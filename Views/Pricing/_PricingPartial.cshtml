@@ -1,0 +1,95 @@
+﻿@model company_profile.PricingVM
+@{
+    // Mendeteksi kultur bahasa yang sedang aktif di aplikasi (.NET localization)
+    var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+}
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light border-bottom">
+                    <tr>
+                        <th style="width: 25%">Jenis Layanan</th>
+                        <th style="width: 15%">Harga Plan</th>
+                        <th style="width: 45%">Deskripsi (Features)</th>
+                        <th style="width: 15%" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.List.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center py-5 text-muted">
+                                <i class="fa fa-folder-open fa-2x mb-2 d-block text-secondary"></i>
+                                No pricing plans available.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.List)
+                        {
+                            // Fallback dinamis jika property NotMapped belum terisi dari sisi Repository/Controller
+                            string jenisLayananAktif = !string.IsNullOrEmpty(item.JenisLayanan)
+                            ? item.JenisLayanan
+                            : (currentCulture == "en" ? item.JenisLayanan_EN : item.JenisLayanan_ID) ?? "-";
+
+                            string deskripsiAktif = !string.IsNullOrEmpty(item.DeskripsiJenisLayanan)
+                            ? item.DeskripsiJenisLayanan
+                            : (currentCulture == "en" ? item.DeskripsiJenisLayanan_EN : item.DeskripsiJenisLayanan_ID) ?? "-";
+
+                            <tr>
+                                <td>
+                                    <div class="fw-bold text-dark">@jenisLayananAktif</div>
+                                    <div class="mt-1">
+                                        <span class="badge bg-light text-secondary border small me-1" title="Indonesia">
+                                            <small class="fw-bold text-danger">ID:</small> @item.JenisLayanan_ID
+                                        </span>
+                                        <span class="badge bg-light text-secondary border small" title="English">
+                                            <small class="fw-bold text-primary">EN:</small> @item.JenisLayanan_EN
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="text-success fw-bold fs-6">
+                                        @item.Harga.ToString("C0", new System.Globalization.CultureInfo("id-ID"))
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="p-2 rounded bg-light border-start border-3 border-info small text-secondary" style="max-height: 100px; overflow-y: auto;">
+                                        @Html.Raw(deskripsiAktif)
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@item.IDPricing" class="btn btn-warning btn-sm" title="Edit Data">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                        <button type="button" onclick="deletePricing(@item.IDPricing)" class="btn btn-danger btn-sm" title="Hapus Data">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-3 gap-3" id="pagination-controls">
+    <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+            data-page="@(Model.CurrentPage - 1)">
+        <i class="fa fa-arrow-left"></i>
+        Previous
+    </button>
+
+    <span class="text-muted fw-bold">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+    <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+            data-page="@(Model.CurrentPage + 1)">
+        Next
+        <i class="fa fa-arrow-right"></i>
+    </button>
+</div>

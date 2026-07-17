@@ -1,0 +1,55 @@
+﻿@model company_profile.TestimonialVM
+
+<div class="row">
+        @if (!Model.List.Any())
+        {
+            <div class="col-12"><div class="alert alert-info text-center">No testimonials available.</div></div>
+        }
+        else
+        {
+            @foreach (var item in Model.List)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <img src="@(string.IsNullOrEmpty(item.UrlGambar) ? "/uploads/no-image.png" : item.UrlGambar)"
+                                 class="rounded-circle mb-3 shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid #f8f9fa;" />
+
+                            <h5 class="card-title mb-1">@item.Nama</h5>
+
+                            @* Simpan data di sini, jangan tampilkan di sini *@
+                            <p class="text-primary small mb-2 fw-bold text-jabatan"
+                               data-id="@item.Jabatan_ID"
+                               data-en="@item.Jabatan_EN">@item.Jabatan_ID</p> @* Default tampilkan ID *@
+
+                            <div class="card-text text-muted small text-testimoni"
+                                 data-id="@Html.Raw(item.IsiTestimoni_ID)"
+                                 data-en="@Html.Raw(item.IsiTestimoni_EN)">
+                                @Html.Raw(item.IsiTestimoni_ID) @* Default tampilkan ID *@
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 text-center pb-3">
+                            <a asp-action="Edit" asp-route-id="@item.IDTestimonial" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                            <button onclick="deleteTesti(@item.IDTestimonial)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+<div class="d-flex justify-content-center align-items-center mt-3 gap-3" id="pagination-controls">
+    <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+            data-page="@(Model.CurrentPage - 1)">
+        <i class="fa fa-arrow-left"></i>
+        Previous
+    </button>
+
+    <span class="text-muted fw-bold">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+    <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+            data-page="@(Model.CurrentPage + 1)">
+        Next
+        <i class="fa fa-arrow-right"></i>
+    </button>
+</div>

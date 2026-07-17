@@ -1,0 +1,412 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    // Validasi di sisi layout: Jika tidak login, redirect ke halaman Login
+    if (!SignInManager.IsSignedIn(User))
+    {
+        Context.Response.Redirect("/Account/Login");
+        return; // Hentikan proses rendering jika tidak login
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+
+    <!--begin::fontsource-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@fontsource/source-sans-3@5.0.12/index.css"
+    asp-append-version="true" />
+    <!--end::fontsource-->
+
+    <!--begin::font-awesome-->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" asp-append-version="true" />
+    <!--end::font-awesome-->
+
+    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <link rel="stylesheet" href="~/css/overlayscrollbars.min.css" asp-append-version="true" />
+    <!--end::Third Party Plugin(OverlayScrollbars)-->
+
+    <!--begin::Third Party Plugin(Bootstrap Icons)-->
+    <link rel="stylesheet" href="~/css/bootstrap-icons.min.css" asp-append-version="true" />
+    <!--end::Third Party Plugin(Bootstrap Icons)-->
+
+    <!--begin::Required Plugin(AdminLTE)-->
+    <link rel="stylesheet" href="~/css/adminlte.css" asp-append-version="true" />
+    <!--end::Required Plugin(AdminLTE)-->
+
+    <!-- apexcharts -->
+    <link rel="stylesheet" href="~/css/apexcharts.css" asp-append-version="true" />
+    <!-- apexcharts -->
+
+    <!-- Custum -->
+    <link rel="stylesheet" href="~/css/Custum.css" asp-append-version="true" />
+    <!-- Custum -->
+
+    <!-- jquery-ui -->
+    <link rel="stylesheet" href="~/css/jquery-ui.css" asp-append-version="true" />
+    <!-- jquery-ui -->
+
+</head>
+<!--end::Head-->
+
+<!--begin::Body-->
+
+<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+    <!--begin::App Wrapper-->
+    <div class="app-wrapper">
+        <!--begin::Header-->
+        <nav class="app-header navbar navbar-expand bg-body">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Start Navbar Links-->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                            <i class="fa fa-list"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!--end::Start Navbar Links-->
+
+                <a asp-action="Home" asp-controller="Company" target="_blank">
+                    <i class="fa fa-firefox"></i> Visit Website
+                </a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Welcome, @User.Identity.Name
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" asp-action="ChangePassword" asp-controller="Account">Change Password</a>
+                        </li>
+                        <li>
+                            <form asp-action="Logout" asp-controller="Account" method="post" class="d-inline">
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fa fa-arrow-right"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!--end::Container-->
+        </nav>
+        <!--end::Header-->
+
+        <!--begin::Sidebar-->
+        @* <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> *@
+        <aside class="app-sidebar shadow" style="background-color: #6610f2;" data-bs-theme="dark">
+            <!--begin::Sidebar Brand-->
+            <div class="sidebar-brand">
+                <!--begin::Brand Link-->
+                <a asp-action="Dashboard" asp-controller="Admin" class="brand-link">
+                    <!--begin::Brand Image-->
+                    @* <img src="./assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" /> *@
+                    <!--end::Brand Image-->
+                    <!--begin::Brand Text-->
+                    <span class="brand-text fw-light">Welcome Admin</span>
+                    <!--end::Brand Text-->
+                </a>
+                <!--end::Brand Link-->
+            </div>
+            <!--end::Sidebar Brand-->
+            <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-wrapper">
+                <nav class="mt-2">
+                    <!--begin::Sidebar Menu-->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
+                        aria-label="Main navigation" data-accordion="false" id="navigation">
+            <li class="nav-item menu-open">
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a asp-action="Dashboard" class="nav-link active" asp-controller="Admin">
+                    <i class="fa fa-laptop"></i>
+                    <p>Dashboard</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Setting" class="nav-link">
+                    <i class="fa fa-cog"></i>
+                    <p>Setting</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Home" class="nav-link">
+                    <i class="fa fa-solid fa-industry"></i>
+                    <p>Home</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Header" class="nav-link">
+                    <i class="fa fa-solid fa-header"></i>
+                    <p>Header Web</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="BannerHome" class="nav-link">
+                    <i class="fa fa-solid fa-image"></i>
+                    <p>Banner Home</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="WhyChooseUs" class="nav-link">
+                    <i class="fa fa-solid fa-question-circle"></i>
+                    <p>Why Choose Us</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="SpecialFeatures" class="nav-link">
+                    <i class="fa fa-solid fa-star"></i>
+                    <p>Special Features</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Achievements" class="nav-link">
+                    <i class="fa fa-solid fa-trophy"></i>
+                    <p>Achievements</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="SliderFooter" class="nav-link">
+                    <i class="fa fa-solid fa-image"></i>
+                    <p>Slider Footer</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="About" class="nav-link">
+                    <i class="fa fa-info-circle"></i>
+                    <p>About</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Contact" class="nav-link">
+                    <i class="fa fa-envelope"></i>
+                    <p>Contact</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Events" class="nav-link">
+                    <i class="fa fa-calendar"></i>
+                    <p>Events</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Faq" class="nav-link">
+                    <i class="fa fa-question-circle"></i>
+                    <p>Faq</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Kategori" class="nav-link">
+                    <i class="fa fa-tags"></i>
+                    <p>Kategori</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="News" class="nav-link">
+                    <i class="fa fa-newspaper-o"></i>
+                    <p>News</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="OurServices" class="nav-link">
+                    <i class="fa fa-cogs"></i>
+                    <p>Our Services</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="PhotoGallery" class="nav-link">
+                    <i class="fa fa-camera"></i>
+                    <p>Photo Gallery</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Portfolio" class="nav-link">
+                    <i class="fa fa-folder"></i>
+                    <p>Portfolio</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Pricing" class="nav-link">
+                    <i class="fa fa-usd"></i>
+                    <p>Pricing</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Team" class="nav-link">
+                    <i class="fa fa-users"></i>
+                    <p>Team</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="Testimonial" class="nav-link">
+                    <i class="fa fa-comment"></i>
+                    <p>Testimonial</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a asp-action="Index" asp-controller="UserContacted" class="nav-link">
+                    <i class="fa fa-envelope"></i>
+                    <p>User Contacted</p>
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+          }
+          <!--end::Sidebar Menu-->
+        </nav>
+      </div>
+      <!--end::Sidebar Wrapper-->
+    </aside>
+    <!--end::Sidebar-->
+
+    <!--begin::App Main-->
+    <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="mb-0">Dashboard</h3>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-end">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--begin::App Content-->
+      <div class="app-content">
+        <div class="container-fluid">
+          <div class="row">
+            @RenderBody()
+          </div>
+        </div>
+      </div>
+      <!--end::App Content-->
+    </main>
+    <!--end::App Main-->
+
+    <!--begin::Footer-->
+    <footer class="app-footer">     
+      <!--begin::Copyright-->
+      <strong>
+                Copyright © @DateTime.Now.Year, CMS Company Profile. All Rights Reserved.
+            </strong>
+      <!--end::Copyright-->
+    </footer>
+    <!--end::Footer-->
+  </div>
+  <!--end::App Wrapper-->
+
+  <!--begin::Script-->
+  <script asp-append-version="true" src="~/lib/jquery/dist/jquery.min.js"></script>
+  <script asp-append-version="true" src="~/js/jquery-ui.min.js"></script>
+
+  <!--begin::Third Party Plugin(OverlayScrollbars)-->
+  <script asp-append-version="true" src="~/js/overlayscrollbars.browser.es6.min.js"></script>
+  <!--end::Third Party Plugin(OverlayScrollbars)-->
+
+  <!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+  <script src="~/js/popper.v2.11.8.min.js" asp-append-version="true"></script>
+  <!--end::Required Plugin(popperjs for Bootstrap 5)-->
+
+  <!--begin::ckeditor-->
+  <script src="~/js/ckeditor.js" asp-append-version="true"></script>
+  <!--end::ckeditor-->
+
+  <!--begin::Required Plugin(Bootstrap 5)-->
+  <script src="~/js/bootstrap.v5.3.7.min.js" asp-append-version="true"></script>
+  <!--end::Required Plugin(Bootstrap 5)-->
+
+  <!--begin::Required Plugin(AdminLTE)-->
+  <script src="~/js/adminlte.js" asp-append-version="true"></script>
+  <!--end::Required Plugin(AdminLTE)-->
+
+  <!--begin::OverlayScrollbars Configure-->
+  <script>
+    const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+    const Default = {
+    scrollbarTheme: 'os-theme-light',
+    scrollbarAutoHide: 'leave',
+    scrollbarClickScroll: true,
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+    const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+    if (sidebarWrapper && OverlayScrollbarsGlobal?.OverlayScrollbars !== undefined) {
+    OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+    scrollbars: {
+    theme: Default.scrollbarTheme,
+    autoHide: Default.scrollbarAutoHide,
+    clickScroll: Default.scrollbarClickScroll,
+    },
+    });
+    }
+    });                                                                            
+  </script>
+  <!--end::OverlayScrollbars Configure-->
+
+  <!-- OPTIONAL SCRIPTS -->
+  <!-- sortablejs -->
+  <script src="~/js/sortable.min.js" asp-append-version="true"></script>
+  <!-- sortablejs -->
+
+  <script>
+      new Sortable(document.querySelector('.connectedSortable'), {
+        group: 'shared',
+        handle: '.card-header',
+      });
+
+      const cardHeaders = document.querySelectorAll('.connectedSortable .card-header');
+      cardHeaders.forEach((cardHeader) => {
+        cardHeader.style.cursor = 'move';
+      });
+  </script>
+
+  <!-- apexcharts -->
+  <script src="~/js/apexcharts.min.js" asp-append-version="true"></script>
+  <!-- apexcharts -->
+  <script src="~/js/flatpickr.js"></script>
+  <!--end::Script-->
+  <script src="~/js/sweetalert2@11.js"></script>
+  <script src="~/js/jscolor.min.js"></script>
+  <script src="~/embed-js/embed.min.js"></script>   
+ 
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+@model company_profile.PricingVM
+@{
+    ViewData["Title"] = "Edit Pricing Plan";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    /* Mengatur tinggi minimal text editor agar proporsional */
+    .ck-editor__editable_inline {
+        min-height: 250px;
+    }
+    /* Memberikan indikasi visual jika ada tab yang memiliki error validasi di dalamnya */
+    .nav-link.text-danger {
+        border-bottom: 2px solid #dc3545 !important;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card shadow border-0">
+                <div class="card-header bg-warning py-3">
+                    <h5 class="mb-0 text-dark"><i class="fa fa-edit me-2"></i>Edit Pricing Plan</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" id="pricingForm">
+                        <input type="hidden" asp-for="IDPricing" />
+                        <input type="hidden" asp-for="CreateAt" />
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="Harga" class="form-label fw-bold"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light fw-bold text-secondary">Rp</span>
+                                    <input asp-for="Harga" class="form-control" type="number" step="0.01" />
+                                </div>
+                                <span asp-validation-for="Harga" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <hr class="text-muted mb-4" />
+
+                        <ul class="nav nav-tabs mb-3" id="langTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="indo-tab" data-bs-toggle="tab" data-bs-target="#indo-pane" type="button" role="tab" aria-controls="indo-pane" aria-selected="true">
+                                    <span class="text-danger fw-bold">ID</span> - Bahasa Indonesia
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="eng-tab" data-bs-toggle="tab" data-bs-target="#eng-pane" type="button" role="tab" aria-controls="eng-pane" aria-selected="false">
+                                    <span class="text-primary fw-bold">EN</span> - English Content
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content border p-3 rounded bg-light" id="langTabContent">
+                            
+                            <div class="tab-pane fade show active" id="indo-pane" role="tabpanel" aria-labelledby="indo-tab" tabindex="0">
+                                <div class="mb-3">
+                                    <label asp-for="JenisLayanan_ID" class="form-label fw-bold">Nama Layanan (ID)</label>
+                                    <input asp-for="JenisLayanan_ID" class="form-control" placeholder="Contoh: Paket Premium Enterprise" />
+                                    <span asp-validation-for="JenisLayanan_ID" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="DeskripsiJenisLayanan_ID" class="form-label fw-bold">Fitur & Deskripsi (ID)</label>
+                                    <textarea asp-for="DeskripsiJenisLayanan_ID" id="editor_id" class="form-control">@Model.DeskripsiJenisLayanan_ID</textarea>
+                                    <div class="form-text text-muted">Gunakan bullet points untuk menulis list fitur paket.</div>
+                                    <span asp-validation-for="DeskripsiJenisLayanan_ID" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="eng-pane" role="tabpanel" aria-labelledby="eng-tab" tabindex="0">
+                                <div class="mb-3">
+                                    <label asp-for="JenisLayanan_EN" class="form-label fw-bold">Service Name (EN)</label>
+                                    <input asp-for="JenisLayanan_EN" class="form-control" placeholder="e.g., Premium Enterprise Plan" />
+                                    <span asp-validation-for="JenisLayanan_EN" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="DeskripsiJenisLayanan_EN" class="form-label fw-bold">Features & Description (EN)</label>
+                                    <textarea asp-for="DeskripsiJenisLayanan_EN" id="editor_en" class="form-control">@Model.DeskripsiJenisLayanan_EN</textarea>
+                                    <div class="form-text text-muted">Use bullet points to list the plan benefits.</div>
+                                    <span asp-validation-for="DeskripsiJenisLayanan_EN" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-sm btn-outline-secondary">
+                                <i class="fa fa-arrow-left me-1"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-sm btn-success px-4">
+                                <i class="fa fa-save me-1"></i> Simpan Perubahan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Memastikan jQuery Validation memeriksa elemen tersembunyi di dalam tab yang tidak aktif
+        if ($.validator) {
+            $.validator.setDefaults({ 
+                ignore: [] 
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            // 1. Inisialisasi CKEditor & Data Binding - Bahasa Indonesia
+            const editorIdElement = document.querySelector('#editor_id');
+            if (editorIdElement) {
+                ClassicEditor
+                    .create(editorIdElement)
+                    .then(editor => {
+                        editor.model.document.on('change:data', () => {
+                            editorIdElement.value = editor.getData();
+                            $(editorIdElement).valid(); // Validasi instan saat mengetik
+                        });
+                    })
+                    .catch(error => { console.error("CKEditor ID Error:", error); });
+            }
+
+            // 2. Inisialisasi CKEditor & Data Binding - Bahasa Inggris
+            const editorEnElement = document.querySelector('#editor_en');
+            if (editorEnElement) {
+                ClassicEditor
+                    .create(editorEnElement)
+                    .then(editor => {
+                        editor.model.document.on('change:data', () => {
+                            editorEnElement.value = editor.getData();
+                            $(editorEnElement).valid(); // Validasi instan saat mengetik
+                        });
+                    })
+                    .catch(error => { console.error("CKEditor EN Error:", error); });
+            }
+
+            // 3. Detektor Validasi Lintas Tab saat Submit Form
+            $('#pricingForm').on('invalid-form.validate', function(form, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    $('#indo-tab, #eng-tab').removeClass('text-danger');
+                    
+                    if ($('#indo-pane .field-validation-error').length || $('#indo-pane input:invalid, #indo-pane textarea:invalid').length) {
+                        $('#indo-tab').addClass('text-danger');
+                    }
+                    if ($('#eng-pane .field-validation-error').length || $('#eng-pane input:invalid, #eng-pane textarea:invalid').length) {
+                        $('#eng-tab').addClass('text-danger');
+                    }
+                }
+            });
+        });
+    </script>
+}

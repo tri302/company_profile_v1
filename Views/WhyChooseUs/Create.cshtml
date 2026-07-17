@@ -1,0 +1,115 @@
+@model company_profile.ViewModels.WhyChooseUsVM
+
+@{
+    ViewData["Title"] = "Tambah Why Choose Us";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .ck-editor__editable_inline {
+        min-height: 250px;
+    }
+</style>
+<div class="container-fluid px-4 py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Tambah Data "Why Choose Us"</h1>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+                <ul class="nav nav-tabs mb-4" id="langTabs" role="tablist">
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#id-pane" type="button">🇮🇩 Bahasa Indonesia</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#en-pane" type="button">🇺🇸 English</button></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="id-pane">
+                        <div class="mb-3">
+                            <label asp-for="JudulWhyChooseUs_ID" class="form-label fw-semibold">Judul (ID)</label>
+                            <input asp-for="JudulWhyChooseUs_ID" class="form-control" />
+                            <span asp-validation-for="JudulWhyChooseUs_ID" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="IsiContentWhyChooseUs_ID" class="form-label fw-semibold">Isi Konten (ID)</label>
+                            <!-- Instruksi yang dipercantik -->
+                            <div class="alert alert-info py-2 px-3 small mb-2">
+                                <i class="fa fa-info-circle me-1"></i>
+                                <strong>Tips:</strong> Untuk menyisipkan video, unggah video Anda ke YouTube terlebih dahulu, lalu masukkan URL video tersebut ke dalam editor di bawah.
+                            </div>
+                            <textarea asp-for="IsiContentWhyChooseUs_ID" class="form-control" id="editor_ID" rows="4"></textarea>
+                            <span asp-validation-for="IsiContentWhyChooseUs_ID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="en-pane">
+                        <div class="mb-3">
+                            <label asp-for="JudulWhyChooseUs_EN" class="form-label fw-semibold">Title (EN)</label>
+                            <input asp-for="JudulWhyChooseUs_EN" class="form-control" />
+                            <span asp-validation-for="JudulWhyChooseUs_EN" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="IsiContentWhyChooseUs_EN" class="form-label fw-semibold">Content (EN)</label>
+                            <!-- Instruksi yang dipercantik -->
+                            <div class="alert alert-info py-2 px-3 small mb-2">
+                                <i class="fa fa-info-circle me-1"></i>
+                                <strong>Tips:</strong> Untuk menyisipkan video, unggah video Anda ke YouTube terlebih dahulu, lalu masukkan URL video tersebut ke dalam editor di bawah.
+                            </div>
+                            <textarea asp-for="IsiContentWhyChooseUs_EN" class="form-control" id="editor_EN" rows="4"></textarea>
+                            <span asp-validation-for="IsiContentWhyChooseUs_EN" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label asp-for="UploadGambar" class="form-label fw-semibold">Upload Gambar/Icon</label>
+                    <input asp-for="UploadGambar" type="file" class="form-control" accept="image/*" required />
+                    <span asp-validation-for="UploadGambar" class="text-danger"></span>
+                </div>
+
+                <hr class="my-4">
+
+                <div align="center">
+                    <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left"></i> Cancel</a>
+                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Save Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Gunakan querySelectorAll untuk mengambil semua elemen yang cocok
+                const editors = document.querySelectorAll('#editor_ID, #editor_EN');
+
+                editors.forEach(editorElement => {
+                    ClassicEditor
+                        .create(editorElement)
+                        .then(editor => {
+                            // Update textarea/input asli saat konten berubah
+                            editor.model.document.on('change:data', () => {
+                                editorElement.value = editor.getData();
+
+                                // Trigger validasi jQuery jika tersedia
+                                if (typeof $ !== 'undefined' && $(editorElement).valid) {
+                                    $(editorElement).valid();
+                                }
+                            });
+                        })
+                        .catch(error => { console.error(error); });
+                });
+            });
+            // Konfigurasi Validasi jQuery agar tidak mengabaikan elemen hidden (textarea bawaan CKEditor)
+        if ($.validator) {
+        $.validator.setDefaults({ ignore: [] });
+        }
+    </script>
+}

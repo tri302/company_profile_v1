@@ -1,0 +1,121 @@
+@using company_profile.ViewModels
+@model DashboardVM
+@{
+    ViewData["Title"] = "Admin page";
+    Layout = "_AdminLayout";
+}
+@if(Model != null)
+{
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total News Categories</span>
+                <span class="info-box-number h2">@Model.TotalNewsByCategories</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total News</span>
+                <span class="info-box-number h2"> @Model.TotalNews</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total Events</span>
+                <span class="info-box-number h2">@Model.TotalEvents</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total Team Members</span>
+                <span class="info-box-number h2">@Model.TotalTeamMembers</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total Clients</span>
+                <span class="info-box-number h2"> @Model.TotalClients</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total Services</span>
+                <span class="info-box-number h2">@Model.TotalServices</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total Testimonials</span>
+                <span class="info-box-number h2">@Model.TotalTestimonials</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total Photos Gallery</span>
+                <span class="info-box-number h2">@Model.TotalPhotosGallery</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        <div class="info-box shadow-sm">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-hand-o-right text-white"></i>
+            </span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-uppercase fw-bold"> Total Pricing Tables</span>
+                <span class="info-box-number h2">@Model.TotalPricingTables</span>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <span class="text-center text-muted">Belum ada data untuk ditampilkan.</span>
+}

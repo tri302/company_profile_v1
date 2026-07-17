@@ -1,0 +1,157 @@
+@model IEnumerable<company_profile.ContactVM>
+
+@{
+    ViewData["Title"] = "Contact Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2><i class="fa fa-solid fa-mobile"></i> Contact Info</h2>
+        <a asp-action="Create" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus-circle"></i> Add Contact
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0 align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="align-middle">Alamat</th>
+                            <th class="align-middle" style="width: 180px;">Phone Number</th>
+                            <th class="align-middle" style="width: 220px;">Email Address</th>
+                            <th class="align-middle" style="width: 140px;">Created At</th>
+                            <th class="align-middle text-center" style="width: 180px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="mb-1">
+                                            <span class="badge bg-secondary me-1">ID</span> 
+                                            <span class="text-wrap">@item.Alamat_ID</span>
+                                        </div>
+                                        <div>
+                                            <span class="badge bg-dark me-1">EN</span> 
+                                            <span class="text-wrap text-muted">@item.Alamat_EN</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="tel:@item.PhoneNumber" class="text-decoration-none text-dark">
+                                            <i class="fa fa-phone text-muted me-1"></i> @item.PhoneNumber
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="mailto:@item.EmailAddress" class="text-decoration-none text-dark">
+                                            <i class="fa fa-envelope text-muted me-1"></i> @item.EmailAddress
+                                        </a>
+                                    </td>
+                                    <td>@item.CreateAt.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-action="Edit" asp-route-id="@item.IDContact" class="btn btn-warning btn-sm">
+                                                <i class="fa fa-pencil"></i> Edit
+                                            </a>
+                                            <button type="button" onclick="deleteData(@item.IDContact)" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i> Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">
+                                    <i class="fa fa-folder-open display-4 d-block mb-2"></i>
+                                    No contacts available.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function deleteData(id) {
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal',
+                position: 'top',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/Contact/Delete/' + id,
+                        type: 'POST',
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    response.message,
+                                    'success'
+                                ).then(() => {
+                                    location.reload(); 
+                                });
+                            } else {
+                                Swal.fire('Error!', response.message, 'error');
+                            }
+                        },
+                        error: function() {
+                            Swal.fire('Error!', 'Terjadi kesalahan sistem.', 'error');
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sukses!',
+                    text: '@TempData["SuccessMessage"]',
+                    position: 'top',
+                    timer: 5000,
+                    showConfirmButton: false
+                });
+            </text>
+        }
+    </script>
+    
+    <script>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: '@TempData["ErrorMessage"]',
+                    position: 'top',
+                    timer: 5000,
+                    showConfirmButton: false
+                });
+            </text>
+        }
+    </script>
+}

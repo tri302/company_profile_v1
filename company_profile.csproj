@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <AssemblyName>company_profile</AssemblyName>
+        <RootNamespace>company_profile</RootNamespace>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <NoWarn>$(NoWarn);CS8600;CS8601;CS8602;CS8603;CS8604;CS8618;CS8625;CS8632;CS8620;CS8613;CS4014</NoWarn>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
+        <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+        <PackageReference Include="HtmlSanitizer" Version="9.0.892" />
+        <PackageReference Include="MailKit" Version="4.16.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.14" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.14">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.14">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+        <PackageReference Include="Quartz.Extensions.Hosting" Version="3.18.1" />
+        <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Resources\*.resx" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,98 @@
+@model company_profile.TestimonialVM
+@{
+    ViewData["Title"] = "Edit Testimonial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .ck-editor__editable_inline {
+        min-height: 250px;
+    }
+</style>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-header bg-warning"><h5>Edit Testimonial: @Model.Nama</h5></div>
+                <div class="card-body">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="IDTestimonial" />
+                        <input type="hidden" asp-for="UrlGambar" />
+
+                        <div class="text-center mb-4">
+                            <img id="imgPreview" src="@(string.IsNullOrEmpty(Model.UrlGambar) ? "/uploads/no-user.png" : Model.UrlGambar)" 
+                                 class="rounded-circle img-thumbnail" style="width: 120px; height: 120px; object-fit: cover;" />
+                            <div class="mt-2">
+                                <input asp-for="UploadGambar" type="file" class="form-control form-control-sm" accept="image/*" onchange="previewFile()" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Nama" class="form-label fw-bold"></label>
+                            <input asp-for="Nama" class="form-control" />
+                            <span asp-validation-for="Nama" class="text-danger"></span>
+                        </div>
+
+                        <ul class="nav nav-tabs" id="langTabs" role="tablist">
+                            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#id-pane" type="button">🇮🇩 Indonesia</button></li>
+                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#en-pane" type="button">🇺🇸 English</button></li>
+                        </ul>
+
+                        <div class="tab-content p-3 border border-top-0 mb-3">
+                            <div class="tab-pane fade show active" id="id-pane">
+                                <div class="mb-3">
+                                    <label asp-for="Jabatan_ID" class="form-label"></label>
+                                    <input asp-for="Jabatan_ID" class="form-control" />
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiTestimoni_ID" class="form-label"></label>
+                                    <textarea asp-for="IsiTestimoni_ID" class="form-control editor-id"></textarea>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="en-pane">
+                                <div class="mb-3">
+                                    <label asp-for="Jabatan_EN" class="form-label"></label>
+                                    <input asp-for="Jabatan_EN" class="form-control" />
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiTestimoni_EN" class="form-label"></label>
+                                    <textarea asp-for="IsiTestimoni_EN" class="form-control editor-en"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left"></i> Cancel</a>
+                            <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Inisialisasi Editor
+        document.querySelectorAll('.editor-id, .editor-en').forEach(el => {
+            ClassicEditor.create(el).then(editor => {
+                editor.model.document.on('change:data', () => { el.value = editor.getData(); });
+            });
+        });
+
+        function previewFile() {
+            const file = document.querySelector('input[type="file"]').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => { document.getElementById('imgPreview').src = e.target.result; };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        $.validator.setDefaults({ ignore: [] });
+    </script>
+    
+}

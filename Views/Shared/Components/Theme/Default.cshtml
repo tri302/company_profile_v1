@@ -1,0 +1,22 @@
+@using company_profile
+@model Theme
+
+<style>
+    /* Menggunakan metode CSS Variables (Cara 1 yang efisien) */
+    :root {
+        --header-bg: @Model.HeaderColor;
+        --footer-bg: @Model.FooterColor;
+    }
+
+    /* ATAU jika Anda pakai Cara 2 (Menimpa selector secara massal karena file CSS bawaan pakai !important) */
+    .header-area,
+    ul.nav-menu li ul li a,
+    .contact-form .btn,
+    span.input-group-btn {
+        background: @Model.HeaderColor !important;
+    }
+
+    .footer-bottom {
+        background: @Model.FooterColor !important;
+    }
+</style>

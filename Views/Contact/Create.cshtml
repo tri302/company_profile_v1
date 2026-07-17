@@ -1,0 +1,100 @@
+@model company_profile.ContactVM
+
+@{
+    ViewData["Title"] = "Create Contact";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-dark d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fa fa-pencil-square-o"></i> Add New Contact Info</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post" asp-controller="Contact">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>                                            <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Alamat_ID" class="form-label fw-bold"></label>
+                                <textarea asp-for="Alamat_ID" class="form-control" rows="3" placeholder="Masukkan alamat lengkap dalam Bahasa Indonesia..."></textarea>
+                                <span asp-validation-for="Alamat_ID" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Alamat_EN" class="form-label fw-bold"></label>
+                                <textarea asp-for="Alamat_EN" class="form-control" rows="3" placeholder="Enter full address in English..."></textarea>
+                                <span asp-validation-for="Alamat_EN" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PhoneNumber" class="form-label fw-bold">Phone Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                    <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Contoh: 08123456789" />
+                                </div>
+                                <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EmailAddress" class="form-label fw-bold">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                    <input asp-for="EmailAddress" type="email" class="form-control" placeholder="Contoh: example@email.com" />
+                                </div>
+                                <span asp-validation-for="EmailAddress" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mt-3 mb-3 text-muted border-bottom pb-2">Social Media Links</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label asp-for="UrlFb" class="form-label small">Facebook</label>
+                                <input asp-for="UrlFb" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label asp-for="UrlTwiter" class="form-label small">Twitter (X)</label>
+                                <input asp-for="UrlTwiter" class="form-control" />
+                                <span asp-validation-for="UrlTwiter" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label asp-for="UrlInstagram" class="form-label small">Instagram</label>
+                                <input asp-for="UrlInstagram" class="form-control" />
+                                <span asp-validation-for="UrlInstagram" class="text-danger small"></span>
+                            </div>                            
+                            <div class="col-md-6 mb-2">
+                                <label asp-for="UrlLinkedIn" class="form-label small">LinkedIn</label>
+                                <input asp-for="UrlLinkedIn" class="form-control" />
+                                <span asp-validation-for="UrlLinkedIn" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label asp-for="UrlYoutube" class="form-label small">YouTube</label>
+                                <input asp-for="UrlYoutube" class="form-control" />
+                                <span asp-validation-for="UrlYoutube" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label asp-for="UrlPinterest" class="form-label small">Pinterest</label>
+                                <input asp-for="UrlPinterest" class="form-control" />
+                                <span asp-validation-for="UrlPinterest" class="text-danger small"></span>
+                            </div>                            
+                        </div>
+
+                        <div class="d-flex justify-content-between border-top pt-3 mt-3">
+                            <a asp-action="Index" class="btn btn-secondary btn-sm">
+                                <i class="fa fa-arrow-left"></i> Back to List
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-save"></i> Save Contact
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,205 @@
+﻿@using company_profile;
+@model NewsVM;
+@{
+    ViewData["Title"] = Model.Judul;
+    Layout = "_FrontEndLayout";
+}
+@functions {
+    public string StripHTML(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "<.*?>", String.Empty);
+    }
+}
+@{
+    // Simpan URL lengkap ke dalam variabel agar kode tidak berantakan
+    var currentUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
+    var encodedUrl = Uri.EscapeDataString(currentUrl);
+    var encodedTitle = Uri.EscapeDataString(Model.Judul ?? "");
+}
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "News Page" })
+<!--Banner End-->
+<style>    
+    /* Pastikan container memiliki ruang */
+    .video-container {
+        display: block !important;
+        width: 100% !important;
+        height: 400px !important; /* Paksa tinggi agar terlihat */
+        margin: 20px 0 !important;
+        overflow: visible !important;
+    }
+
+        /* Pastikan iframe mengambil seluruh ruang container */
+        .video-container iframe {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            border: 5px solid #ccc !important; /* Tambahkan border untuk tes */
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+</style>
+<!--Blog-One Start-->
+<div class="blog-one-area pt_60 pb_90">
+    <div class="container">
+        <div class="row">
+            <!-- Kolom Konten Utama (8 Kolom) -->
+            <div class="col-lg-8">
+                <div class="single-blog">
+                    <img src="@(string.IsNullOrEmpty(Model.UrlGambar) ? Url.Content("~/uploads/no-image.png") : Model.UrlGambar)"
+                         alt="News Photo">
+                    <h3>@Model.Judul</h3>
+                    <ul>
+                        <li>
+                            <i class="fa fa-edit"></i>
+                            <a asp-action="NewsByCategory" asp-controller="Company"
+                                   asp-route-NamaKategori="@Model.KategoriBerita.NamaKategori">
+                                @(Model.KategoriBerita?.NamaKategori ?? "Uncategorized")
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa fa-calendar-o"></i>
+                            @Model.CreateAt.ToString("dd MMMM yyyy")
+                        </li>
+                    </ul>
+
+                    <div class="blog-content">
+                        @Html.Raw(Model.IsiContent)
+                        @* @{ *@
+                        @*     // 1. Ambil konten *@
+                        @*     var content = Model.IsiContent ?? ""; *@
+
+                        @*     // 2. Gunakan Regex untuk mengubah <oembed> menjadi <iframe> *@
+                        @*     // Kode ini mencari URL video di dalam tag oembed dan mengubahnya ke format embed YouTube *@
+                        @*     // Gunakan nama lengkap System.Text.RegularExpressions.Regex *@
+                        @*     var processedContent = System.Text.RegularExpressions.Regex.Replace(content, *@
+                        @*     @"<oembed url=""https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)""></oembed>", *@
+                        @*     @"<div class=""video-container""><iframe width=""100%"" height=""400"" src=""https:www.youtube.com/embed/$1"" frameborder=""0"" allowfullscreen></iframe></div>"); *@
+                        @* } *@
+
+                        @* @* 3. Tampilkan hasilnya sebagai HTML *@
+                        @* @Html.Raw(processedContent) *@
+                    </div>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="comment-form headstyle mt_50">
+                    <h4>Share This News</h4>
+                    <div class="share_buttons">
+                        <!-- Facebook: Hanya butuh URL -->
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/sharer.php?u=@encodedUrl">
+                            <i class="fa fa-facebook-f"></i>
+                        </a>
+
+                        <!-- Twitter: URL + Text -->
+                        <a class="twitter" target="_blank"
+                               href="https://twitter.com/intent/tweet?url=@encodedUrl&text=@encodedTitle">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+
+                        <!-- Pinterest: Butuh URL + Description -->
+                        <a class="pinterest" target="_blank"
+                               href="https://www.pinterest.com/pin/create/button/?url=@encodedUrl&description=@encodedTitle">
+                            <i class="fa fa-pinterest"></i>
+                        </a>
+
+                        <!-- LinkedIn: Gunakan format terbaru -->
+                        <a class="linkedin" target="_blank"
+                               href="https://www.linkedin.com/sharing/share-offsite/?url=@encodedUrl">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+        
+                        <!-- Tambahan WhatsApp (Sering digunakan di Indonesia) -->
+                        <a class="whatsapp" target="_blank"
+                               href="https://api.whatsapp.com/send?text=@encodedTitle%20@encodedUrl">
+                            <i class="fa fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Start (4 Kolom) -->
+            <div class="col-lg-4">
+                <div class="sidebar">                  
+                    <!-- Categories -->
+                    <div class="sidebar-item">
+                        <h3>Categories</h3>
+                        <ul>
+                            @if (Model.ListKategoriBerita != null)
+                            {
+                                @foreach (var item in Model.ListKategoriBerita)
+                                {
+                                    <li>
+                                        <a asp-action="NewsByCategory" asp-controller="Company"
+                                               asp-route-NamaKategori="@item.NamaKategori">
+                                            @(item?.NamaKategori ?? "Uncategorized")                                            
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts -->
+                    <div class="sidebar-item">
+                        <h3>Recent Posts</h3>
+                        @if (Model.ListRecentPostsBerita != null)
+                        {
+                            @foreach (var recent in Model.ListRecentPostsBerita)
+                            {
+                                <div class="sidebar-recent-item" style="display: flex; margin-bottom: 15px;">
+                                    <div class="recent-photo" style="width: 80px; margin-right: 10px; flex-shrink: 0;">
+                                        <a asp-action="NewsDetail" asp-route-IDNews="@recent.IDNews">
+                                            <img src="@(string.IsNullOrEmpty(recent.UrlGambar) ? Url.Content("~/uploads/no-image.png") : recent.UrlGambar)"
+                                                 style="width:100%" alt="Blog Photo">
+                                        </a>
+                                    </div>
+                                    <div class="recent-text">
+                                        <a asp-action="NewsDetail" asp-controller="Company"
+                                           asp-route-IDNews="@recent.IDNews">@recent.Judul</a>
+                                        <div class="rpwwt-post-date">@recent.CreateAt.ToString("MMMM dd, yyyy")</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--Sidebar End-->
+        </div>
+    </div>
+</div>
+<!--Blog-One End-->
+
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->
+@section Scripts {    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Cari semua tag oembed di dalam konten
+            var oembeds = document.querySelectorAll('oembed[url]');
+            oembeds.forEach(function(el) {
+                var url = el.getAttribute('url');
+                // Ekstrak ID Video YouTube dari URL
+                var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                var match = url.match(regExp);
+                var videoId = (match && match[2].length === 11) ? match[2] : null;
+
+                if (videoId) {
+                    // Buat elemen iframe secara manual
+                    var iframe = document.createElement('iframe');
+                    iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId);
+                    iframe.setAttribute('width', '100%');
+                    iframe.setAttribute('height', '400');
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allowfullscreen', 'true');
+
+                    // Ganti tag oembed dengan iframe
+                    el.parentNode.replaceChild(iframe, el);
+                }
+            });
+        });
+    </script>
+}

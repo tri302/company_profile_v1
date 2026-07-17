@@ -1,0 +1,97 @@
+@model company_profile.PhotoGalleryVM
+@{
+    ViewData["Title"] = "Upload Photo to Gallery";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5 class="mb-0">Upload to Gallery</h5>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <div class="preview-container mb-3 border rounded d-flex align-items-center justify-content-center bg-light"
+                                 style="height: 250px; overflow: hidden;">
+                                <img id="imgPreview" src="~/uploads/no-image.png" class="img-fluid"
+                                     style="max-height: 100%; object-fit: contain;" alt="Preview" />
+                            </div>
+                            <label asp-for="UploadGambar" class="form-label fw-bold">Pilih Foto</label>
+                            <input asp-for="UploadGambar" type="file" class="form-control" accept="image/*"
+                                   onchange="previewImage(this)" required />
+                            <span id="imageError" class="text-danger small d-block mt-1"></span>
+                            <span asp-validation-for="UploadGambar" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-upload"></i> Start Upload
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary btn-sm">
+                                <i class="fa fa-arrow-left"></i> Back to Gallery
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('imgPreview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                // Reset ke gambar default jika input dikosongkan
+                preview.src = "/uploads/no-image.png";
+            }
+        }
+
+        document.querySelector('input[type="file"]').addEventListener('change', function () {
+            const file = this.files[0];
+            const errorElement = document.getElementById('imageError'); 
+            const submitBtn = document.querySelector('button[type="submit"]');
+
+            // Reset status
+            errorElement.innerText = "";
+            submitBtn.disabled = false;
+
+            if (file) {
+                const fileSize = file.size / 1024 / 1024;
+                const fileType = file.type;
+
+                // 1. Validasi Tipe
+                if (!fileType.startsWith('image/')) {
+                    errorElement.innerText = "File harus berupa gambar (JPG, PNG, dll).";
+                    this.value = "";
+                    submitBtn.disabled = true;
+                    return;
+                }
+
+                // 2. Validasi Ukuran (5MB)
+                if (fileSize > 5) {
+                    errorElement.innerText = "Ukuran file (" + fileSize.toFixed(2) + " MB) terlalu besar! Maksimal 5MB.";
+                    this.value = "";
+                    submitBtn.disabled = true;
+                    return;
+                }
+                
+                // Jalankan preview jika semua aman
+                previewImage(this);
+            }
+        });
+    </script>
+}

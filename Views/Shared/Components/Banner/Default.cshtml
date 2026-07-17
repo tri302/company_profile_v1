@@ -1,0 +1,28 @@
+@using company_profile
+@model PageBannerSetting 
+
+@if (Model != null)
+{
+    <div class="banner-slider" style="background-image:url('@Url.Content("~/uploads/banners/" + Model.BannerPath)');">
+        @* Catatan: Sesuaikan path "/uploads/" di atas dengan folder tempat kamu menyimpan gambar.
+           Jika di database kamu sudah menyimpan path lengkapnya, cukup gunakan: @Url.Content(Model.BannerPath)
+        *@
+        <div class="bg"></div>
+        <div class="bannder-table">
+            <div class="banner-text">
+                <h1>@Model.PageName</h1>
+            </div>
+        </div>
+    </div>
+    }
+else
+{
+    <div class="banner-slider" style="background-image:url('@Url.Content("~/uploads/no-image.png")');">
+        <div class="bg"></div>
+        <div class="bannder-table">
+            <div class="banner-text">
+                <h1>Welcome</h1>
+            </div>
+        </div>
+    </div>
+}

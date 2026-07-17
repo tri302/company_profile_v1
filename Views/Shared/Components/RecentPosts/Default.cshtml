@@ -1,0 +1,32 @@
+@model IEnumerable<company_profile.NewsVM>
+<ul class="list-unstyled gap-1">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var post in Model)
+        {
+            <li class="mb-3 d-flex align-items-start">
+                @if (!string.IsNullOrEmpty(post.UrlGambar))
+                {
+                    <img src="@post.UrlGambar" alt="@post.Judul" class="img-thumbnail me-3 flex-shrink-0"
+                         style="width: 60px; height: 60px; object-fit: cover;" />
+                }
+                else
+                {
+                    <img src="/uploads/no-image.png" alt="No Image" class="img-thumbnail me-3 flex-shrink-0"
+                         style="width: 60px; height: 60px; object-fit: cover;" />
+                }
+
+                <div class="flex-grow-1">
+                    <a href="@Url.Action("NewsDetail", "Company", new { id = post.IDNews })"
+                       class="text-decoration-none fw-semibold text-dark d-block lh-sm mb-1">
+                        @post.Judul
+                    </a>                    
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="text-muted">Tidak ada berita terbaru.</li>
+    }
+</ul>

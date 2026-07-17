@@ -1,0 +1,261 @@
+@model company_profile.OurServicesVM
+@{
+    ViewData["Title"] = "Ubah Layanan";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .ck-editor__editable_inline {
+        min-height: 280px;
+    }
+    .nav-tabs .nav-link {
+        color: #495057;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+        border: none;
+        border-bottom: 3px solid transparent;
+    }
+    .nav-tabs .nav-link:hover {
+        border-color: transparent;
+        color: #0d6efd;
+    }
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        background-color: transparent;
+        border-color: transparent;
+        border-bottom: 3px solid #0d6efd;
+        font-semibold: 600;
+    }
+</style>
+
+<div class="container-fluid px-4 mt-4">
+    <!-- Header Modul -->
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-body p-4 bg-white rounded-3">
+            <div class="d-flex align-items-center">
+                <div class="bg-warning-subtle text-warning p-3 rounded-3 me-3 d-flex align-items-center justify-content-center" style="width: 55px; height: 55px;">
+                    <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+                </div>
+                <div>
+                    <h4 class="mb-1 fw-bold text-dark">Ubah Data Layanan</h4>
+                    <p class="text-muted mb-0 small">Memperbarui informasi spesifikasi komponen jasa profil: <span class="text-primary fw-semibold">@Model.JudulService_ID</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Edit Utama -->
+    <form asp-action="Edit" enctype="multipart/form-data" method="post" id="formService">
+        @Html.AntiForgeryToken()
+        
+        <!-- Identitas Kunci Hidden -->
+        <input type="hidden" asp-for="IDOurServices" />
+        <input type="hidden" asp-for="UrlGambar" />
+        
+        <div class="row">
+            <!-- Kolom Kiri: Input Konten Multibahasa (ID / EN) -->
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow-sm border-0 rounded-3 mb-4">
+                    <div class="card-body p-4">
+                        
+                        <!-- Nav Tabs Bahasa -->
+                        <ul class="nav nav-tabs mb-4 border-bottom" id="languageTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active d-flex align-items-center gap-2 pb-3" id="id-tab" data-bs-toggle="tab" data-bs-target="#panel-id" type="button" role="tab" aria-controls="panel-id" aria-selected="true">
+                                    <span>🇮🇩</span> <strong>Bahasa Indonesia</strong>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link d-flex align-items-center gap-2 pb-3" id="en-tab" data-bs-toggle="tab" data-bs-target="#panel-en" type="button" role="tab" aria-controls="panel-en" aria-selected="false">
+                                    <span>🇬🇧</span> <strong>English (Inggris)</strong>
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Isi Tab Konten -->
+                        <div class="tab-content" id="languageTabsContent">
+                            
+                            <!-- Panel Bahasa Indonesia -->
+                            <div class="tab-pane fade show active" id="panel-id" role="tabpanel" aria-labelledby="id-tab">
+                                <div class="mb-4">
+                                    <label asp-for="JudulService_ID" class="form-label fw-bold text-dark">Nama / Judul Layanan (ID)</label>
+                                    <input asp-for="JudulService_ID" class="form-control form-control-solid shadow-sm" placeholder="Contoh: Pengembangan Aplikasi Web" />
+                                    <span asp-validation-for="JudulService_ID" class="text-danger small mt-1 d-block"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiService_ID" class="form-label fw-bold text-dark">Deskripsi Lengkap Layanan (ID)</label>
+                                    <textarea asp-for="IsiService_ID" id="editor_ID" class="form-control">@Model.IsiService_ID</textarea>
+                                    <span asp-validation-for="IsiService_ID" class="text-danger small mt-1 d-block"></span>
+                                </div>
+                            </div>
+
+                            <!-- Panel Bahasa Inggris -->
+                            <div class="tab-pane fade" id="panel-en" role="tabpanel" aria-labelledby="en-tab">
+                                <div class="mb-4">
+                                    <label asp-for="JudulService_EN" class="form-label fw-bold text-dark">Service Title / Name (EN)</label>
+                                    <input asp-for="JudulService_EN" class="form-control form-control-solid shadow-sm" placeholder="e.g., Web Application Development" />
+                                    <span asp-validation-for="JudulService_EN" class="text-danger small mt-1 d-block"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiService_EN" class="form-label fw-bold text-dark">Full Service Description (EN)</label>
+                                    <textarea asp-for="IsiService_EN" id="editor_EN" class="form-control">@Model.IsiService_EN</textarea>
+                                    <span asp-validation-for="IsiService_EN" class="text-danger small mt-1 d-block"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kolom Kanan: Gambar & Tombol Manajemen Aksi -->
+            <div class="col-xl-4 col-lg-5">
+                <!-- Card Upload / Pratinjau Gambar Berjalan -->
+                <div class="card shadow-sm border-0 rounded-3 mb-4">
+                    <div class="card-header bg-white py-3 border-bottom">
+                        <h6 class="m-0 fw-bold text-dark"><i class="fa fa-image me-2 text-secondary"></i>Visual Ikon / Gambar Layanan</h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="preview-container mb-3 border rounded-3 d-flex align-items-center justify-content-center bg-light shadow-inner position-relative" 
+                             style="height: 240px; overflow: hidden;">
+                            <img id="imgPreview" src="@(string.IsNullOrEmpty(Model.UrlGambar) ? "/images/default-service.png" : Model.UrlGambar)" 
+                                 class="img-fluid"
+                                 style="max-height: 100%; object-fit: contain;" alt="Preview Thumbnail"
+                                 onerror="this.onerror=null; this.src='/images/default-service.png';" />
+                        </div>
+                        
+                        <div class="mb-2">
+                            <label class="form-label fw-bold text-dark small">Ganti Gambar Komponen</label>
+                            <input asp-for="UploadGambar" id="fileInput" class="form-control shadow-sm" type="file" accept="image/*" />
+                            <span id="imageError" class="text-danger small d-block mt-1"></span>
+                            <span asp-validation-for="UploadGambar" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                        <div class="bg-light p-3 rounded-2 border border-dashed mt-3">
+                            <small class="text-muted d-block line-height-sm">
+                                <i class="fa fa-info-circle text-primary me-1"></i> Kosongkan pilihan file jika Anda <strong>tidak ingin mengubah</strong> visual ikon layanan yang saat ini aktif.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Tombol Aksi Kendali -->
+                <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-body p-3 bg-light rounded-3">
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-semibold py-2.5 shadow-sm">
+                                <i class="fa fa-save me-1"></i> Simpan Perubahan
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary fw-semibold py-2.5">
+                                <i class="fa fa-arrow-left me-1"></i> Batal & Kembali
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            // --- LOGIKA CKEDITOR MULTI-BAHASA (ID & EN) ---
+            const initCKEditor = (selector, textareaId) => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    ClassicEditor.create(element)
+                        .then(editor => {
+                            editor.model.document.on('change:data', () => {
+                                const targetTextarea = document.querySelector(textareaId);
+                                targetTextarea.value = editor.getData();
+                                $(targetTextarea).valid(); // Trigger validasi jQuery real-time
+                            });
+                        })
+                        .catch(error => { console.error("Gagal memuat CKEditor pada " + selector, error); });
+                }
+            };
+
+            // Inisialisasi Editor untuk sediaan data lama di kedua panel bahasa
+            initCKEditor('#editor_ID', '#editor_ID');
+            initCKEditor('#editor_EN', '#editor_EN');
+
+            // Setelan konfigurasi agar jQuery Validator tidak mengabaikan elemen tersembunyi di dalam Tab pasif
+            if ($.validator) {
+                $.validator.setDefaults({ ignore: [] });
+                
+                // Pindah otomatis ke Tab yang memicu error validasi saat klik submit
+                $('#formService').on('invalid-form.validate', function(event, validator) {
+                    if (validator.numberOfInvalids()) {
+                        const firstInvalidElement = $(validator.errorList[0].element);
+                        const parentTabPane = firstInvalidElement.closest('.tab-pane');
+                        if (parentTabPane.length) {
+                            const tabId = parentTabPane.attr('id');
+                            const tabTriggerButton = document.querySelector(`button[data-bs-target="#${tabId}"]`);
+                            if (tabTriggerButton) {
+                                const tabInstance = bootstrap.Tab.getOrCreateInstance(tabTriggerButton);
+                                tabInstance.show();
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- LOGIKA VALIDASI GAMBAR BARU & LOKAL PREVIEW ---
+            const fileInput = document.getElementById('fileInput');
+            const imgPreview = document.getElementById('imgPreview');
+            const errorElement = document.getElementById('imageError');
+            const submitBtn = document.querySelector('button[type="submit"]');
+            
+            // Menyimpan referensi URL gambar yang saat ini tersimpan di server
+            const databaseImage = "@(string.IsNullOrEmpty(Model.UrlGambar) ? "/images/default-service.png" : Model.UrlGambar)";
+
+            fileInput.addEventListener('change', function () {
+                const file = this.files[0];
+                
+                // Reset status error
+                errorElement.innerText = "";
+                submitBtn.disabled = false;
+
+                if (file) {
+                    const fileSize = file.size / 1024 / 1024; // Hitung ukuran dalam satuan MB
+                    const fileType = file.type;
+                    const maxSize = 5; // Batasan ukuran file (5MB)
+
+                    // 1. Validasi Ekstensi Gambar
+                    if (!fileType.startsWith('image/')) {
+                        errorElement.innerText = "Berkas harus berupa format gambar valid (JPG, JPEG, PNG).";
+                        resetInputToDefault(this);
+                        return;
+                    }
+
+                    // 2. Validasi Batasan Ukuran Berkas
+                    if (fileSize > maxSize) {
+                        errorElement.innerText = `Ukuran file (${fileSize.toFixed(2)} MB) terlalu besar! Batas maksimal adalah ${maxSize} MB.`;
+                        resetInputToDefault(this);
+                        return;
+                    }
+
+                    // 3. Muat file lokal ke komponen img preview
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imgPreview.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+
+                } else {
+                    // Jika user membatalkan pilihan berkas, kembalikan ke gambar semula dari server
+                    imgPreview.src = databaseImage;
+                }
+            });
+
+            function resetInputToDefault(inputElement) {
+                inputElement.value = ""; 
+                imgPreview.src = databaseImage;
+            }
+        });
+    </script>
+}

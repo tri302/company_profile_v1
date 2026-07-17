@@ -1,0 +1,132 @@
+@model OurServicesVM
+@{
+    ViewData["Title"] = "Manajemen Layanan";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid px-4 mt-4">
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-body p-4 bg-white rounded-3">
+            <div class="row align-items-center g-3">
+                <div class="col-md-8 d-flex align-items-center">
+                    <div class="bg-primary-subtle text-primary p-3 rounded-3 me-3 d-flex align-items-center justify-content-center" style="width: 55px; height: 55px;">
+                        <i class="fa fa-cogs fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-1 fw-bold text-dark">Daftar Layanan Perusahaan</h4>
+                        <p class="text-muted mb-0 small">Kelola data keunggulan produk dan jasa (*Our Services*) yang ditampilkan pada halaman profil utama.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a asp-action="Create" class="btn btn-primary btn-sm">
+                        <i class="fa fa-plus-circle"></i> Create New
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="table-container">
+        <partial name="_OurServicesPartial.cshtml" model="Model" />
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedData", "OurServices")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        // Fungsi Penanganan Hapus Data via AJAX & SweetAlert2
+        function deleteService(id) {
+            Swal.fire({
+                title: 'Hapus Layanan Ini?',
+                text: "Data spesifikasi komponen layanan akan dihapus secara permanen dari basis data sistem.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '<i class="fa fa-trash"></i> Ya, Hapus Data',
+                cancelButtonText: 'Batalkan',
+                customClass: {
+                    confirmButton: 'btn btn-danger px-3',
+                    cancelButton: 'btn btn-light border px-3 ms-2'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Tampilkan status loading ringan selama request berjalan
+                    Swal.fire({
+                        title: 'Memproses Penghapusan...',
+                        allowOutsideClick: false,
+                        didOpen: () => { Swal.showLoading(); }
+                    });
+
+                    $.ajax({
+                        url: '/OurServices/Delete/' + id,
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil Dihapus!',
+                                    text: 'Spesifikasi komponen layanan profil telah dibersihkan.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal Menghapus',
+                                    text: res.message || 'Terjadi hambatan internal sistem saat menghapus data.',
+                                    confirmButtonColor: '#0d6efd'
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Kesalahan Sistem',
+                                text: 'Gagal terhubung dengan server pengendali. Silakan coba sesaat lagi.',
+                                confirmButtonColor: '#0d6efd'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // Toast Notifikasi Sukses Operasi (TempData)
+        document.addEventListener("DOMContentLoaded", function () {
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses!',
+                        text: '@TempData["SuccessMessage"]',
+                        position: 'top-end',
+                        toast: true,
+                        timer: 4500,
+                        showConfirmButton: false,
+                        timerProgressBar: true
+                    });
+                </text>
+            }
+        });
+    </script>
+}

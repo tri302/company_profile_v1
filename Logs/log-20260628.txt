@@ -1,0 +1,445 @@
+2026-06-28 14:19:19.978 +07:00 [INF] Executed DbCommand (81ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `subscribers` AS `s`
+2026-06-28 14:19:20.202 +07:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2026-06-28 14:19:20.203 +07:00 [INF] Quartz Scheduler created
+2026-06-28 14:19:20.206 +07:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2026-06-28 14:19:20.207 +07:00 [INF] RAMJobStore initialized.
+2026-06-28 14:19:20.208 +07:00 [INF] Quartz Scheduler 3.18.1.0 - 'QuartzScheduler' with instanceId 'NON_CLUSTERED' initialized
+2026-06-28 14:19:20.208 +07:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2026-06-28 14:19:20.209 +07:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2026-06-28 14:19:20.243 +07:00 [INF] Adding 2 jobs, 2 triggers.
+2026-06-28 14:19:20.248 +07:00 [INF] Adding job: DEFAULT.BroadcastJob
+2026-06-28 14:19:20.267 +07:00 [INF] Adding job: DEFAULT.MonitorScaleJob
+2026-06-28 14:19:21.280 +07:00 [INF] Executed DbCommand (141ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-28 14:19:21.501 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-28 14:19:21.509 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-28 14:19:21.592 +07:00 [INF] Executed DbCommand (20ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `aspnetusers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+2026-06-28 14:19:21.910 +07:00 [INF] Database Keep-Alive Service telah dimulai.
+2026-06-28 14:19:21.911 +07:00 [INF] Mengirim ping ke MySQL Aiven pada: "2026-06-28T14:19:21.9103507+07:00"
+2026-06-28 14:19:22.287 +07:00 [INF] Now listening on: http://localhost:5171
+2026-06-28 14:19:22.288 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-28 14:19:22.288 +07:00 [INF] Hosting environment: Development
+2026-06-28 14:19:22.288 +07:00 [INF] Content root path: D:\source\company_profile
+2026-06-28 14:19:22.319 +07:00 [INF] Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+2026-06-28 14:19:22.413 +07:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `n`.`IDNews`, `n`.`CreateAt`, `n`.`IDKategori`, `n`.`IsSent`, `n`.`IsiContent_EN`, `n`.`IsiContent_ID`, `n`.`Judul_EN`, `n`.`Judul_ID`, `n`.`UrlGambar`
+FROM `News` AS `n`
+2026-06-28 14:19:22.441 +07:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-06-28 14:19:22.495 +07:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `e`.`Id`, `e`.`ReceiveEmailTo`, `e`.`SendEmailFrom`, `e`.`SmtpHost`, `e`.`SmtpPassword`, `e`.`SmtpPort`, `e`.`SmtpUsername`
+FROM `emailsettings` AS `e`
+LIMIT 1
+2026-06-28 14:19:22.871 +07:00 [INF] Ping Berhasil. Database tetap terjaga.
+2026-06-28 14:19:24.926 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/ - null null
+2026-06-28 14:19:24.987 +07:00 [WRN] Failed to determine the https port for redirect.
+2026-06-28 14:19:25.128 +07:00 [INF] Executing endpoint 'company_profile.Controllers.CompanyController.Home (company_profile)'
+2026-06-28 14:19:25.219 +07:00 [INF] Route matched with {action = "Home", controller = "Company"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Home() on controller company_profile.Controllers.CompanyController (company_profile).
+2026-06-28 14:19:25.533 +07:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-06-28 14:19:25.636 +07:00 [INF] Executed DbCommand (18ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`JudulCounter_EN` AS `JudulCounter`, `c`.`JudulCounter_ID`, `c`.`IsiContentCounter`
+FROM `counter` AS `c`
+LIMIT @__p_0
+2026-06-28 14:19:25.703 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `b`.`Id`, `b`.`JudulTextAnimatedOnBanner_EN` AS `JudulTextAnimatedOnBanner`, `b`.`IsiTextAnimatedOnBanner_EN` AS `IsiTextAnimatedOnBanner`, `b`.`JudulTextAnimatedOnBanner_ID`, `b`.`IsiTextAnimatedOnBanner_ID`, `b`.`UrlGambar`
+FROM `bannerhome` AS `b`
+2026-06-28 14:19:25.754 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `h`.`ID`, `h`.`UrlFb`, `h`.`UrlTwiter`, `h`.`UrlLinkedIn`, `h`.`UrlPinterest`, `h`.`UrlYoutube`, `h`.`UrlInstagram`, `h`.`UrlTiktok`, `h`.`EmailAddress`, `h`.`PhoneNumber`, `h`.`IsShow`
+FROM `header` AS `h`
+2026-06-28 14:19:26.117 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `h`.`Id`, `h`.`JudulAboutStart_EN`, `h`.`IsiAboutStart_EN`, `h`.`EmbededUrlVidio`, `h`.`JudulAboutStart_ID`, `h`.`IsiAboutStart_ID`
+FROM `home` AS `h`
+ORDER BY `h`.`Id`
+2026-06-28 14:19:26.196 +07:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `h2`.`Id`, `h2`.`Judul_EN` AS `Judul`, `h2`.`Judul_ID`, `h2`.`Value`, `h`.`Id`
+FROM `home` AS `h`
+INNER JOIN `homeprogressbar` AS `h2` ON `h`.`Id` = `h2`.`HomeId`
+ORDER BY `h`.`Id`
+2026-06-28 14:19:26.290 +07:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `w`.`Id`, `w`.`JudulWhyChooseUs_EN` AS `JudulWhyChooseUs`, `w`.`IsiContentWhyChooseUs_EN` AS `IsiContentWhyChooseUs`, `w`.`JudulWhyChooseUs_ID`, `w`.`IsiContentWhyChooseUs_ID`, `w`.`UrlGambar`
+FROM `whychooseus` AS `w`
+2026-06-28 14:19:26.383 +07:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`JudulSpecialFeatures_EN` AS `JudulSpecialFeatures`, `s`.`IsiContentSpecialFeatures_EN` AS `IsiContentSpecialFeatures`, `s`.`JudulSpecialFeatures_ID`, `s`.`IsiContentSpecialFeatures_ID`
+FROM `specialfeatures` AS `s`
+2026-06-28 14:19:26.473 +07:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `o`.`IDOurServices`, `o`.`JudulService_EN` AS `JudulService`, `o`.`IsiService_EN` AS `IsiService`, `o`.`JudulService_ID`, `o`.`IsiService_ID`, `o`.`UrlGambar`, `o`.`CreateAt`
+FROM `OurServices` AS `o`
+2026-06-28 14:19:26.583 +07:00 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`IDPortfolio`, `p`.`UrlGambar`, `p`.`Judul_EN` AS `Judul`, `p`.`IsiContentPortfolio_EN` AS `IsiContentPortfolio`, `p`.`ClientComment_EN` AS `ClientComment`, `p`.`Judul_ID`, `p`.`IsiContentPortfolio_ID`, `p`.`ClientComment_ID`, `p`.`CreateAt`, `p`.`ClientName`, `p`.`ClientCompanyName`, `p`.`ProjectStartDate`, `p`.`ProjectEndDate`
+FROM `Portfolios` AS `p`
+2026-06-28 14:19:26.715 +07:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`IDTeam`, `t`.`Nama`, `t`.`NoHP`, `t`.`Email`, `t`.`Website`, `t`.`UrlFoto` AS `UrlGambar`, `t`.`UrlFb`, `t`.`UrlLinkedIn`, `t`.`UrlYoutube`, `t`.`UrlTwiter`, `t`.`Jabatan_EN` AS `Jabatan`, `t`.`Deskripsi_EN` AS `Deskripsi`, `t`.`Jabatan_ID`, `t`.`Deskripsi_ID`
+FROM `Teams` AS `t`
+2026-06-28 14:19:26.920 +07:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`IDPricing`, `p`.`JenisLayanan_EN` AS `JenisLayanan`, `p`.`DeskripsiJenisLayanan_EN` AS `DeskripsiJenisLayanan`, `p`.`JenisLayanan_ID`, `p`.`DeskripsiJenisLayanan_ID`, COALESCE(`p`.`Harga`, 0.0) AS `Harga`, `p`.`CreateAt`
+FROM `Pricings` AS `p`
+2026-06-28 14:19:26.984 +07:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `f`.`IDFaq`, `f`.`CreateAt`, `f`.`JudulFaq_EN` AS `JudulFaq`, `f`.`IsiFaq_EN` AS `IsiFaq`, `f`.`JudulFaq_ID`, `f`.`IsiFaq_ID`
+FROM `Faqs` AS `f`
+2026-06-28 14:19:27.169 +07:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `n`.`IDNews`, `n`.`Judul_ID`, `n`.`Judul_EN`, `n`.`UrlGambar`, `n`.`IDKategori`, `n`.`CreateAt`, `k`.`NamaKategori_ID` AS `NamaKategori`
+FROM `News` AS `n`
+INNER JOIN `Kategoris` AS `k` ON `n`.`IDKategori` = `k`.`IDKategori`
+ORDER BY `n`.`CreateAt` DESC
+2026-06-28 14:19:27.249 +07:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`UrlImage`
+FROM `sliderfooterhomes` AS `s`
+2026-06-28 14:19:27.325 +07:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:27.347 +07:00 [INF] Executing ViewResult, running view Home.
+2026-06-28 14:19:28.019 +07:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`Id`, `p`.`BannerPath`, `p`.`PageName`
+FROM `pagebanners` AS `p`
+WHERE `p`.`PageName` = 'Cta Page'
+LIMIT 1
+2026-06-28 14:19:28.149 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `l`.`Id`, `l`.`Tipe`, `l`.`UrlGambar`
+FROM `logosettings` AS `l`
+2026-06-28 14:19:28.529 +07:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-06-28 14:19:28.579 +07:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`Id`, `t`.`FooterColor`, `t`.`HeaderColor`
+FROM `themes` AS `t`
+LIMIT 1
+2026-06-28 14:19:28.682 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `h`.`ID`, `h`.`UrlFb`, `h`.`UrlTwiter`, `h`.`UrlLinkedIn`, `h`.`UrlPinterest`, `h`.`UrlYoutube`, `h`.`UrlInstagram`, `h`.`UrlTiktok`, `h`.`EmailAddress`, `h`.`PhoneNumber`, `h`.`IsShow`
+FROM `header` AS `h`
+2026-06-28 14:19:28.849 +07:00 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `l`.`Id`, `l`.`Tipe`, `l`.`UrlGambar`
+FROM `logosettings` AS `l`
+2026-06-28 14:19:29.026 +07:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `k`.`IDKategori`, `k`.`NamaKategori_EN`, `k`.`NamaKategori_ID`
+FROM `Kategoris` AS `k`
+2026-06-28 14:19:29.224 +07:00 [INF] Executed DbCommand (24ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `n`.`IDNews`, `n`.`CreateAt`, `n`.`IDKategori`, `n`.`IsSent`, `n`.`IsiContent_EN`, `n`.`IsiContent_ID`, `n`.`Judul_EN`, `n`.`Judul_ID`, `n`.`UrlGambar`
+FROM `News` AS `n`
+ORDER BY `n`.`CreateAt` DESC
+LIMIT @__p_0
+2026-06-28 14:19:29.797 +07:00 [INF] Executed DbCommand (20ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`IDPortfolio`, `p`.`ClientComment_EN`, `p`.`ClientComment_ID`, `p`.`ClientCompanyName`, `p`.`ClientName`, `p`.`CreateAt`, `p`.`IsiContentPortfolio_EN`, `p`.`IsiContentPortfolio_ID`, `p`.`Judul_EN`, `p`.`Judul_ID`, `p`.`ProjectEndDate`, `p`.`ProjectStartDate`, `p`.`UrlGambar`
+FROM `Portfolios` AS `p`
+ORDER BY `p`.`IDPortfolio` DESC
+LIMIT @__p_0
+2026-06-28 14:19:30.075 +07:00 [INF] Executed DbCommand (92ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p0`.`Id`, `p0`.`IDPortfolio`, `p0`.`UrlGambar`, `p1`.`IDPortfolio`
+FROM (
+    SELECT `p`.`IDPortfolio`
+    FROM `Portfolios` AS `p`
+    ORDER BY `p`.`IDPortfolio` DESC
+    LIMIT @__p_0
+) AS `p1`
+INNER JOIN `portfoliogambar` AS `p0` ON `p1`.`IDPortfolio` = `p0`.`IDPortfolio`
+ORDER BY `p1`.`IDPortfolio` DESC
+2026-06-28 14:19:30.397 +07:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-06-28 14:19:30.685 +07:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`IDContact`, `c`.`Alamat_EN`, `c`.`Alamat_ID`, `c`.`CreateAt`, `c`.`EmailAddress`, `c`.`PhoneNumber`, `c`.`UrlFb`, `c`.`UrlInstagram`, `c`.`UrlLinkedIn`, `c`.`UrlPinterest`, `c`.`UrlTwiter`, `c`.`UrlYoutube`
+FROM `Contacts` AS `c`
+LIMIT 1
+2026-06-28 14:19:31.364 +07:00 [INF] Executed ViewResult - view Home executed in 3972.0503ms.
+2026-06-28 14:19:31.399 +07:00 [INF] Executed action company_profile.Controllers.CompanyController.Home (company_profile) in 6178.4312ms
+2026-06-28 14:19:31.401 +07:00 [INF] Executed endpoint 'company_profile.Controllers.CompanyController.Home (company_profile)'
+2026-06-28 14:19:31.438 +07:00 [INF] Session started; Key:f1fce1a7-8d07-1f59-0963-02756960347f, Id:66b31523-9680-08fc-7ab5-b691c83c9929
+2026-06-28 14:19:31.476 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/ - 200 null text/html; charset=utf-8 6554.2245ms
+2026-06-28 14:19:34.602 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/team/7d61a15c-9420-4fb0-b420-63d34d50e083.png - null null
+2026-06-28 14:19:34.670 +07:00 [INF] Sending file. Request path: '/uploads/team/7d61a15c-9420-4fb0-b420-63d34d50e083.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\team\7d61a15c-9420-4fb0-b420-63d34d50e083.png'
+2026-06-28 14:19:34.671 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/team/7d61a15c-9420-4fb0-b420-63d34d50e083.png - 200 114904 image/png 68.3173ms
+2026-06-28 14:19:34.994 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/team/67db773f-1bd9-4274-a645-174b4039347c.png - null null
+2026-06-28 14:19:34.994 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/team/e594c0af-e39f-4cce-bc37-23a3ce7c6e15.png - null null
+2026-06-28 14:19:34.995 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/team/7b86d334-30b3-4171-9eb0-60257b80fabd.png - null null
+2026-06-28 14:19:34.997 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/team/ea64d3c8-bc0c-4d17-9baa-90c3447a9c54.png - null null
+2026-06-28 14:19:34.999 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/team/ccfaf819-30a8-4a09-a016-5d73700d9e1b.png - null null
+2026-06-28 14:19:34.999 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/team/8386a64c-e2b3-468e-9559-602af8b5e533.png - null null
+2026-06-28 14:19:35.001 +07:00 [INF] Sending file. Request path: '/uploads/team/ccfaf819-30a8-4a09-a016-5d73700d9e1b.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\team\ccfaf819-30a8-4a09-a016-5d73700d9e1b.png'
+2026-06-28 14:19:35.001 +07:00 [INF] Sending file. Request path: '/uploads/team/8386a64c-e2b3-468e-9559-602af8b5e533.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\team\8386a64c-e2b3-468e-9559-602af8b5e533.png'
+2026-06-28 14:19:35.001 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/team/ccfaf819-30a8-4a09-a016-5d73700d9e1b.png - 200 46346 image/png 2.2872ms
+2026-06-28 14:19:35.002 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/team/8386a64c-e2b3-468e-9559-602af8b5e533.png - 200 51421 image/png 2.163ms
+2026-06-28 14:19:35.003 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/team/9d06fdf3-5bcf-4c31-9470-cc47112d6cc5.png - null null
+2026-06-28 14:19:35.003 +07:00 [INF] Sending file. Request path: '/uploads/team/67db773f-1bd9-4274-a645-174b4039347c.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\team\67db773f-1bd9-4274-a645-174b4039347c.png'
+2026-06-28 14:19:35.003 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/team/67db773f-1bd9-4274-a645-174b4039347c.png - 200 100962 image/png 9.4745ms
+2026-06-28 14:19:35.004 +07:00 [INF] Sending file. Request path: '/uploads/team/e594c0af-e39f-4cce-bc37-23a3ce7c6e15.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\team\e594c0af-e39f-4cce-bc37-23a3ce7c6e15.png'
+2026-06-28 14:19:35.005 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/team/e594c0af-e39f-4cce-bc37-23a3ce7c6e15.png - 200 106818 image/png 10.9012ms
+2026-06-28 14:19:35.006 +07:00 [INF] Sending file. Request path: '/uploads/team/9d06fdf3-5bcf-4c31-9470-cc47112d6cc5.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\team\9d06fdf3-5bcf-4c31-9470-cc47112d6cc5.png'
+2026-06-28 14:19:35.006 +07:00 [INF] Sending file. Request path: '/uploads/team/ea64d3c8-bc0c-4d17-9baa-90c3447a9c54.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\team\ea64d3c8-bc0c-4d17-9baa-90c3447a9c54.png'
+2026-06-28 14:19:35.006 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/team/9d06fdf3-5bcf-4c31-9470-cc47112d6cc5.png - 200 97663 image/png 3.338ms
+2026-06-28 14:19:35.006 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/team/ea64d3c8-bc0c-4d17-9baa-90c3447a9c54.png - 200 97663 image/png 8.9915ms
+2026-06-28 14:19:35.007 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/d59598d0-5295-4b20-b6ce-dc5c0d762f92.png - null null
+2026-06-28 14:19:35.007 +07:00 [INF] Sending file. Request path: '/uploads/team/7b86d334-30b3-4171-9eb0-60257b80fabd.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\team\7b86d334-30b3-4171-9eb0-60257b80fabd.png'
+2026-06-28 14:19:35.007 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/team/7b86d334-30b3-4171-9eb0-60257b80fabd.png - 200 114904 image/png 11.9679ms
+2026-06-28 14:19:35.008 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/1416c09d-a122-44df-9bb2-d3fe92e29201.png - null null
+2026-06-28 14:19:35.009 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/f7bf4a8a-8431-4fed-b7bf-0dd0a2b6cdf1.png - null null
+2026-06-28 14:19:35.009 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/1416c09d-a122-44df-9bb2-d3fe92e29201.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\1416c09d-a122-44df-9bb2-d3fe92e29201.png'
+2026-06-28 14:19:35.009 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/1416c09d-a122-44df-9bb2-d3fe92e29201.png - 200 25295 image/png 1.3471ms
+2026-06-28 14:19:35.010 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/f7bf4a8a-8431-4fed-b7bf-0dd0a2b6cdf1.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\f7bf4a8a-8431-4fed-b7bf-0dd0a2b6cdf1.png'
+2026-06-28 14:19:35.017 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/f7bf4a8a-8431-4fed-b7bf-0dd0a2b6cdf1.png - 200 21152 image/png 7.7677ms
+2026-06-28 14:19:35.056 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/d59598d0-5295-4b20-b6ce-dc5c0d762f92.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\d59598d0-5295-4b20-b6ce-dc5c0d762f92.png'
+2026-06-28 14:19:35.057 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/d59598d0-5295-4b20-b6ce-dc5c0d762f92.png - 200 2204623 image/png 49.741ms
+2026-06-28 14:19:35.507 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/85f70375-974a-44f3-87b5-61b6eedd3474.png - null null
+2026-06-28 14:19:35.509 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/85f70375-974a-44f3-87b5-61b6eedd3474.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\85f70375-974a-44f3-87b5-61b6eedd3474.png'
+2026-06-28 14:19:35.509 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/85f70375-974a-44f3-87b5-61b6eedd3474.png - 200 19403 image/png 1.8238ms
+2026-06-28 14:19:35.539 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/3258d034-084b-4191-ba9a-52b57a13795c.png - null null
+2026-06-28 14:19:35.543 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/3258d034-084b-4191-ba9a-52b57a13795c.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\3258d034-084b-4191-ba9a-52b57a13795c.png'
+2026-06-28 14:19:35.546 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/3258d034-084b-4191-ba9a-52b57a13795c.png - 200 42082 image/png 6.5054ms
+2026-06-28 14:19:35.578 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/4cd8a2f5-da0d-4bae-a49f-2138fad8ac0a.png - null null
+2026-06-28 14:19:35.591 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/4cd8a2f5-da0d-4bae-a49f-2138fad8ac0a.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\4cd8a2f5-da0d-4bae-a49f-2138fad8ac0a.png'
+2026-06-28 14:19:35.591 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/4cd8a2f5-da0d-4bae-a49f-2138fad8ac0a.png - 200 142695 image/png 14.8961ms
+2026-06-28 14:19:38.176 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/e0f61983-11c4-4be3-9f5f-901d1b98fc92.png - null null
+2026-06-28 14:19:38.179 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/e0f61983-11c4-4be3-9f5f-901d1b98fc92.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\e0f61983-11c4-4be3-9f5f-901d1b98fc92.png'
+2026-06-28 14:19:38.180 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/e0f61983-11c4-4be3-9f5f-901d1b98fc92.png - 200 41226 image/png 3.6943ms
+2026-06-28 14:19:38.200 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/094c00e7-56c1-466c-8236-be45d9ad4039.png - null null
+2026-06-28 14:19:38.515 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/portfolio/ddeda6c7-aa46-40e1-a045-197508b7250d.png - null null
+2026-06-28 14:19:38.518 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/sliders/38ec6216-a1b5-4210-b697-4f8687725383_client-2.png - null null
+2026-06-28 14:19:38.518 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/sliders/6a272368-6413-40b6-82bd-5a355fb7eb5e_client-1.png - null null
+2026-06-28 14:19:38.519 +07:00 [INF] Sending file. Request path: '/uploads/sliders/6a272368-6413-40b6-82bd-5a355fb7eb5e_client-1.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\sliders\6a272368-6413-40b6-82bd-5a355fb7eb5e_client-1.png'
+2026-06-28 14:19:38.519 +07:00 [INF] Sending file. Request path: '/uploads/sliders/38ec6216-a1b5-4210-b697-4f8687725383_client-2.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\sliders\38ec6216-a1b5-4210-b697-4f8687725383_client-2.png'
+2026-06-28 14:19:38.520 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/sliders/38ec6216-a1b5-4210-b697-4f8687725383_client-2.png - 200 44375 image/png 1.9729ms
+2026-06-28 14:19:38.520 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/sliders/6a272368-6413-40b6-82bd-5a355fb7eb5e_client-1.png - 200 29981 image/png 1.7702ms
+2026-06-28 14:19:38.520 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/sliders/6944ec7f-b344-444f-8d42-eb1097c8458c_client-3.png - null null
+2026-06-28 14:19:38.537 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/sliders/18f85584-d722-43ec-b36f-3f7ba2720580_client-5.png - null null
+2026-06-28 14:19:38.541 +07:00 [INF] Sending file. Request path: '/uploads/sliders/6944ec7f-b344-444f-8d42-eb1097c8458c_client-3.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\sliders\6944ec7f-b344-444f-8d42-eb1097c8458c_client-3.png'
+2026-06-28 14:19:38.542 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/sliders/6944ec7f-b344-444f-8d42-eb1097c8458c_client-3.png - 200 45008 image/png 21.6084ms
+2026-06-28 14:19:38.543 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/a57e6ca3-500b-4f50-b644-91821df8304c.png - null null
+2026-06-28 14:19:38.550 +07:00 [INF] Sending file. Request path: '/uploads/sliders/18f85584-d722-43ec-b36f-3f7ba2720580_client-5.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\sliders\18f85584-d722-43ec-b36f-3f7ba2720580_client-5.png'
+2026-06-28 14:19:38.550 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/sliders/18f85584-d722-43ec-b36f-3f7ba2720580_client-5.png - 200 46431 image/png 12.4729ms
+2026-06-28 14:19:38.550 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/a02c0e39-52fb-4c0f-95e7-a0f112356688.png - null null
+2026-06-28 14:19:38.555 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/sliders/3566e244-9568-4e0c-8035-16eec2d7ffb6_client-4.png - null null
+2026-06-28 14:19:38.557 +07:00 [INF] Sending file. Request path: '/uploads/sliders/3566e244-9568-4e0c-8035-16eec2d7ffb6_client-4.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\sliders\3566e244-9568-4e0c-8035-16eec2d7ffb6_client-4.png'
+2026-06-28 14:19:38.558 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/sliders/3566e244-9568-4e0c-8035-16eec2d7ffb6_client-4.png - 200 28108 image/png 2.6845ms
+2026-06-28 14:19:38.642 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/ddeda6c7-aa46-40e1-a045-197508b7250d.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\ddeda6c7-aa46-40e1-a045-197508b7250d.png'
+2026-06-28 14:19:38.643 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/ddeda6c7-aa46-40e1-a045-197508b7250d.png - 200 2204623 image/png 127.2076ms
+2026-06-28 14:19:38.699 +07:00 [INF] Sending file. Request path: '/uploads/portfolio/094c00e7-56c1-466c-8236-be45d9ad4039.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\portfolio\094c00e7-56c1-466c-8236-be45d9ad4039.png'
+2026-06-28 14:19:38.699 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/portfolio/094c00e7-56c1-466c-8236-be45d9ad4039.png - 200 2069372 image/png 498.8727ms
+2026-06-28 14:19:38.765 +07:00 [INF] Sending file. Request path: '/uploads/news/a02c0e39-52fb-4c0f-95e7-a0f112356688.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\a02c0e39-52fb-4c0f-95e7-a0f112356688.png'
+2026-06-28 14:19:38.765 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/a02c0e39-52fb-4c0f-95e7-a0f112356688.png - 200 1981098 image/png 214.8325ms
+2026-06-28 14:19:38.776 +07:00 [INF] Sending file. Request path: '/uploads/news/a57e6ca3-500b-4f50-b644-91821df8304c.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\a57e6ca3-500b-4f50-b644-91821df8304c.png'
+2026-06-28 14:19:38.776 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/a57e6ca3-500b-4f50-b644-91821df8304c.png - 200 2257258 image/png 233.1626ms
+2026-06-28 14:19:38.883 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-28 14:19:38.889 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 5.7449ms
+2026-06-28 14:19:40.454 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:40.471 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:40.510 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:40.510 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:40.533 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:40.548 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:40.558 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:40.565 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:40.573 +07:00 [INF] Executed ViewResult - view NotFound executed in 13.0097ms.
+2026-06-28 14:19:40.574 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 40.8502ms
+2026-06-28 14:19:40.574 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:40.576 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 121.8283ms
+2026-06-28 14:19:40.577 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:40.589 +07:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:40.590 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:40.591 +07:00 [INF] Executed ViewResult - view NotFound executed in 1.3246ms.
+2026-06-28 14:19:40.591 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 43.3296ms
+2026-06-28 14:19:40.591 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:40.593 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 121.4936ms
+2026-06-28 14:19:40.593 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:41.148 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:41.171 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:41.175 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:41.186 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:41.187 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:41.187 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.5687ms.
+2026-06-28 14:19:41.187 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 11.8715ms
+2026-06-28 14:19:41.188 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:41.188 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 39.7087ms
+2026-06-28 14:19:41.188 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:41.473 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:41.473 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:41.477 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:41.482 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:41.483 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:41.484 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.7912ms.
+2026-06-28 14:19:41.484 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 7.1032ms
+2026-06-28 14:19:41.484 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:41.484 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 11.8957ms
+2026-06-28 14:19:41.485 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:41.852 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:41.853 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:41.856 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:41.878 +07:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:41.879 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:41.879 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.844ms.
+2026-06-28 14:19:41.880 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 23.1728ms
+2026-06-28 14:19:41.880 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:41.880 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 28.114ms
+2026-06-28 14:19:41.881 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:43.047 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:43.050 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:43.066 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:43.072 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:43.072 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:43.073 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.493ms.
+2026-06-28 14:19:43.073 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 6.7786ms
+2026-06-28 14:19:43.073 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:43.073 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 25.8132ms
+2026-06-28 14:19:43.073 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:43.186 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:43.187 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:43.196 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:43.202 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:43.202 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:43.203 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4313ms.
+2026-06-28 14:19:43.203 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 6.8954ms
+2026-06-28 14:19:43.203 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:43.204 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 17.9003ms
+2026-06-28 14:19:43.204 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:43.684 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:43.685 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:43.686 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:43.686 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:43.691 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:43.694 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:43.695 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:43.695 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:43.695 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4134ms.
+2026-06-28 14:19:43.695 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 4.3351ms
+2026-06-28 14:19:43.696 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:43.696 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 11.8555ms
+2026-06-28 14:19:43.696 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:43.698 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:43.698 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:43.698 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4645ms.
+2026-06-28 14:19:43.699 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 4.0196ms
+2026-06-28 14:19:43.699 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:43.699 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 14.0049ms
+2026-06-28 14:19:43.699 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:48.308 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/no-image.png - null null
+2026-06-28 14:19:48.366 +07:00 [INF] Sending file. Request path: '/uploads/no-image.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\no-image.png'
+2026-06-28 14:19:48.369 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/no-image.png - 200 19382 image/png 59.6013ms
+2026-06-28 14:19:49.105 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - null null
+2026-06-28 14:19:49.107 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:49.113 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:49.118 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:49.119 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:49.119 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4464ms.
+2026-06-28 14:19:49.120 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 6.2703ms
+2026-06-28 14:19:49.120 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:49.120 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/<iframe width="560" height="315" src="https://www.youtube.com/embed/odfEZ1v9AJ8?si=iihM74e4K6oJ_y9o%22%20title=%22YouTube%20video%20player%22%20frameborder=%220%22%20allow=%22accelerometer;%20autoplay;%20clipboard-write;%20encrypted-media;%20gyroscope;%20picture-in-picture;%20web-share%22%20referrerpolicy=%22strict-origin-when-cross-origin%22%20allowfullscreen%3E%3C/iframe%3E - 404 null text/html; charset=utf-8 15.2361ms
+2026-06-28 14:19:49.120 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%3Ciframe%20width=%22560%22%20height=%22315%22%20src=%22https://www.youtube.com/embed/odfEZ1v9AJ8, Response status code: 404
+2026-06-28 14:19:49.605 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/ourservices/a007400b-54df-4ea0-92d9-9f989db767f3.png - null null
+2026-06-28 14:19:49.605 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/[value-6] - null null
+2026-06-28 14:19:49.606 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/ourservices/25b99a21-1cc2-4371-b86f-18e6fab9e427.png - null null
+2026-06-28 14:19:49.607 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/ourservices/3a682f20-5aaa-465e-816b-1a44c9165420.png - null null
+2026-06-28 14:19:49.614 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/ourservices/2e456cd0-38b2-402d-a116-826595cb01df.png - null null
+2026-06-28 14:19:49.615 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:49.630 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-28 14:19:49.656 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-28 14:19:49.656 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-28 14:19:49.656 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4609ms.
+2026-06-28 14:19:49.657 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 26.5311ms
+2026-06-28 14:19:49.657 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-28 14:19:49.657 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/[value-6] - 404 null text/html; charset=utf-8 52.1765ms
+2026-06-28 14:19:49.657 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/%5Bvalue-6%5D, Response status code: 404
+2026-06-28 14:19:49.819 +07:00 [INF] Sending file. Request path: '/uploads/ourservices/a007400b-54df-4ea0-92d9-9f989db767f3.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\ourservices\a007400b-54df-4ea0-92d9-9f989db767f3.png'
+2026-06-28 14:19:49.820 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/ourservices/a007400b-54df-4ea0-92d9-9f989db767f3.png - 200 1981098 image/png 215.3853ms
+2026-06-28 14:19:49.833 +07:00 [INF] Sending file. Request path: '/uploads/ourservices/2e456cd0-38b2-402d-a116-826595cb01df.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\ourservices\2e456cd0-38b2-402d-a116-826595cb01df.png'
+2026-06-28 14:19:49.834 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/ourservices/2e456cd0-38b2-402d-a116-826595cb01df.png - 200 2069372 image/png 219.5574ms
+2026-06-28 14:19:49.839 +07:00 [INF] Sending file. Request path: '/uploads/ourservices/25b99a21-1cc2-4371-b86f-18e6fab9e427.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\ourservices\25b99a21-1cc2-4371-b86f-18e6fab9e427.png'
+2026-06-28 14:19:49.839 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/ourservices/25b99a21-1cc2-4371-b86f-18e6fab9e427.png - 200 2162670 image/png 232.9714ms
+2026-06-28 14:19:49.883 +07:00 [INF] Sending file. Request path: '/uploads/ourservices/3a682f20-5aaa-465e-816b-1a44c9165420.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\ourservices\3a682f20-5aaa-465e-816b-1a44c9165420.png'
+2026-06-28 14:19:49.883 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/ourservices/3a682f20-5aaa-465e-816b-1a44c9165420.png - 200 2255845 image/png 276.2077ms
+2026-06-28 14:20:07.089 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/ourservices/ba934a64-895c-419f-9ec4-0ac5b06cae0b.png - null null
+2026-06-28 14:20:07.093 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/ourservices/c71a7bb8-7130-4006-b079-acd93fcaf056.png - null null
+2026-06-28 14:20:07.094 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/achivement.png - null null
+2026-06-28 14:20:07.165 +07:00 [INF] Sending file. Request path: '/uploads/ourservices/c71a7bb8-7130-4006-b079-acd93fcaf056.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\ourservices\c71a7bb8-7130-4006-b079-acd93fcaf056.png'
+2026-06-28 14:20:07.165 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/ourservices/c71a7bb8-7130-4006-b079-acd93fcaf056.png - 200 55415 image/png 72.4371ms
+2026-06-28 14:20:07.769 +07:00 [INF] Sending file. Request path: '/uploads/achivement.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\achivement.png'
+2026-06-28 14:20:07.770 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/achivement.png - 200 1981098 image/png 675.8215ms
+2026-06-28 14:20:07.808 +07:00 [INF] Sending file. Request path: '/uploads/ourservices/ba934a64-895c-419f-9ec4-0ac5b06cae0b.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\ourservices\ba934a64-895c-419f-9ec4-0ac5b06cae0b.png'
+2026-06-28 14:20:07.808 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/ourservices/ba934a64-895c-419f-9ec4-0ac5b06cae0b.png - 200 2204623 image/png 719.1221ms
+2026-06-28 14:20:08.079 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/home_testimonial_photo.png - null null
+2026-06-28 14:20:08.083 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/b4fea0e3-9cab-4413-8fa1-f09d39bebc12.png - null null
+2026-06-28 14:20:08.088 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/b237509f-ae99-4ed4-966d-ccb397159502.png - null null
+2026-06-28 14:20:08.093 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/b7c6316b-4b65-4807-8db4-aeb7a66704bd.png - null null
+2026-06-28 14:20:08.096 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/60180c14-ca82-43a0-9332-e76dc15c876a.png - null null
+2026-06-28 14:20:08.098 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/4fa39e35-7045-4b81-a9b3-92a90496f3fb.png - null null
+2026-06-28 14:20:08.532 +07:00 [INF] Sending file. Request path: '/uploads/news/b237509f-ae99-4ed4-966d-ccb397159502.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\b237509f-ae99-4ed4-966d-ccb397159502.png'
+2026-06-28 14:20:08.533 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/b237509f-ae99-4ed4-966d-ccb397159502.png - 200 2036750 image/png 445.1383ms
+2026-06-28 14:20:08.534 +07:00 [INF] Sending file. Request path: '/uploads/news/4fa39e35-7045-4b81-a9b3-92a90496f3fb.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\4fa39e35-7045-4b81-a9b3-92a90496f3fb.png'
+2026-06-28 14:20:08.534 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/4fa39e35-7045-4b81-a9b3-92a90496f3fb.png - 200 2204623 image/png 436.327ms
+2026-06-28 14:20:08.550 +07:00 [INF] Sending file. Request path: '/uploads/news/b4fea0e3-9cab-4413-8fa1-f09d39bebc12.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\b4fea0e3-9cab-4413-8fa1-f09d39bebc12.png'
+2026-06-28 14:20:08.550 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/b4fea0e3-9cab-4413-8fa1-f09d39bebc12.png - 200 2255845 image/png 467.1786ms
+2026-06-28 14:20:08.553 +07:00 [INF] Sending file. Request path: '/uploads/home_testimonial_photo.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\home_testimonial_photo.png'
+2026-06-28 14:20:08.554 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/home_testimonial_photo.png - 200 2255845 image/png 475.1195ms
+2026-06-28 14:20:08.570 +07:00 [INF] Sending file. Request path: '/uploads/news/60180c14-ca82-43a0-9332-e76dc15c876a.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\60180c14-ca82-43a0-9332-e76dc15c876a.png'
+2026-06-28 14:20:08.571 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/60180c14-ca82-43a0-9332-e76dc15c876a.png - 200 2573669 image/png 475.2494ms
+2026-06-28 14:20:08.581 +07:00 [INF] Sending file. Request path: '/uploads/news/b7c6316b-4b65-4807-8db4-aeb7a66704bd.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\b7c6316b-4b65-4807-8db4-aeb7a66704bd.png'
+2026-06-28 14:20:08.582 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/b7c6316b-4b65-4807-8db4-aeb7a66704bd.png - 200 2715601 image/png 489.0613ms
+2026-06-28 14:20:08.900 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/c8d07653-1b0e-4d5b-b5cd-c0949f80930f.png - null null
+2026-06-28 14:20:08.916 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/news/156159c7-4b16-46f5-9cde-e0edf9a9d18d.png - null null
+2026-06-28 14:20:09.046 +07:00 [INF] Sending file. Request path: '/uploads/news/c8d07653-1b0e-4d5b-b5cd-c0949f80930f.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\c8d07653-1b0e-4d5b-b5cd-c0949f80930f.png'
+2026-06-28 14:20:09.046 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/c8d07653-1b0e-4d5b-b5cd-c0949f80930f.png - 200 2069372 image/png 145.4635ms
+2026-06-28 14:20:09.061 +07:00 [INF] Sending file. Request path: '/uploads/news/156159c7-4b16-46f5-9cde-e0edf9a9d18d.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\news\156159c7-4b16-46f5-9cde-e0edf9a9d18d.png'
+2026-06-28 14:20:09.061 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/news/156159c7-4b16-46f5-9cde-e0edf9a9d18d.png - 200 2162670 image/png 144.6334ms
+2026-06-28 14:20:09.112 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/contactformimg.png - null null
+2026-06-28 14:20:09.196 +07:00 [INF] Sending file. Request path: '/uploads/contactformimg.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\contactformimg.png'
+2026-06-28 14:20:09.196 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/contactformimg.png - 200 2204623 image/png 83.904ms
+2026-06-28 14:24:20.426 +07:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `e`.`Id`, `e`.`ReceiveEmailTo`, `e`.`SendEmailFrom`, `e`.`SmtpHost`, `e`.`SmtpPassword`, `e`.`SmtpPort`, `e`.`SmtpUsername`
+FROM `emailsettings` AS `e`
+LIMIT 1
+2026-06-28 14:24:22.885 +07:00 [INF] Mengirim ping ke MySQL Aiven pada: "2026-06-28T14:24:22.8836776+07:00"
+2026-06-28 14:24:23.497 +07:00 [INF] Ping Berhasil. Database tetap terjaga.

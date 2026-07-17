@@ -1,0 +1,189 @@
+@using company_profile
+@model EventsVM
+@{
+    ViewData["Title"] = "Event Details";
+    Layout = "_FrontEndLayout";
+}
+
+@section Header {
+    @{
+        var absoluteImageUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Url.Content("~" + Model.UrlGambar)}";
+        var absolutePageUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
+    }
+    <meta property="og:title" content="@Model.JudulEvent" />
+    <meta property="og:description" content="Ayo ikuti event menarik ini!" />
+    <meta property="og:image" content="@absoluteImageUrl" />
+    <meta property="og:url" content="@absolutePageUrl" />
+    <meta property="og:type" content="article" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@Model.JudulEvent">
+    <meta name="twitter:image" content="@absoluteImageUrl">
+}
+
+<style>
+    .map-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    /* Tambahan agar iframe peta responsif */
+    .map-container iframe {
+        width: 100% !important;
+        height: 400px !important;
+    }
+</style>
+
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "Event Page" })
+<!--Banner End-->
+
+<div class="event-detail pt_60 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="event-detail-content">
+                    <div class="event-photo-item mb_30">
+                        <img src="@Url.Content("~" + Model.UrlGambar)" alt="Event Photo" style="width:100%;">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="event-contact-item">
+                                <div class="event-contact-icon"><i class="fa fa-play"></i></div>
+                                <div class="event-contact-text">
+                                    <h4>Start Date</h4>
+                                    <p>@Model.StartEvent.ToString("dd MMMM yyyy")</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="event-contact-item">
+                                <div class="event-contact-icon"><i class="fa fa-flag"></i></div>
+                                <div class="event-contact-text">
+                                    <h4>End Date</h4>
+                                    <p>@Model.EndEvent.ToString("dd MMMM yyyy")</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="event-contact-item">
+                                <div class="event-contact-icon"><i class="fa fa-map-marker"></i></div>
+                                <div class="event-contact-text">
+                                    <h4>Address</h4>
+                                    <p>@Model.AlamatEvent</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event-detail-text">
+                        <h3>Description</h3>
+                        <div style="clear:both;">
+                            @Html.Raw(Model.IsiContentEvent)
+                        </div>
+                        <div class="event-map headstyle mt_50">
+                            <h4>Event Location Map</h4>
+                            <div class="map-container">
+                                @if (!string.IsNullOrEmpty(Model.LokasiEvent))
+                                {
+                                    <iframe src="@Model.LokasiEvent"
+                                            width="600"
+                                            height="450"
+                                            style="border:0;"
+                                            allowfullscreen=""
+                                            loading="lazy">
+                                    </iframe>
+                                }
+                                else
+                                {
+                                    <p>Peta tidak valid atau lokasi belum diatur.</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="comment-form headstyle mt-2 mb_50">
+                            <h4>Share This Event</h4>
+                            <div class="share-container">
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_whatsapp"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="event-sidebar sidebar">
+                    <div class="sidebar-item">
+                        @if (Model.UpcomingEvents == null || !Model.UpcomingEvents.Any())
+                        {
+                            <h3>No Upcoming Events</h3>
+                            <p>There are no upcoming events at the moment. Please check back later!</p>
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.UpcomingEvents)
+                            {
+                                <h3> Upcoming Events</h3>
+                                // Menambahkan class visual jika event ini yang sedang dibuka
+                                var activeStyle = item.IDEvents == Model.IDEvents
+                                                  ? "border: 2px solid #007bff; background: #f8f9fa; padding: 10px; border-radius: 5px;"
+                                                  : "";
+
+                                <div class="sidebar-recent-item" style="@activeStyle">
+                                    <div class="recent-photo">
+                                        <a asp-controller="Company" asp-action="EventDetail" asp-route-id="@item.IDEvents">
+                                            <img src="@Url.Content("~" + item.UrlGambar)" alt="Event Photo">
+                                        </a>
+                                    </div>
+                                    <div class="recent-text">
+                                        <a asp-controller="Company" asp-action="EventDetail"
+                                           asp-route-id="@item.IDEvents">@item.JudulEvent</a>
+                                        <div class="rpwwt-post-date">Start: @item.StartEvent.ToString("dd MMMM yyyy")</div>
+                                    </div>
+                                </div>
+
+                            }
+                        }
+                    </div>
+                    <div class="sidebar-item mt_30">
+                        @if (Model.PastEvents == null || !Model.PastEvents.Any())
+                        {
+                            <h3>No Past Events</h3>
+                            <p>There are no past events to display.</p>
+                        }
+                        else
+                        {
+                            <h3>Past Events</h3>
+                            @foreach (var item in Model.PastEvents)
+                            {
+                                <div class="sidebar-recent-item">
+                                    <div class="recent-photo">
+                                        <a asp-controller="Company" asp-action="EventDetail" asp-route-id="@item.IDEvents">
+                                            <img src="@Url.Content("~" + item.UrlGambar)" alt="Event Photo">
+                                        </a>
+                                    </div>
+                                    <div class="recent-text">
+                                        <a asp-controller="Company" asp-action="EventDetail"
+                                           asp-route-id="@item.IDEvents">@item.JudulEvent</a>
+                                        <div class="rpwwt-post-date">Finished: @item.EndEvent.ToString("dd MMMM yyyy")</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->

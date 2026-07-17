@@ -1,0 +1,111 @@
+@model company_profile.AboutVM
+
+@{
+    ViewData["Title"] = "Edit About Content";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .ck-editor__editable_inline {
+        min-height: 250px;
+    }
+
+    .preview-container {
+        height: 250px;
+        overflow: hidden;
+        background-color: #f8f9fa;
+        border: 2px dashed #dee2e6;
+    }
+</style>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">Edit About Content</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        @* Hidden field sangat penting untuk proses Update *@
+                        <input type="hidden" asp-for="IDAbout" />
+
+                        @* Menyimpan data CreateAt agar tidak hilang saat postback *@
+                        <input type="hidden" asp-for="CreateAt" />                                                
+                        
+                        <div class="mb-3">
+                            <label asp-for="IsiContent_ID" class="form-label fw-bold">Content (ID)</label>
+                            <textarea asp-for="IsiContent_ID" class="form-control" id="editor_id"
+                                      placeholder="Masukkan isi konten dalam Bahasa Indonesia"></textarea>
+                            <span asp-validation-for="IsiContent_ID" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IsiContent_EN" class="form-label fw-bold">Content (EN)</label>
+                            <textarea asp-for="IsiContent_EN" class="form-control" id="editor_en"
+                                      placeholder="Masukkan isi konten dalam Bahasa Inggris"></textarea>
+                            <span asp-validation-for="IsiContent_EN" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3 text-muted small">
+                            <p>Created At: @Model.CreateAt.ToString("dd MMMM yyyy HH:mm")</p>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary btn-sm">
+                                <i class="fa fa-arrow-left"></i> Back to List
+                            </a>
+                            <button type="submit" id="btnSubmit" class="btn btn-success btn-sm">
+                                <i class="fa fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Pastikan CKEditor sudah dimuat di window
+            if (typeof ClassicEditor !== 'undefined') {
+                const targetEditors = ['#editor_id', '#editor_en'];
+                targetEditors.forEach(selector => {
+                    const editorElement = document.querySelector(selector);
+
+                    if (editorElement) {
+                        ClassicEditor
+                            .create(editorElement)
+                            .then(editor => {
+                                // Update field asli saat ada perubahan
+                                editor.model.document.on('change:data', () => {
+                                    editorElement.value = editor.getData();
+                                    // Validasi jika menggunakan jQuery Validate
+                                    if (typeof $ !== 'undefined' && $.fn.valid) {
+                                        $(editorElement).valid();
+                                    }
+                                });
+                            })
+                            .catch(error => {
+                                console.error('CKEditor Gagal Inisialisasi pada ' + selector, error);
+                            });
+                    }
+                });
+            } else {
+                console.error('CKEditor library tidak ditemukan.');
+            }
+        });
+
+            //Konfigurasi Validasi jQuery agar tidak mengabaikan elemen hidden (textarea bawaan CKEditor)
+            if ($.validator) {
+                $.validator.setDefaults({ ignore: [] });
+            }
+    </script>
+}

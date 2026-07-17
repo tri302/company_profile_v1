@@ -1,0 +1,180 @@
+﻿@using company_profile;
+@model NewsVM;
+@functions {
+    public string StripHTML(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "<.*?>", String.Empty);
+    }
+}
+@{
+    // Simpan URL lengkap ke dalam variabel agar kode tidak berantakan
+    var currentUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
+    var encodedUrl = Uri.EscapeDataString(currentUrl);
+    var encodedTitle = Uri.EscapeDataString(Model.Judul ?? "");
+}
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "News Page" })
+<!--Banner End-->
+
+<!--Blog-One Start-->
+<div class="blog-one-area pt_60 pb_90">
+    <div class="container">
+        <div class="row">
+            <!-- Kolom Konten Utama (8 Kolom) -->
+            <div class="col-lg-8">
+                @foreach (var item in Model.ListBerita)
+                {
+                    <div class="single-blog">
+                        <img src="@(string.IsNullOrEmpty(item.UrlGambar) ? Url.Content("~/uploads/no-image.png") : item.UrlGambar)"
+                             alt="News Photo">                        
+                        <ul>
+                            <li>
+                                <i class="fa fa-edit"></i>
+                                <a asp-action="NewsByCategory" asp-controller="Company"
+                                       asp-route-NamaKategori="@item.Kategori.NamaKategori">
+                                    @(item.Kategori?.NamaKategori ?? "Uncategorized")
+                                </a>
+                            </li>
+                            <li>
+                                <i class="fa fa-calendar-o"></i>
+                                @item.CreateAt.ToString("dd MMMM yyyy")
+                            </li>                            
+                        </ul>
+                        <h3>
+                            <a asp-action="NewsDetail" asp-controller="Company"
+                               asp-route-id="@item.IDNews">
+                                @item.Judul
+                            </a>
+                        </h3>
+                        <div class="blog-content">
+                            @{
+                                var cleanText = StripHTML(item.IsiContent ?? "");
+                                var shortText = cleanText.Length > 180 ? cleanText.Substring(0, 180) + "..." : cleanText;
+                            }
+                            @shortText
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center align-items-center mt-4" id="pagination-controls">
+                            <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+                                    data-page="@(Model.CurrentPage - 1)">
+                                <i class="fa fa-arrow-left"></i> Previous
+                            </button>
+
+                            <!-- Menambahkan mx-4 untuk memberi jarak kiri dan kanan pada teks -->
+                            <span class="text-muted fw-bold mx-4">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+                            <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+                                    data-page="@(Model.CurrentPage + 1)">
+                                Next <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>                                
+                <!-- Share Buttons -->
+                <div class="comment-form headstyle mt_50">
+                    <h4>Share This News</h4>
+                    <div class="share_buttons">
+                        <!-- Facebook: Hanya butuh URL -->
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/sharer.php?u=@encodedUrl">
+                            <i class="fa fa-facebook-f"></i>
+                        </a>
+
+                        <!-- Twitter: URL + Text -->
+                        <a class="twitter" target="_blank"
+                               href="https://twitter.com/intent/tweet?url=@encodedUrl&text=@encodedTitle">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+
+                        <!-- Pinterest: Butuh URL + Description -->
+                        <a class="pinterest" target="_blank"
+                               href="https://www.pinterest.com/pin/create/button/?url=@encodedUrl&description=@encodedTitle">
+                            <i class="fa fa-pinterest"></i>
+                        </a>
+
+                        <!-- LinkedIn: Gunakan format terbaru -->
+                        <a class="linkedin" target="_blank"
+                               href="https://www.linkedin.com/sharing/share-offsite/?url=@encodedUrl">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+        
+                        <!-- Tambahan WhatsApp (Sering digunakan di Indonesia) -->
+                        <a class="whatsapp" target="_blank"
+                               href="https://api.whatsapp.com/send?text=@encodedTitle%20@encodedUrl">
+                            <i class="fa fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Start (4 Kolom) -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <!-- Search -->
+                    <div class="sidebar-item">
+                        <form asp-action="Search" asp-controller="Company" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for ..."
+                                       name="search_string" autocomplete="off">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="sidebar-item">
+                        <h3>Categories</h3>
+                        <ul>
+                            @if (Model.ListKategoriBerita != null)
+                            {
+                                @foreach (var item in Model.ListKategoriBerita)
+                                {
+                                    <li>
+                                        <a asp-action="NewsByCategory" asp-controller="Company"
+                                               asp-route-NamaKategori="@item.NamaKategori">
+                                            @(item?.NamaKategori ?? "Uncategorized")
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts -->
+                    <div class="sidebar-item">
+                        <h3>Recent Posts</h3>
+                        @if (Model.ListRecentPostsBerita != null)
+                        {
+                            @foreach (var recent in Model.ListRecentPostsBerita)
+                            {
+                                <div class="sidebar-recent-item" style="display: flex; margin-bottom: 15px;">
+                                    <div class="recent-photo" style="width: 80px; margin-right: 10px; flex-shrink: 0;">
+                                        <a asp-action="NewsDetail" asp-route-IDNews="@recent.IDNews">
+                                            <img src="@(string.IsNullOrEmpty(recent.UrlGambar) ? Url.Content("~/uploads/no-image.png") : recent.UrlGambar)"
+                                                 style="width:100%" alt="Blog Photo">
+                                        </a>
+                                    </div>
+                                    <div class="recent-text">
+                                        <a asp-action="NewsDetail" asp-controller="Company"
+                                           asp-route-IDNews="@recent.IDNews">@recent.Judul</a>
+                                        <div class="rpwwt-post-date">@recent.CreateAt.ToString("MMMM dd, yyyy")</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--Sidebar End-->
+        </div>
+    </div>
+</div>
+<!--Blog-One End-->
+
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->

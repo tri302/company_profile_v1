@@ -1,0 +1,23 @@
+/* Mengubah background utama sidebar */
+.app-sidebar,
+.app-sidebar .sidebar-brand {
+  background-color: #6610f2 !important; /* Warna Indigo */
+  color: #ffffff !important;
+}
+
+/* Mengubah warna teks dan icon menu agar tetap putih/terang */
+.sidebar-menu .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Efek Hover (ketika mouse di atas menu) */
+.sidebar-menu .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+/* Menu Aktif */
+.sidebar-menu .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+}

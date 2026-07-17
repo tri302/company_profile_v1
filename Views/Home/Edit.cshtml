@@ -1,0 +1,543 @@
+@using company_profile.ViewModels.HomeVM;
+@model HomeVM
+@{
+    ViewData["Title"] = "Edit Konten Beranda";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .ck-editor__editable_inline {
+        min-height: 250px;
+    }
+    .tracking-wide {
+        letter-spacing: 0.04em;
+    }
+
+    .x-small {
+        font-size: 0.78rem;
+    }
+
+    .line-height-1 {
+        line-height: 1;
+    }
+
+    .border-dashed {
+        border-style: dashed !important;
+    }
+
+    .shadow-inner {
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+    }
+</style>
+<div class="container-fluid mt-4" style="max-width: 1000px;">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <div>
+            <h4 class="mb-1 text-dark fw-bold">
+                <i class="fa fa-plus-circle text-primary me-2"></i>Edit Data Konten
+                Beranda
+            </h4>
+            <p class="text-muted small mb-0">
+                Isi data formulir di bawah ini untuk update data.
+            </p>
+        </div>
+    </div>
+    <div class="card shadow border-0 rounded-3 overflow-hidden">
+        <div class="card-body p-4 p-md-5">
+            <form asp-action="Edit" asp-controller="Home" method="post" enctype="multipart/form-data"
+                  id="formCreateHome">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="UrlGambar" />
+                <!-- Nav Tabs -->
+                <ul class="nav nav-tabs mb-3" id="langTab" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#id-tab"
+                                type="button">
+                            🇮🇩 Bahasa Indonesia
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#en-tab"
+                                type="button">
+                            🇺🇸 English
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content mb-4">
+                    <!-- Tab Indonesia -->
+                    <div class="tab-pane fade show active" id="id-tab">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label asp-for="JudulAboutStart_ID"
+                                       class="form-label fw-semibold text-secondary small text-uppercase">
+                                    Judul Section
+                                    (ID)
+                                </label>
+                                <input asp-for="JudulAboutStart_ID" class="form-control"
+                                       placeholder="Contoh: Menuju Era Digital..." />
+                                <span asp-validation-for="JudulAboutStart_ID" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="IsiAboutStart_ID"
+                                       class="form-label fw-semibold text-secondary small text-uppercase">
+                                    Deskripsi
+                                    (ID)
+                                </label>                                
+                                <textarea asp-for="IsiAboutStart_ID" id="editor_ID" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="IsiAboutStart_ID" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab English -->
+                    <div class="tab-pane fade" id="en-tab">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label asp-for="JudulAboutStart_EN"
+                                       class="form-label fw-semibold text-secondary small text-uppercase">
+                                    Title Section
+                                    (EN)
+                                </label>
+                                <input asp-for="JudulAboutStart_EN" class="form-control"
+                                       placeholder="Example: Toward Digital Era..." />
+                                <span asp-validation-for="JudulAboutStart_EN" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="IsiAboutStart_EN"
+                                       class="form-label fw-semibold text-secondary small text-uppercase">
+                                    Description
+                                    (EN)
+                                </label>                                
+                                <textarea asp-for="IsiAboutStart_EN" id="editor_EN" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="IsiAboutStart_EN" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4" />
+
+                <!-- Progress Bar (Global Section) -->
+                <!-- Metrik Kemajuan -->
+                <div class="mb-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="text-dark fw-bold mb-0">
+                            <i class="fa fa-tasks text-warning me-2"></i>Metrik Kemajuan
+                        </h5>
+                        <button type="button" id="btnTambahProgress" class="btn btn-warning btn-sm shadow-sm">
+                            <i class="fa fa-plus me-1"></i> Tambah Item
+                        </button>
+                    </div>
+
+                    <!-- Container Utama -->
+                    <div id="containerProgress" class="d-flex flex-column gap-3">
+                        @if (Model?.ProgressBars != null && Model.ProgressBars.Count > 0)
+                        {
+                            @for (int i = 0; i < Model.ProgressBars.Count; i++)
+                            {
+                                <div class="row g-2 align-items-center bg-white p-3 rounded border shadow-sm baris-progress">
+                                    <input type="hidden" name="ProgressBars[@i].Id" value="@Model.ProgressBars[i].Id" />
+
+                                    <div class="col-md-4">
+                                        <input type="text"
+                                               name="ProgressBars[@i].Judul_ID"
+                                               value="@Model.ProgressBars[i].Judul_ID"
+                                               class="form-control input-judul-id"
+                                               placeholder="Judul Progres (ID)"
+                                               required />
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <input type="text"
+                                               name="ProgressBars[@i].Judul_EN"
+                                               value="@Model.ProgressBars[i].Judul_EN"
+                                               class="form-control input-judul-en"
+                                               placeholder="Judul Progres (EN)"
+                                               required />
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="number"
+                                               name="ProgressBars[@i].Value"
+                                               value="@Model.ProgressBars[i].Value"
+                                               class="form-control input-value"
+                                               placeholder="%"
+                                               min="0"
+                                               max="100"
+                                               required />
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <button type="button"
+                                                class="btn btn-outline-danger w-100 btnHapusBaris">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            }
+                        }
+                        else
+                        {
+                            <!-- FALLBACK: Baris kosong pertama -->
+                            <div class="row g-2 align-items-center bg-white p-3 rounded border shadow-sm baris-progress">
+                                <input type="hidden" name="ProgressBars[0].Id" value="0" />
+                                <div class="col-md-4">
+                                    <input type="text"
+                                           name="ProgressBars[0].Judul_ID"
+                                           class="form-control input-judul-id" placeholder="Judul Progres (ID)" />
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text"
+                                           name="ProgressBars[0].Judul_EN"
+                                           class="form-control input-judul-en" placeholder="Judul Progres (EN)" />
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number"
+                                           name="ProgressBars[0].Value"
+                                           class="form-control input-value" placeholder="%" min="0" max="100" />
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <button type="button"
+                                            class="btn btn-outline-danger w-100 btnHapusBaris">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- Media Section -->
+                <div class="mb-4">
+                    <h5 class="text-dark fw-bold mb-3">
+                        <i class="fa fa-film text-danger me-2"></i>Integrasi Media
+                    </h5>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label asp-for="EmbededUrlVidio" class="form-label">URL Embed Video</label>
+                            <input asp-for="EmbededUrlVidio" id="inputEmbed" class="form-control" />
+                            <span asp-validation-for="EmbededUrlVidio" class="text-danger"></span>
+                            <div id="embedError"
+                                 class="alert alert-danger mt-2"
+                                 style="display:none">
+                                URL harus berupa URL embed Youtube atau Vimeo.
+                            </div>
+                            <div class="card bg-light border-start border-4 border-info mt-3 shadow-none">
+                                <div class="card-body p-3">
+                                    <h6 class="fw-bold text-dark small mb-1">
+                                        <i class="fa fa-info-circle text-info me-1">
+                                        </i>Cara Menyalin URL Embed:
+                                    </h6>
+                                    <ol class="small text-secondary mb-0 ps-3">
+                                        <li>Buka video di Youtube, tekan tombol <strong>Bagikan / Share</strong>.</li>
+                                        <li>
+                                            Pilih opsi berlambang kode <strong>Sematkan / Embed (&lt;&gt;)</strong>.
+                                        </li>
+                                        <li>
+                                            Salin teks tautan yang berada di dalam atribut <code class="text-danger">
+                                                src="..."
+                                            </code> saja.
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* <div class="col-md-6"> *@
+                        @*     <div class="row g-2"> *@
+                        @*         <div class="col-12"> *@
+                        @*             <label asp-for="File" *@
+                        @*                    class="form-label fw-semibold text-secondary small text-uppercase tracking-wide"> *@
+                        @*                 Lampiran *@
+                        @*                 File *@
+                        @*                 Gambar Banner *@
+                        @*             </label> *@
+                        @*             <div class="input-group shadow-sm border rounded-3 overflow-hidden"> *@
+                        @*                 <span class="input-group-text bg-light border-0"> *@
+                        @*                     <i class="fa fa-image text-muted"></i> *@
+                        @*                 </span> *@
+                        @*                 <input asp-for="File" type="file" id="inputFileGambar" *@
+                        @*                        class="form-control border-0 py-2" accept="image/*" /> *@
+                        @*             </div> *@
+                        @*             <span asp-validation-for="File" class="text-danger small mt-1 d-block"></span> *@
+                        @*             <div id="fileError" class="alert alert-danger border-0 py-2 px-3 small mt-2" *@
+                        @*                  style="display:none;"> *@
+                        @*                 <i class="fa fa-times-circle me-1"></i> Ukuran file melampaui batas maksimal *@
+                        @*                 2MB! *@
+                        @*             </div> *@
+                        @*         </div> *@
+                        @*         <div class="col-12 mt-3"> *@
+                        @*             <span class="form-label fw-semibold text-secondary small text-uppercase tracking-wide d-block mb-2"> *@
+                        @*                 Live Preview Gambar *@
+                        @*             </span> *@
+                        @*             <div class="border rounded-3 p-2 bg-light d-flex align-items-center justify-content-center position-relative shadow-inner mx-auto overflow-hidden text-center" *@
+                        @*                  style="min-height: 140px; max-height: 140px; max-width: 240px;"> *@
+                        @*                 <img id="imgPreview" src="#" alt="Preview" *@
+                        @*                      class="img-fluid rounded btn-zoom shadow-sm" *@
+                        @*                      style="display: none; max-height: 124px; object-fit: contain; cursor: zoom-in;" /> *@
+                        @*                 <div id="previewPlaceholder" class="text-muted small p-3"> *@
+                        @*                     <i class="fa fa-picture-o fa-2x d-block mb-1 opacity-50"></i> *@
+                        @*                     <span class="x-small">Belum ada berkas dipilih</span> *@
+                        @*                 </div> *@
+                        @*             </div> *@
+                        @*         </div> *@
+                        @*     </div> *@
+                        @* </div> *@
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between pt-4 border-top">
+                    <a asp-action="Index" class="btn btn-secondary btn-sm">
+                        <i class="fa fa-arrow-left me-1"></i> Kembali
+                    </a>
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fa fa-save"></i> Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@* <div class="modal fade" id="imageZoomModal" tabindex="-1" aria-hidden="true"> *@
+@*     <div class="modal-dialog modal-dialog-centered modal-lg"> *@
+@*         <div class="modal-content bg-transparent border-0 shadow-none"> *@
+@*             <div class="modal-header border-0 p-0 position-relative"> *@
+@*                 <button type="button" class="btn-sm btn-close btn-close-white position-absolute top-0 end-0 m-3" *@
+@*                         data-bs-dismiss="modal" aria-label="Close" style="z-index: 1055;"></button> *@
+@*             </div> *@
+@*             <div class="modal-body text-center p-0"> *@
+@*                 <img id="imgModalTarget" src="" class="img-fluid rounded shadow" *@
+@*                      style="max-height: 85vh; cursor: zoom-out;" data-bs-dismiss="modal" /> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Izinkan elemen tersembunyi (seperti textarea CKEditor) untuk divalidasi oleh jQuery Validate
+            if ($.validator) {
+                $.validator.setDefaults({ ignore: [] });
+            }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Pastikan CKEditor sudah dimuat di window
+            if (typeof ClassicEditor !== 'undefined') {
+                const targetEditors = ['#editor_ID', '#editor_EN'];
+
+                targetEditors.forEach(selector => {
+                    const editorElement = document.querySelector(selector);
+
+                    if (editorElement) {
+                        ClassicEditor
+                            .create(editorElement)
+                            .then(editor => {
+                                // Update field asli saat ada perubahan
+                                editor.model.document.on('change:data', () => {
+                                    editorElement.value = editor.getData();
+                                    // Validasi jika menggunakan jQuery Validate
+                                    if (typeof $ !== 'undefined' && $.fn.valid) {
+                                        $(editorElement).valid();
+                                    }
+                                });
+                            })
+                            .catch(error => {
+                                console.error('CKEditor Gagal Inisialisasi pada ' + selector, error);
+                            });
+                    }
+                });
+            } else {
+                console.error('CKEditor library tidak ditemukan.');
+            }
+        });
+    </script>
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+                // Pastikan indeksProgress dimulai dari jumlah baris yang ada (entah dari DB atau fallback)
+        let indeksProgress = $(".baris-progress").length;
+            // ==========================================
+            // 1. INPUT PREVIEW & VALIDASI SIZE IMAGES
+            // ==========================================
+            // $("#inputFileGambar").change(function () {
+            //     const fileInput = this;
+            //     const file = fileInput.files[0];
+            //     const maxSize = 2 * 1024 * 1024; 2MB
+
+            //     if (file) {
+            //         if (file.size > maxSize) {
+            //             $("#fileError").show();
+            //             resetPreview();
+            //             fileInput.value = "";
+            //             return false;
+            //         } else {
+            //             $("#fileError").hide();
+            //         }
+
+            //         const reader = new FileReader();
+            //         reader.onload = function (e) {
+            //             $("#imgPreview").attr("src", e.target.result).show();
+            //             $("#previewPlaceholder").hide();
+            //         }
+            //         reader.readAsDataURL(file);
+            //     } else {
+            //         resetPreview();
+            //     }
+            });
+
+            // function resetPreview() {
+            //     $("#imgPreview").attr("src", "#").hide();
+            //     $("#previewPlaceholder").show();
+            // }
+
+            // ==========================================
+            // 2. MODAL INTERAKSI ZOOM IN OUT
+            // ==========================================
+            // $(document).on("click", ".btn-zoom", function (e) {
+            //     e.preventDefault();
+            //     const srcGambar = $(this).attr("src");
+
+            //     if (srcGambar && srcGambar !== "#") {
+            //         $("#imgModalTarget").attr("src", srcGambar);
+            //         if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            //             var myModal = new bootstrap.Modal(document.getElementById('imageZoomModal'));
+            //             myModal.show();
+            //         } else {
+            //             $("#imageZoomModal").modal("show");
+            //         }
+            //     }
+            // });
+
+            // ==========================================
+            // 3. VALIDASI FORM URL VIDEO EMBED
+            // ==========================================
+            $("#inputEmbed").on("input blur", function () {
+                validateEmbedUrl($(this).val());
+            });
+
+            function validateEmbedUrl(url) {
+                if (url.trim() === "") {
+                    $("#embedError").hide();
+                    return true;
+                }
+                const isEmbed = url.includes("/embed/") || url.includes("player.vimeo.com/video/");
+                if (!isEmbed) {
+                    $("#embedError").show();
+                    return false;
+                } else {
+                    $("#embedError").hide();
+                    return true;
+                }
+            }
+
+        // ==========================================
+        // 4. PROGRESS BAR INTERACTION DINAMIS
+        // ==========================================
+        $(document).on("click", "#btnTambahProgress", function () {
+            // Menghitung jumlah baris yang ada saat tombol diklik
+            let currentCount = $(".baris-progress").length;
+
+            let htmlBaru = `
+            <div class="row g-2 pb-2 baris-progress align-items-center bg-white p-2 rounded border shadow-sm">
+                <input type="hidden" name="ProgressBars[${currentCount}].Id" value="0" />
+                <div class="col-md-4">
+                    <div class="input-group input-group-sm border rounded">
+                        <span class="input-group-text bg-light border-0">ID</span>
+                        <input type="text" name="ProgressBars[${currentCount}].Judul_ID" class="form-control border-0 input-judul-id" placeholder="Judul Progress (ID)" required />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group input-group-sm border rounded">
+                        <span class="input-group-text bg-light border-0">EN</span>
+                        <input type="text" name="ProgressBars[${currentCount}].Judul_EN" class="form-control border-0 input-judul-en" placeholder="Judul Progress (EN)" required />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group input-group-sm border rounded">
+                        <span class="input-group-text bg-light border-0"><i class="fa fa-percent text-muted"></i></span>
+                        <input type="number" name="ProgressBars[${currentCount}].Value" class="form-control border-0 input-value" min="0" max="100" placeholder="%" required />
+                    </div>
+                </div>
+                <div class="col-md-2 text-center">
+                    <button type="button" class="btn btn-outline-danger btn-sm btnHapusBaris w-100">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </div>`;
+
+            $("#containerProgress").append(htmlBaru);
+        });
+
+            $(document).on("click", ".btnHapusBaris", function () {
+                if ($(".baris-progress").length > 1) {
+                    $(this).closest(".baris-progress").remove();
+
+                    // Re-index ulang name attributes agar urut untuk model binding .NET
+                    $(".baris-progress").each(function (index) {
+                        $(this).find("input[type='hidden']").attr("name", `ProgressBars[${index}].Id`);
+                        $(this).find(".input-judul-id").attr("name", `ProgressBars[${index}].Judul_ID`);
+                        $(this).find(".input-judul-en").attr("name", `ProgressBars[${index}].Judul_EN`);
+                        $(this).find(".input-value").attr("name", `ProgressBars[${index}].Value`);
+                    });
+
+                    indeksProgress = $(".baris-progress").length;
+                } else {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Minimal 1 Item',
+                        text: 'Anda harus menyisakan minimal satu baris metrik keahlian!',
+                        position: 'top',
+                        confirmButtonColor: '#3085d6'
+                    });
+                }
+            });
+
+            // ==========================================
+            // 5. INTERCEPT PRE-SUBMIT CHECK
+            // ==========================================
+            $("#formCreateHome").submit(function (e) {
+                    let isValid = true;
+                // Validasi Baris Progress Terisi Lengkap
+                $(".baris-progress").each(function () {
+                    const inputJudulID = $(this).find(".input-judul-id");
+                    const inputJudulEN = $(this).find(".input-judul-en");
+                    const inputValue = $(this).find(".input-value");
+
+                    if (inputJudulID.val().trim() === "" || inputJudulEN.val().trim() === "" || inputValue.val().trim() === "") {
+                        e.preventDefault();
+                        isValid = false;
+
+                        if (inputJudulID.val().trim() === "") { inputJudulID.focus(); }
+                        else if (inputJudulEN.val().trim() === "") { inputJudulEN.focus(); }
+                        else { inputValue.focus(); }
+
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Data Belum Lengkap',
+                            text: 'Seluruh input (ID, EN, dan Nilai) pada item Progress Bar harus diisi!',
+                            position: 'top',
+                            confirmButtonColor: '#3085d6'
+                        });
+                        return false; // Break loop
+                    }
+                });
+
+                if (!isValid) return false;
+
+                // Validasi Kelayakan Tautan Video Embed
+                const embedUrl = $("#inputEmbed").val();
+                if (!validateEmbedUrl(embedUrl)) {
+                    e.preventDefault();
+                    $("#inputEmbed").focus();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'URL Embed Tidak Valid',
+                        text: 'Silakan periksa kembali tautan video atau kosongkan jika tidak ingin disematkan.',
+                        position: 'top',
+                        confirmButtonColor: '#3085d6'
+                    });
+                    return false;
+                }
+            });        
+    </script>
+}

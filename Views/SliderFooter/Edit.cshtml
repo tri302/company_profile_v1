@@ -1,0 +1,166 @@
+@model company_profile.SliderFooterHomeVM
+
+@{
+    ViewData["Title"] = "Ubah Slider Footer Home";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Content Header -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2 align-items-center">
+            <div class="col-sm-6">
+                <h2 class="m-0 text-dark">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Ubah Data Slider
+                </h2>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <div class="card card-info card-outline shadow-sm">
+                    <div class="card-header bg-warning">
+                        <h3 class="card-title text-muted font-weight-bold">Form Perubahan Data</h3>
+                    </div>
+
+                    <form asp-action="Edit" asp-controller="SliderFooter" method="post" enctype="multipart/form-data">
+                        <div class="card-body">
+
+                            <!-- Validasi Ringkas -->
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                            <!-- Hidden Fields: Penting untuk tracking ID dan nama gambar lama -->
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="UrlImage" />
+
+                            <!-- Info ID (Read-only) -->
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label font-weight-bold text-muted">ID Slider</label>
+                                <div class="col-sm-9 d-flex align-items-center">
+                                    <span class="badge badge-secondary py-2 px-3 font-weight-bold">#@Model.Id</span>
+                                </div>
+                            </div>
+
+                            <!-- Input File Gambar Baru -->
+                            <div class="form-group">
+                                <label asp-for="UploadGambar" class="control-label font-weight-bold">Ganti Gambar
+                                    (Opsional)</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <!-- Jangan pakai 'required' karena boleh mengedit data tanpa ganti gambar -->
+                                            <input asp-for="UploadGambar" type="file" class="custom-file-input"
+                                                   id="imageInput" accept="image/*" />
+                                            <label class="custom-file-label" for="imageInput">Pilih file baru jika ingin
+                                                mengganti...</label>
+                                            </div>
+                                        </div>
+                                        <span asp-validation-for="UploadGambar" class="text-danger small d-block mt-1"></span>
+                                        <small class="form-text text-muted">
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i> Biarkan kosong jika Anda tidak
+                                            ingin mengubah gambar saat ini.
+                                        </small>
+                                    </div>
+
+                                    <!-- Visual Preview (Gambar Lama vs Gambar Baru) -->
+                                    <div class="form-group mt-4">
+                                        <label class="font-weight-bold text-muted d-block">Pratinjau Gambar:</label>
+                                        <div id="previewContainer"
+                                             class="img-thumbnail bg-light d-flex align-items-center justify-content-center"
+                                             style="width: 100%; max-width: 400px; height: 200px; overflow: hidden; border: 2px solid #ddd;">
+
+                                            @if (!string.IsNullOrEmpty(Model.UrlImage))
+                                            {
+                                                <!-- Menampilkan gambar yang ada sekarang di server -->
+                                                <img id="imagePreview" src="~/uploads/sliders/@Model.UrlImage" alt="Slider Image"
+                                                     class="img-fluid"
+                                                     style="max-height: 100%; max-width: 100%; object-fit: cover;" />
+                                            }
+                                            else
+                                            {
+                                                <!-- Fallback jika data sebelumnya kosong semisal terjadi anomali -->
+                                                <div id="previewPlaceholder" class="text-center text-secondary p-3">
+                                                    <i class="fa fa-picture-o fa-3x d-block mb-2" aria-hidden="true"></i>
+                                                    <span class="small">Tidak ada gambar aktif</span>
+                                                </div>
+                                                <img id="imagePreview" src="#" alt="Pratinjau Gambar" class="img-fluid d-none"
+                                                     style="max-height: 100%; max-width: 100%; object-fit: cover;" />
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Footer Tombol -->
+                                <div class="card-footer bg-white border-top-0 py-3 d-flex justify-content-center gap-2">
+                                    <a asp-action="Index" class="btn btn-secondary btn-sm">
+                                        <i class="fa fa-arrow-left"></i> Back
+                                    </a>
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        <i class="fa fa-save"></i> Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Client-side Validation -->
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        // Menyimpan url gambar original untuk fallback jika input direset/cancel
+        const originalSrc = document.getElementById('imagePreview') ? document.getElementById('imagePreview').src : '#';
+
+        document.getElementById('imageInput').addEventListener('change', function (e) {
+            const file = this.files[0];
+            const imagePreview = document.getElementById('imagePreview');
+            const previewPlaceholder = document.getElementById('previewPlaceholder');
+
+            if (file) {
+                this.nextElementSibling.innerText = file.name;
+
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    if (imagePreview) {
+                        imagePreview.src = event.target.result;
+                        imagePreview.classList.remove('d-none');
+                    }
+                    if (previewPlaceholder) {
+                        previewPlaceholder.classList.add('d-none');
+                    }
+                }
+                reader.readAsDataURL(file);
+            } else {
+                this.nextElementSibling.innerText = 'Pilih file baru jika ingin mengganti...';
+
+                // Kembalikan ke gambar semula jika user membatalkan pilihan file
+                if (originalSrc !== '#' && imagePreview) {
+                    imagePreview.src = originalSrc;
+                    imagePreview.classList.remove('d-none');
+                    if (previewPlaceholder) previewPlaceholder.classList.add('d-none');
+                } else if (imagePreview) {
+                    imagePreview.src = '#';
+                    imagePreview.classList.add('d-none');
+                    if (previewPlaceholder) previewPlaceholder.classList.remove('d-none');
+                }
+            }
+        });
+    </script>
+}

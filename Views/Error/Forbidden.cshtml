@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Akses Ditolak";
+    Layout = null;
+}
+
+<div class="error-container">
+    <div class="error-content">
+        <div class="error-icon">
+            <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#d63031" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+        </div>
+
+        <h1>Akses Dibatasi</h1>
+        <p>Maaf, Anda tidak memiliki izin untuk melihat halaman ini. Silakan pastikan Anda sudah masuk dengan akun yang memiliki hak akses yang sesuai.</p>
+
+        <div class="error-actions">
+            <a href="/Account/Login" class="btn-primary">Login Kembali</a>
+            <a href="/" class="btn-secondary">Kembali ke Beranda</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+        padding: 20px;
+    }
+
+    .error-icon {
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        color: #2d3436;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+
+    p {
+        color: #636e72;
+        margin-bottom: 2rem;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-primary {
+        background-color: #d63031;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 8px;
+        margin-right: 10px;
+        transition: 0.3s;
+        font-weight: 600;
+    }
+
+    .btn-secondary {
+        background-color: #dfe6e9;
+        color: #2d3436;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #b71c1c;
+    }
+</style>

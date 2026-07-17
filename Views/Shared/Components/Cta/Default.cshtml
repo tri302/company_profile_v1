@@ -1,0 +1,47 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizerFactory Factory
+@{
+    var Localizer = Factory.Create("SharedResource", "company_profile");    
+}
+@using company_profile
+@model PageBannerSetting
+
+@if (Model != null)
+{
+    <div class="call-us" style="background-image:url('@Url.Content("~/uploads/banners/" + Model.BannerPath)');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-8 col-12">
+                    <div class="call-text">
+                        <h3>@Localizer["Cta"]</h3>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-12">
+                    <div class="button">
+                        <a href="#">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="call-us" style="background-image:url('@Url.Content("~/uploads/no-image.png")');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-8 col-12">
+                    <div class="call-text">
+                        <h3>@Localizer["Cta"]</h3>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-12">
+                    <div class="button">
+                        <a href="#">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

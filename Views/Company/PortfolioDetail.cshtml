@@ -1,0 +1,237 @@
+﻿@using company_profile;
+@model PortfolioVM;
+@{
+    ViewData["Title"] = "Portfolio page";
+    Layout = "_FrontEndLayout";
+}
+@* // Paksa supaya tombol owl-prev dan owl-next carousel muncul *@
+<style>
+    .project-carousel .owl-nav {
+        display: block !important;
+    }
+
+    .project-carousel .owl-prev,
+    .project-carousel .owl-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 999;
+    }
+
+    .project-carousel .owl-prev {
+        left: -25px;
+    }
+
+    .project-carousel .owl-next {
+        right: -25px;
+    }
+</style>
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "Portfolio Page" })
+<!--Banner End-->
+
+@* <div class="portfolio-details pt_60 pb_90"> *@
+<div class="portfolio-details mb-2 mt-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="portfolio-carousel owl-carousel">
+                    @foreach (var image in Model.ListPortfolio)
+                    {
+                        var imagePath = Url.Content("~/" + image.UrlGambar.TrimStart('/'));
+                        <div class="item">
+                            <a href="@imagePath" class="magnific">
+                                <img src="@imagePath" alt="Project Photo">
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <div class="portfolio-details-text">
+                    <div>
+                        @Html.Raw(@Model.IsiContentPortfolio)
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="portfolio-sidebar">
+                    <div class="portfolio-details headstyle">
+                        <h4>Project Detail</h4>
+                        <ul>
+                            <li><span>Client Name:</span><br>@Model.ClientName</li>
+                            <li><span>Client Company Name:<br></span>@Model.ClientCompanyName</li>
+                            <li><span>Project Start Date:<br></span>@Model.ProjectStartDate</li>
+                            <li><span>Project End Date:<br></span>@Model.ProjectEndDate</li>
+                            <li><span>Client Comment:<br></span>@Html.Raw(@Model.ClientComment)</li>
+                        </ul>
+                    </div>
+
+                    <div class="portfolio-form headstyle mt-30">
+                        <h4>Quick Contact</h4>
+                        <form id="contactForm" action="/UserContacted/Create" method="post" accept-charset="utf-8">
+                            @Html.AntiForgeryToken()
+                            <!-- Pastikan Token ini ada jika tidak pakai tag helper form asli ASP.NET -->
+
+                            <div class="form-row row">
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.Name" type="text" class="form-control"
+                                           placeholder="Name" required/>
+                                    <span id="error_ContactForm_Name" class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.PhoneNumber" type="text" class="form-control"
+                                           placeholder="Phone Number" required />
+                                    <span id="error_ContactForm_PhoneNumber"
+                                          class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.EmailAddress" type="email" class="form-control"
+                                           placeholder="Email Address" required />
+                                    <span id="error_ContactForm_EmailAddress"
+                                          class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.Subject" type="text" class="form-control"
+                                           placeholder="Subject Email" required />
+                                    <span id="error_ContactForm_Subject" class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-12">
+                                    <textarea asp-for="ContactForm.Pesan" class="form-control"
+                                              placeholder="Pesan Email" required></textarea>
+                                    <span id="error_ContactForm_Pesan" class="text-danger-ajax text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <div class="captcha-section-1">
+                                        <label><strong id="questionText">@ViewBag.CaptchaQuestion</strong></label>
+                                    </div>
+                                    <div class="captcha-section-2">
+                                        <input type="number" name="userCaptcha" id="userCaptchaInput"
+                                               class="form-control" required autocomplete="off" />
+                                    </div>
+                                    <span id="error_userCaptcha" class="text-danger-ajax text-danger ml-2"></span>
+                                </div>
+                                <div class="form-button">
+                                    <button type="submit" class="btn" name="form_portfolio">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <div class="recent-project pt_90 pb_90"> *@
+<div class="recent-project mt-2 mb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>Recent Portfolio</h2>
+                    <h3>See all our works that we do for our clients</h3>
+                </div>
+                <div class="project-carousel owl-carousel">
+                    @foreach (var item in Model.RecentPortfolios)
+                    {
+                        var _imagePath = Url.Content("~/" + item.UrlGambar.TrimStart('/'));
+                        <div class="item">
+                            <div class="portfolio-group">
+                                <div class="portfolio-photo" style="background-image: url('@_imagePath');">
+                                    <div class="portfolio-bg"></div>
+                                    <div class="portfolio-table">
+                                        <div class="portfolio-icon">
+                                            <a href="@_imagePath" class="magnific"><i class="fa fa-search-plus"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-text">
+                                    <h3>
+                                        <a asp-action="PortfolioDetail" asp-controller="Company"
+                                           asp-route-id="@item.IDPortfolio">
+                                            @item.Judul
+                                        </a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Pastikan ID selector di bawah ini (#contactForm) SAMA dengan id di tag <form id="contactForm"> Anda
+            $("#contactForm").on("submit", function (e) {
+                e.preventDefault(); // Menghentikan reload halaman bawaan browser
+                // Bersihkan pesan error lama sebelum request baru dikirim
+                $(".text-danger-ajax").text("");
+                $("#captchaError").text("");
+                var form = $(this);
+                // Ambil URL dari atribut action form, atau set langsung manual jika action-nya masih '#'
+                var actionUrl = form.attr("action");
+                if (actionUrl === "#" || actionUrl === "") {
+                    actionUrl = "/Company/Portfolio"; // Sesuaikan dengan Route / Controller terget Anda
+                }
+                var formData = form.serialize();
+                $.ajax({
+                    url: actionUrl,
+                    type: "POST",
+                    data: formData,
+                    success: function (response) {
+                        // 1. Selalu perbarui pertanyaan captcha secara realtime jika ada kiriman soal baru dari server
+                        if (response.newCaptchaQuestion) {
+                            $("#questionText").text(response.newCaptchaQuestion);
+                        }
+                        // 2. Jika Server merespon sukses (Data tersimpan & Captcha benar)
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses!',
+                                text: response.message,
+                                position: 'top',
+                                timer: 5000, // Waktu tampil pesan (5 detik)
+                                showConfirmButton: false
+                            });
+                            form[0].reset(); // Kosongkan isi semua input form
+                        }
+                        // 3. Jika Server merespon gagal (Captcha salah atau validasi model state gagal)
+                        else {
+                            if (response.errors) {
+                                $.each(response.errors, function (key, value) {
+                                    // Antisipasi nama properti complex (cth: ContactForm.Name menjadi ContactForm_Name)
+                                    var cleanKey = key.replace(/\./g, '_');
+                                    // Cari span error berdasarkan ID bawaan atau ID kustom Anda
+                                    var elementId = "#error_" + cleanKey;
+                                    // Jika tidak ketemu, coba cari span yang menggunakan asp-validation-for bawaan ASP.NET
+                                    if ($(elementId).length === 0) {
+                                        // Mencari span berdasarkan atribut name properti yang error
+                                        $("[asp-validation-for='ContactForm." + key + "']").text(value);
+                                        $("[asp-validation-for='" + key + "']").text(value);
+                                    } else {
+                                        $(elementId).text(value);
+                                    }
+                                });
+                            }
+                            // Kosongkan field input captcha yang salah agar user bisa isi ulang
+                            $("#userCaptchaInput").val("");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Terjadi kesalahan sistem pada AJAX request.");
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

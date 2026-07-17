@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizerFactory Factory
+@{
+    var Localizer = Factory.Create("SharedResource", "company_profile");
+    // Mengambil data dari ViewData, gunakan nilai default jika null
+    var seo = ViewData["SEO"] as SeoMetadata ?? new SeoMetadata();
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@(seo?.MetaTitle ?? "CMS")</title>
+    <meta name="title" content="@(seo?.MetaTitle ?? "CMS")">
+    <meta name="description" content="@(seo?.MetaDescription ?? "CMS")">
+
+    @if (!string.IsNullOrEmpty(seo?.MetaKeywords))
+    {
+        <meta name="keywords" content="@seo.MetaKeywords" />
+    }
+
+    @if (!string.IsNullOrEmpty(seo?.CanonicalUrl))
+    {
+        <link rel="canonical" href="@seo.CanonicalUrl" />
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@(seo?.MetaTitle ?? "Cms")" />
+    <meta property="og:description" content="@(seo?.MetaDescription ?? "cms")" />
+    <meta property="og:image" content="@(seo?.OgImageUrl ?? "/images/default-logo.png")" />
+
+    <title>Multix - Multipurpose Website CMS</title>
+
+    @await RenderSectionAsync("Header", required: false)
+    @await Component.InvokeAsync("Favicon")
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" asp-append-version="true" />    
+    <link rel="stylesheet" href="~/css/animate.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/jquery-ui.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/magnific-popup.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/meanmenu.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/toastr.min.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/stylefe.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/spacing.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/responsive.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/front.css" asp-append-version="true" />    
+
+    @await Component.InvokeAsync("Theme")
+</head>
+
+<body>
+    <div id="fb-root"></div>
+
+    @await Component.InvokeAsync("Header")
+
+    <div id="strickymenu" class="menu-area sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12">
+                    <div class="logo flex">
+                        <a asp-action="Home" asp-controller="Company">
+                            @await Component.InvokeAsync("Logo")
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-12 main-menu">
+                    <div class="main-menu-item">
+                        <ul class="nav-menu">
+                            <li><a asp-action="Home" asp-controller="Company">@Localizer["Home"]</a></li>
+                            <li><a asp-action="About" asp-controller="Company">@Localizer["About"]</a></li>
+                            <li><a asp-action="Team" asp-controller="Company">@Localizer["Team"]</a></li>
+                            <li class="menu-item-has-children">
+                                <a href="javascript:void(0);" class="chl">Page</a>
+                                <ul>
+                                    <li><a asp-action="Event" asp-controller="Company">@Localizer["Events"]</a></li>
+                                    <li>
+                                        <a asp-action="PhotoGalery"
+                                           asp-controller="Company">@Localizer["PhotoGallery"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Testimonial"
+                                           asp-controller="Company">@Localizer["Testimonial"]</a>
+                                    </li>
+                                    <li><a asp-action="Faq" asp-controller="Company">@Localizer["Faq"]</a></li>
+                                    <li><a asp-action="Pricing" asp-controller="Company">@Localizer["Pricing"]</a></li>
+                                </ul>
+                            </li>
+                            <li><a asp-action="Service" asp-controller="Company">@Localizer["Service"]</a></li>
+                            <li><a asp-action="Portfolio" asp-controller="Company">@Localizer["Portfolio"]</a></li>
+                            <li><a asp-action="News" asp-controller="Company">@Localizer["News"]</a></li>
+                            <li><a asp-action="Contact" asp-controller="Company">@Localizer["Contact"]</a></li>
+                        </ul>
+                    </div>
+                    <div class="searchbar pb-2">                        
+                        <form asp-action="Search" asp-controller="Company" method="get">
+                            <div class="input-group">
+                                <input type="text" name="search_string" class="form-control" placeholder="Search for a news headline..."
+                                       value="@Context.Request.Query["search_string"]">
+                                @await Component.InvokeAsync("CategoryList")                                
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <div class="footer-area pt_60 pb_90">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-item" id="newsletter">
+                        <h3>@Localizer["Newsletter"]</h3>
+                        <p>
+                            @Localizer["Subcribe"]
+                        </p>
+                        <form id="newsletterForm" method="post" accept-charset="utf-8">
+                            @Html.AntiForgeryToken()
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Email Address" name="Email"
+                                       id="newsletterEmail" required>
+                                <span class="input-group-btn">
+                                    <button class="btn" type="submit">
+                                        <i class="fa fa-location-arrow"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-item footer-recent-post">
+                        <h3>@Localizer["RecentPost"]</h3>
+                        @await Component.InvokeAsync("RecentPosts", new { numberToShow = 2 })
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-item">
+                        <h3>@Localizer["Project"]</h3>
+                        @await Component.InvokeAsync("Project", new { numberToShow = 3 })                        
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    @await Component.InvokeAsync("Address")
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom pt_50 pb_50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-menu">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Terms and Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="copy-text">
+                        <p>Copyright © @DateTime.Now.Year, CMS Company Profile. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-top">
+        <i class="fa fa-angle-up"></i>
+    </div>  
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
+    <script src="~/js/popper.v2.11.8.min.js" asp-append-version="true"></script>
+    <script src="~/js/bootstrap.v5.3.7.min.js" asp-append-version="true"></script>
+    <script src="~/embed-js/embed.min.js"></script>
+    <script src="~/js/jquery-ui.min.js" asp-append-version="true"></script>
+    <script src="~/js/owl.carousel.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.magnific-popup.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.meanmenu.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.filterizr.min.js" asp-append-version="true"></script>
+    <script src="~/js/waypoints.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.counterup.min.js" asp-append-version="true"></script>
+    <script src="~/js/viewportchecker.js" asp-append-version="true"></script>
+    <script src="~/js/toastr.min.js" asp-append-version="true"></script>
+    <script src="~/js/custom.js" asp-append-version="true"></script>
+    <script src="~/js/sweetalert2@11.js"></script>
+       
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

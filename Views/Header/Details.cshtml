@@ -1,0 +1,134 @@
+@model company_profile.ViewModels.HeaderVM;
+
+@{
+    ViewData["Title"] = "Detail Company Profile Header";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white py-3 d-flex justify-content-between align-items-center">
+                    <div>
+                        @if (Model.IsShow == true)
+                        {
+                            <span class="badge bg-success fs-6"><i class="fa fa-eye"></i> Ditampilkan</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger fs-6"><i class="fa fa-eye"></i> Disembunyikan</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+
+                        <div class="list-group-item p-3 bg-light fw-bold text-secondary">
+                            <small class="text-uppercase tracking-wider">Kontak Utama</small>
+                        </div>
+                        <div class="list-group-item p-3">
+                            <div class="row">
+                                <div class="col-sm-4 text-muted fw-semibold">Alamat Email</div>
+                                <div class="col-sm-8 text-dark">
+                                    @if (!string.IsNullOrEmpty(Model.EmailAddress))
+                                    {
+                                        <a href="mailto:@Model.EmailAddress" class="text-decoration-none">
+                                            <i class="fa fa-envelope me-2 text-primary"></i>@Model.EmailAddress
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted-italics">- Tidak diisi -</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item p-3">
+                            <div class="row">
+                                <div class="col-sm-4 text-muted fw-semibold">Nomor Telepon</div>
+                                <div class="col-sm-8 text-dark">
+                                    @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                                    {
+                                        <a href="tel:@Model.PhoneNumber" class="text-decoration-none">
+                                            <i class="fa fa-phone me-2 text-success"></i>@Model.PhoneNumber
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted-italics">- Tidak diisi -</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item p-3 bg-light fw-bold text-secondary">
+                            <small class="text-uppercase tracking-wider">Tautan Media Sosial</small>
+                        </div>
+
+                        @{
+                            var socialMediaList = new List<(string Name, string Url, string Icon, string ColorClass)>
+                            {
+                                ("Facebook", Model.UrlFb, "fa fa-facebook", "text-primary"),
+                                ("Twitter / X", Model.UrlTwiter, "fa fa-twitter", "text-dark"),
+                                ("LinkedIn", Model.UrlLinkedIn, "fa fa-linkedin", "text-secondary"),
+                                ("Pinterest", Model.UrlPinterest, "fa fa-pinterest", "text-danger"),
+                                ("YouTube", Model.UrlYoutube, "fa fa-youtube", "text-danger"),
+                                ("Instagram", Model.UrlInstagram, "fa fa-instagram", "text-warning"),
+                                ("TikTok", Model.UrlTiktok, "svg-tiktok", "text-dark")
+                            };
+                        }
+
+                        @foreach (var social in socialMediaList)
+                        {
+                            <div class="list-group-item p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-4 text-muted fw-semibold">
+
+                                        @if (social.Icon == "svg-tiktok")
+                                        {
+                                            <!-- 2. Jika TikTok, render SVG ini (ukurannya sudah disesuaikan dengan fs-5) -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em"
+                                                 fill="currentColor" class="me-2 align-middle" viewBox="0 0 448 512">
+                                                <path
+                                                d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,410,113.11a13.43,13.43,0,0,0,3.33.42V209.91A11.05,11.05,0,0,1,448,209.91Z" />
+                                            </svg>
+                                        }
+                                        else
+                                        {
+                                            <!-- 3. Icon selain TikTok tetap pakai Font Awesome biasa -->
+                                            <i class="@social.Icon @social.ColorClass me-2 fs-5 align-middle"></i>
+                                        }
+
+                                        @social.Name
+                                    </div>
+                                    <div class="col-sm-8 text-truncate">
+                                        @if (!string.IsNullOrEmpty(social.Url))
+                                        {
+                                            <a href="@social.Url" target="_blank" class="text-decoration-none text-break">
+                                                @social.Url <i class="fa fa-external-link ms-1 text-muted small"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted text-opacity-50 small font-monospace">- Belum dikonfigurasi
+                                                -</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-light p-3 text-start">
+                        <a asp-action="Index" class="btn btn-secondary btn-sm">
+                            <i class="fa fa-arrow-left me-2"></i> Back
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

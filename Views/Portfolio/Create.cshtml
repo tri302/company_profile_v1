@@ -1,0 +1,303 @@
+﻿@model company_profile.PortfolioVM
+@{
+    ViewData["Title"] = "Create Portfolio";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .ck-editor__editable_inline {
+        min-height: 280px;
+    }
+
+    .upload-zone {
+        border: 2px dashed #dee2e6;
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .upload-zone:hover {
+            border-color: #0d6efd;
+            background-color: #f1f6ff;
+        }
+
+    .preview-thumb-container {
+        position: relative;
+        display: inline-block;
+        width: 90px;
+        height: 90px;
+        margin-right: 8px;
+        margin-bottom: 8px;
+        border-radius: 0.375rem;
+        overflow: hidden;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+</style>
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card shadow-sm border-0 rounded-3">
+
+                <div class="card-header p-4 bg-white border-bottom d-flex align-items-center">
+                    <div class="bg-primary-subtle text-primary p-3 rounded-3 me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                        <i class="fa fa-plus-circle fa-xl"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0 fw-bold text-dark">Add New Portfolio</h5>
+                        <p class="text-muted small mb-0">Isi formulir di bawah untuk mendaftarkan rekam jejak atau kasus studi proyek baru.</p>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none"></div>
+
+                    <form asp-action="Create" enctype="multipart/form-data" id="formPortfolio">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="ClientName" class="form-label fw-semibold text-secondary small">Nama Client</label>
+                                    <input asp-for="ClientName" class="form-control" placeholder="Contoh: Bpk. John Doe" />
+                                    <span asp-validation-for="ClientName" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="ClientCompanyName" class="form-label fw-semibold text-secondary small">Nama Perusahaan Klien</label>
+                                    <input asp-for="ClientCompanyName" class="form-control" placeholder="Contoh: PT. Maju Jaya Abadi" />
+                                    <span asp-validation-for="ClientCompanyName" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="ProjectStartDate" class="form-label fw-semibold text-secondary small">Tanggal Mulai Proyek</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white text-muted"><i class="fa fa-calendar-alt"></i></span>
+                                        <input asp-for="ProjectStartDate" type="text" class="form-control datepicker" placeholder="dd-mm-yyyy" autocomplete="off" />
+                                    </div>
+                                    <span asp-validation-for="ProjectStartDate" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="ProjectEndDate" class="form-label fw-semibold text-secondary small">Tanggal Selesai Proyek</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white text-muted"><i class="fa fa-calendar-alt"></i></span>
+                                        <input asp-for="ProjectEndDate" type="text" class="form-control datepicker" placeholder="dd-mm-yyyy" autocomplete="off" />
+                                    </div>
+                                    <span asp-validation-for="ProjectEndDate" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-tabs" id="langTabs" role="tablist">
+                            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#id-pane" type="button">🇮🇩 Indonesia</button></li>
+                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#en-pane" type="button">🇺🇸 English</button></li>
+                        </ul>
+
+                        <div class="tab-content p-3 border border-top-0 mb-4">
+                            <div class="tab-pane fade show active" id="id-pane">
+                                <div class="mb-3">
+                                    <label asp-for="Judul_ID" class="form-label fw-semibold text-secondary small">Nama Project / Portfolio</label>
+                                    <input asp-for="Judul_ID" class="form-control form-control-lg fs-6" placeholder="Contoh: E-Commerce Web App Development" />
+                                    <span asp-validation-for="Judul_ID" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiContentPortfolio_ID" class="form-label"></label>
+                                    <textarea asp-for="IsiContentPortfolio_ID" id="IsiContenteditor_id" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="IsiContentPortfolio_ID" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="ClientComment_ID" class="form-label"></label>
+                                    <textarea asp-for="ClientComment_ID" id="editorComment_ID" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="ClientComment_ID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="en-pane">
+                                <div class="mb-3">
+                                    <label asp-for="Judul_EN" class="form-label fw-semibold text-secondary small">Nama Project / Portfolio</label>
+                                    <input asp-for="Judul_EN" class="form-control form-control-lg fs-6" placeholder="Contoh: E-Commerce Web App Development" />
+                                    <span asp-validation-for="Judul_EN" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiContentPortfolio_EN" class="form-label"></label>
+                                    <textarea asp-for="IsiContentPortfolio_EN" id="IsiContenteditor_en" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="IsiContentPortfolio_EN" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="ClientComment_EN" class="form-label"></label>
+                                    <textarea asp-for="ClientComment_EN" class="form-control" id="ClientCommenteditor_en" rows="5"></textarea>
+                                    <span asp-validation-for="ClientComment_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-secondary small">Gambar Sampul Utama (Cover)</label>
+                                <input asp-for="UploadGambar" type="file" class="form-control mb-2" accept="image/*" id="inputGambar" />
+                                <span asp-validation-for="UploadGambar" class="text-danger"></span>
+                                <div class="upload-zone p-3 text-center d-flex flex-column align-items-center justify-content-center border rounded" style="min-height: 160px;">
+                                    <img id="previewGambar" src="#" style="max-width: 100%; max-height: 140px; display: none; object-fit: contain;" class="rounded shadow-sm" />
+                                    <div id="placeholderText" class="text-muted small py-3">
+                                        <i class="fa fa-cloud-upload-alt fa-2x d-block mb-2 text-primary-subtle"></i>
+                                        Pratinjau gambar cover utama akan tampil di sini
+                                    </div>
+                                </div>
+                                <span id="imageError" class="text-danger small d-block mt-1"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-secondary small">Dokumentasi Foto Proyek</label>
+                                <input asp-for="UploadFotoProject" type="file" multiple class="form-control mb-2" id="inputFotoProject" accept="image/*" />
+                                <span asp-validation-for="UploadFotoProject" class="text-danger"></span>
+                                <span class="form-text text-muted small d-block mb-2">Anda dapat memilih multi-file foto sekaligus.</span>
+                                <div class="upload-zone p-3 border rounded" style="min-height: 160px;">
+                                    <div class="d-flex flex-wrap" id="gridGalleryPreview"></div>
+                                    <div id="placeholderGalleryText" class="text-muted small text-center py-4">
+                                        <i class="fa fa-images fa-2x d-block mb-2 text-primary-subtle"></i>
+                                        Daftar thumbnail file pendukung akan tersusun di sini
+                                    </div>
+                                </div>
+                                <span id="fileError" class="text-danger small d-block mt-1"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between border-top pt-3 mt-4">
+                            <a asp-action="Index" class="btn-sm btn btn-secondary px-3">
+                                <i class="fa fa-arrow-left me-1"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn-sm btn btn-primary px-4 fw-semibold shadow-sm">
+                                <i class="fa fa-save me-1"></i> Simpan Portfolio
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+
+        <script>
+            $(document).ready(function () {
+                $(".datepicker").datepicker({
+                    dateFormat: "dd-mm-yy",
+                    changeMonth: true,
+                    changeYear: true
+                });
+            });
+        </script>
+
+        <script>
+            if ($.validator) {
+                $.validator.setDefaults({ ignore: [] });
+            }
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {                
+                //Gunakan querySelectorAll untuk mengambil semua elemen
+                const selector = '#IsiContenteditor_id, #editorComment_ID, #IsiContenteditor_en, #ClientCommenteditor_en';
+                const editorElements = document.querySelectorAll(selector);
+                editorElements.forEach((editorElement) => {
+                    ClassicEditor
+                        .create(editorElement)
+                        .then(editor => {
+                            // Update field asli saat ada perubahan
+                            editor.model.document.on('change:data', () => {
+                                editorElement.value = editor.getData();
+                                // Trigger re-validasi jQuery
+                                if (typeof $ !== 'undefined' && $(editorElement).hasClass('error')) {
+                                     $(editorElement).valid();
+                                }
+                            });
+                        })
+                        .catch(error => { console.error(error); });
+                });
+            });
+        </script>
+
+        <script>
+            document.getElementById('inputGambar').addEventListener('change', function () {
+                const input = this;
+                const errorElement = document.getElementById('imageError');
+                const preview = document.getElementById('previewGambar');
+                const placeholder = document.getElementById('placeholderText');
+                const submitBtn = document.querySelector('button[type="submit"]');
+
+                errorElement.innerText = "";
+                submitBtn.disabled = false;
+
+                if (input.files && input.files[0]) {
+                    const file = input.files[0];
+                    const fileSize = file.size / 1024 / 1024;
+
+                    if (!file.type.startsWith('image/')) {
+                        errorElement.innerText = "Berkas wajib berupa gambar valid (JPG, PNG, WebP).";
+                        input.value = "";
+                        preview.style.display = 'none';
+                        placeholder.style.display = 'block';
+                        submitBtn.disabled = true;
+                        return;
+                    }
+
+                    if (fileSize > 5) {
+                        errorElement.innerText = "Ukuran file (" + fileSize.toFixed(2) + " MB) melampaui batas maksimal server (5MB).";
+                        input.value = "";
+                        preview.style.display = 'none';
+                        placeholder.style.display = 'block';
+                        submitBtn.disabled = true;
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                        placeholder.style.display = 'none';
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.style.display = 'none';
+                    placeholder.style.display = 'block';
+                }
+            });
+        </script>
+
+        <script>
+            document.getElementById('inputFotoProject').addEventListener('change', function () {
+                const previewContainer = document.getElementById('gridGalleryPreview');
+                const placeholder = document.getElementById('placeholderGalleryText');
+                const errorSpan = document.getElementById('fileError');
+
+                previewContainer.innerHTML = '';
+                errorSpan.innerText = '';
+
+                if (this.files.length > 0) {
+                    placeholder.style.display = 'none';
+
+                    Array.from(this.files).forEach((file) => {
+                        if (file.size > 5 * 1024 * 1024) {
+                            errorSpan.innerText = `File "${file.name}" terabaikan karena melampaui batas 5MB!`;
+                            return;
+                        }
+
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const thumbWrapper = document.createElement('div');
+                            thumbWrapper.className = 'preview-thumb-container';
+                            thumbWrapper.innerHTML = `<img src="${e.target.result}" class="w-100 h-100" style="object-fit: cover;" title="${file.name}">`;
+                            previewContainer.appendChild(thumbWrapper);
+                        }
+                        reader.readAsDataURL(file);
+                    });
+                } else {
+                    placeholder.style.display = 'block';
+                }
+            });
+        </script>
+    }

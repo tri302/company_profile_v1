@@ -1,0 +1,102 @@
+@model company_profile.ContactFormVM
+
+@{
+    ViewData["Title"] = "User Contacted";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div id="table-container">
+        <partial name="_UserContactedPartial.cshtml" model="Model" />
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedData", "UserContacted")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+       function deleteData(id) {
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal',
+            position: 'top',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/UserContacted/Delete/' + id,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire(
+                                'Deleted!',
+                                response.message,
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload halaman untuk melihat perubahan
+                            });
+                        } else {
+                            Swal.fire('Error!', response.message, 'error');
+                        }
+                    },
+                    error: function() {
+                        Swal.fire('Error!', 'Terjadi kesalahan sistem.', 'error');
+                    }
+                });
+            }
+        })
+    }
+    </script>
+
+    <script>
+        // Menampilkan pesan sukses setelah operasi berhasil
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                Swal.fire({
+                icon: 'success',
+                title: 'Sukses!',
+                text: '@TempData["SuccessMessage"]',
+                position: 'top',
+                timer: 5000, // Waktu tampil pesan (5 detik)
+                showConfirmButton: false
+                });
+            </text>
+        }
+    </script>
+
+    <script>
+        // Menampilkan pesan sukses setelah operasi berhasil
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '@TempData["ErrorMessage"]',
+                position: 'top',
+                timer: 5000, // Waktu tampil pesan (5 detik)
+                showConfirmButton: false
+                });
+            </text>
+        }
+    </script>
+}

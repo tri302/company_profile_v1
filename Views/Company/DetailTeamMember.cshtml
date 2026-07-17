@@ -1,0 +1,71 @@
+﻿@using company_profile
+@model TeamVM
+@{
+    ViewData["Title"] = "Team Member Details";
+    Layout = "_FrontEndLayout";
+}
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "Team Page" })
+<!--Banner End-->
+
+<!--Team Start-->
+<div class="team-detail pt_60 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="team-detail-photo">
+                    @if (string.IsNullOrEmpty(Model.UrlGambar))
+                    {
+                        <img src="~/uploads/no-image.png" alt="No Image" />
+                    }
+                    else
+                    {                        
+                        <img src="@Model.UrlGambar" />
+                    }
+                </div>
+                <div class="team-info headstyle">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><span><i class="fa fa-envelope"></i></span>@Model.Email</li>
+                        <li><span><i class="fa fa-phone"></i></span>@Model.NoHP</li>
+                        <li><span><i class="fa fa-globe"></i></span>@Model.Website</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="team-detail-text">
+                    <h4>@Model.Nama</h4>
+                    <span>@Model.Jabatan</span>
+                    <p>
+                      @Html.Raw(@Model.Deskripsi)
+                    </p>
+                    <ul>
+                        <li>
+                            <a href="@(string.IsNullOrEmpty(Model.UrlFb) ? "#" : Model.UrlFb)" target="_blank">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@(string.IsNullOrEmpty(Model.UrlTwiter) ? "#" : Model.UrlTwiter)"
+                               target="_blank"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="@(string.IsNullOrEmpty(Model.UrlLinkedIn) ? "#" : Model.UrlLinkedIn)"
+                               target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                        <li>
+                            <a href="@(string.IsNullOrEmpty(Model.UrlYoutube) ? "#" : Model.UrlYoutube)"
+                               target="_blank"><i class="fa fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Team End-->
+
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->
+</div>

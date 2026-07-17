@@ -1,0 +1,134 @@
+﻿@using company_profile;
+@model NewsVM;
+@functions {
+    public string StripHTML(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "<.*?>", String.Empty);
+    }
+}
+
+<!--Blog-One Start-->
+<div class="blog-one-area pt_60 pb_90">
+    <div class="container">
+        <div class="row">
+
+            <!-- Bagian Kiri: List Berita (col-lg-8) -->
+            <div class="col-lg-8">
+                @if (Model.ListBerita != null)
+                {
+                    @foreach (var item in Model.ListBerita)
+                    {
+                        <div class="blog-one-item">
+                            <div class="blog-one-photo">
+                                <a asp-action="NewsDetail" asp-controller="Company" asp-route-id="@item.IDNews">
+                                    <img src="@(string.IsNullOrEmpty(item.UrlGambar) ? Url.Content("~/uploads/no-image.png") : item.UrlGambar)"
+                                         alt="Blog Photo">
+                                </a>
+                            </div>
+                            <div class="blog-one-text">
+                                <ul>
+                                    <li>
+                                        <i class="fa fa-edit"></i>
+                                        <a asp-action="NewsByCategory" asp-controller="Company"
+                                           asp-route-NamaKategori="@item.Kategori.NamaKategori">
+                                            @(item.Kategori?.NamaKategori ?? "Uncategorized")
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-calendar-o"></i>
+                                        @item.CreateAt.ToString("MMMM dd, yyyy")
+                                    </li>
+                                </ul>
+                                <h3>
+                                    <a asp-action="NewsDetail" asp-controller="Company"
+                                       asp-route-id="@item.IDNews">@item.Judul</a>
+                                </h3>
+                                <p>
+                                    @{
+                                        var cleanText = StripHTML(item.IsiContent ?? "");
+                                        var shortText = cleanText.Length > 180 ? cleanText.Substring(0, 180) + "..." : cleanText;
+                                    }
+                                    @shortText
+                                </p>
+                                <div class="button-df">
+                                    <a asp-action="NewsDetail" asp-controller="Company" asp-route-id="@item.IDNews">
+                                        Read More <i class="fa fa-chevron-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+                <!-- Pagination ditempatkan di dalam col-lg-8 agar sejajar di bawah list berita -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center align-items-center mt-4" id="pagination-controls">
+                            <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+                                    data-page="@(Model.CurrentPage - 1)">
+                                <i class="fa fa-arrow-left"></i> Previous
+                            </button>
+
+                            <!-- Menambahkan mx-4 untuk memberi jarak kiri dan kanan pada teks -->
+                            <span class="text-muted fw-bold mx-4">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+                            <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+                                    data-page="@(Model.CurrentPage + 1)">
+                                Next <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Selesai col-lg-8 -->
+            <!-- Bagian Kanan: Sidebar (col-lg-4) -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <div class="sidebar-item">
+                        <h3>Categories</h3>
+                        <ul>
+                            @if (Model.ListKategoriBerita != null)
+                            {
+                                @foreach (var item in Model.ListKategoriBerita)
+                                {
+                                    <li>
+                                        <a asp-action="NewsByCategory" asp-controller="Company"
+                                           asp-route-NamaKategori="@item.NamaKategori">
+                                            @(item?.NamaKategori ?? "Uncategorized")
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-item">
+                        <h3>Recent Posts</h3>
+                        @if (Model.ListRecentPostsBerita != null)
+                        {
+                            @foreach (var recent in Model.ListRecentPostsBerita)
+                            {
+                                <div class="sidebar-recent-item">
+                                    <div class="recent-photo">
+                                        <a asp-action="NewsDetail" asp-controller="Company" asp-route-id="@recent.IDNews">
+                                            <img src="@(string.IsNullOrEmpty(recent.UrlGambar) ? Url.Content("~/uploads/no-image.png") : recent.UrlGambar)"
+                                                 alt="Recent Photo">
+                                        </a>
+                                    </div>
+                                    <div class="recent-text">
+                                        <a asp-action="NewsDetail" asp-controller="Company"
+                                           asp-route-id="@recent.IDNews">@recent.Judul</a>
+                                        <div class="rpwwt-post-date">
+                                            @recent.CreateAt.ToString("MMMM dd, yyyy")
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div> <!-- Selesai col-lg-4 -->
+
+        </div> <!-- /.row utama -->
+    </div> <!-- /.container utama -->
+</div>
+<!--Blog-One End-->

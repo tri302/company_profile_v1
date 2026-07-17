@@ -1,0 +1,89 @@
+﻿@using company_profile;
+@model PhotoGalleryVM;
+@{
+    ViewData["Title"] = "Gallery page";
+    Layout = "_FrontEndLayout";
+}
+<style>
+    .gallery-photo {
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .gallery-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .gallery-photo:hover .gallery-bg {
+        opacity: 1;
+    }
+
+    .gallery-table {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gallery-icon a {
+        color: #fff;
+        font-size: 24px;
+    }
+</style>
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "Photo Gallery Page" })
+<!--Banner End-->
+<div id="table-container">
+    <partial name="_PhotoGaleryPartial" model="Model" />
+</div>
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedDataPhotoGallery", "Company")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Gagal memuat halaman: ", error);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $('.magnific').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300,
+                    easing: 'ease-in-out'
+                }
+            });
+        });
+    </script>
+}

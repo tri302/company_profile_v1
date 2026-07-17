@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Halaman Tidak Ditemukan";
+    Layout = null;
+}
+
+<div class="error-container">
+    <div class="error-content">
+        <!-- Ilustrasi/Ikon Pencarian -->
+        <div class="error-icon">
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#fdcb6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <path d="M11 8v6"></path>
+                <path d="M8 11h6"></path>
+            </svg>
+        </div>
+
+        <h1>Yah, Halaman Hilang!</h1>
+        <p>Maaf, halaman yang Anda cari tidak dapat ditemukan. Mungkin tautannya rusak atau halaman tersebut telah dipindahkan.</p>
+
+        <div class="error-actions">
+            <a href="/" class="btn-primary">Kembali ke Beranda</a>
+            <button onclick="history.back()" class="btn-secondary">Kembali Sebelumnya</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+        padding: 20px;
+    }
+
+    .error-icon {
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+    }
+
+    h1 {
+        color: #2d3436;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        color: #636e72;
+        margin-bottom: 2rem;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Tombol Konsisten */
+    .btn-primary {
+        background-color: #e17055; /* Oranye hangat untuk 404 */
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 8px;
+        margin-right: 10px;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #d63031;
+        }
+
+    .btn-secondary {
+        background-color: #f1f2f6;
+        color: #2d3436;
+        padding: 12px 24px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    /* Animasi kecil agar lebih menarik */
+    @@keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+
+        40% {
+            transform: translateY(-10px);
+        }
+
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+</style>

@@ -1,0 +1,77 @@
+﻿@using company_profile;
+@model EventsVM;
+<div class="event-area pt_60 pb_90">
+    <div class="container">
+        @if (Model.ListEvents != null && Model.ListEvents.Any())
+        {
+            @foreach (var item in Model.ListEvents)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="event-item"
+                             style="background: #f9f9f9; padding: 20px; margin-bottom: 30px; border: 1px solid #eee;">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-4">
+                                    <div class="event-photo"
+                                         style="background-image:url('@Url.Content("~" + item.UrlGambar)'); height: 200px; background-size: cover; background-position: center; border-radius: 4px;">
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-9 col-lg-8">
+                                    <div class="event-body">
+                                        <div class="event-header">
+                                            <h4 style="margin-top: 0;">@item.JudulEvent</h4>
+                                            <ul style="list-style: none; padding: 0; display: flex; gap: 15px; font-size: 14px; color: #666;">
+                                                <li><i class="fa fa-clock-o"></i> Start: @item.StartEvent.ToString("dd MMMM yyyy")</li>
+                                                <li>
+                                                    <i class="fa fa-clock-o"></i> End: @item.EndEvent.ToString("dd MMMM yyyy")
+                                                </li>
+                                                <li><i class="fa fa-map-marker"></i> @item.AlamatEvent</li>
+                                            </ul>
+                                        </div>
+                                        <div class="event-content" style="margin-top: 15px;">
+                                            @Html.Raw(item.IsiContentEvent.Length > 200
+                                                     ? item.IsiContentEvent.Substring(0, 200) + "..."
+                                                     : item.IsiContentEvent)
+                                            <div class="button-df" style="margin-top: 20px;">
+                                                <a asp-action="EventDetail" target="_blank" asp-route-id="@item.IDEvents"
+                                                   class="btn btn-primary"
+                                                   style="background-color: #337ab7; border: none; padding: 8px 20px;">
+                                                    Read More <i class="fa fa-chevron-circle-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            }
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-center align-items-center mt-4" id="pagination-controls">
+                        <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+                                data-page="@(Model.CurrentPage - 1)">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </button>
+
+                        <!-- Menambahkan mx-4 untuk memberi jarak kiri dan kanan pada teks -->
+                        <span class="text-muted fw-bold mx-4">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+                        <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+                                data-page="@(Model.CurrentPage + 1)">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                No record found
+            </div>
+        }
+    </div>
+</div>

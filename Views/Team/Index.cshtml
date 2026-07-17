@@ -1,0 +1,71 @@
+@model company_profile.TeamVM
+@{
+    ViewData["Title"] = "Team Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="mb-0 text-dark"><i class="fa fa-users text-primary me-2"></i>Team Management</h4>
+            <small class="text-muted">Kelola data anggota tim dengan dukungan multi-bahasa</small>
+        </div>
+        <a asp-action="Create" class="btn btn-primary btn-sm shadow-sm">
+            <i class="fa fa-plus-circle me-1"></i> Create New
+        </a>
+    </div>
+    <div id="table-container">
+        <partial name="_TeamPartial.cshtml" model="Model" />
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedData", "Team")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        function deleteMember(id) {
+            Swal.fire({
+                title: 'Hapus ?',
+                text: "Data yang dihapus tidak dapat dipulihkan.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus',
+                position: 'top'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/Team/Delete/' + id,
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.success) {
+                                Swal.fire({ icon: 'success', title: 'Terhapus!', text: 'Anggota tim dihapus', position: 'top', timer: 2000, showConfirmButton: false })
+                                    .then(() => { location.reload(); });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                Swal.fire({ icon: 'success', title: 'Berhasil!', text: '@TempData["SuccessMessage"]', position: 'top', timer: 3000, showConfirmButton: false });
+            </text>
+        }
+    </script>
+}

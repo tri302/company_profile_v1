@@ -1,0 +1,545 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = company_profile
+build_property.RootNamespace = company_profile
+build_property.ProjectDir = D:\source\company_profile\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\source\company_profile
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/source/company_profile/Views/About/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/About/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/About/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Account/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Achievements/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNoaWV2ZW1lbnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Achievements/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNoaWV2ZW1lbnRzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Achievements/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNoaWV2ZW1lbnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Achievements/_AchievementsTablePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNoaWV2ZW1lbnRzXF9BY2hpZXZlbWVudHNUYWJsZVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/BannerHome/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFubmVySG9tZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/BannerHome/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFubmVySG9tZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/BannerHome/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFubmVySG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/About.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxBYm91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxDb250YWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/DetailTeamMember.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxEZXRhaWxUZWFtTWVtYmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Event.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxFdmVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/EventDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxFdmVudERldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Faq.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxGYXEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxIb21lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/News.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxOZXdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/NewsByCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxOZXdzQnlDYXRlZ29yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/NewsDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxOZXdzRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/PhotoGalery.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxQaG90b0dhbGVyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Portfolio.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxQb3J0Zm9saW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/PortfolioDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxQb3J0Zm9saW9EZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Pricing.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxQcmljaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Service.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxTZXJ2aWNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/ServiceDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxTZXJ2aWNlRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Team.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxUZWFtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/Testimonial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxUZXN0aW1vbmlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_EventPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfRXZlbnRQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_FaqPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfRmFxUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_NewsByCategoryPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfTmV3c0J5Q2F0ZWdvcnlQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_NewsPartialFE.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfTmV3c1BhcnRpYWxGRS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_PhotoGaleryPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfUGhvdG9HYWxlcnlQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_PortfolioPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfUG9ydGZvbGlvUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_PricingPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfUHJpY2luZ1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_ServicePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfU2VydmljZVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_TeamPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfVGVhbVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Company/_TestimonialPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxfVGVzdGltb25pYWxQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Contact/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Contact/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Contact/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Error/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Error/Forbidden.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRm9yYmlkZGVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Error/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcTm90Rm91bmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Error/ServerError.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcU2VydmVyRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Events/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Events/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Events/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Events/_EventsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXF9FdmVudHNQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Faq/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFxXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Faq/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFxXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Faq/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFxXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Faq/_FaqPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFxXF9GYXFQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Header/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhZGVyXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Header/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhZGVyXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Header/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhZGVyXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Header/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhZGVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Home/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Home/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Home/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Home/_HomePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfSG9tZVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Kategori/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2F0ZWdvcmlcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Kategori/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2F0ZWdvcmlcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Kategori/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2F0ZWdvcmlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Maintenance/Maintenance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFpbnRlbmFuY2VcTWFpbnRlbmFuY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/News/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/News/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/News/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/News/_NewsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xfTmV3c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/OurServices/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3VyU2VydmljZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/OurServices/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3VyU2VydmljZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/OurServices/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3VyU2VydmljZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/OurServices/_OurServicesPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3VyU2VydmljZXNcX091clNlcnZpY2VzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/PhotoGallery/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvdG9HYWxsZXJ5XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/PhotoGallery/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvdG9HYWxsZXJ5XEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/PhotoGallery/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvdG9HYWxsZXJ5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/PhotoGallery/_PhotoGalleryPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvdG9HYWxsZXJ5XF9QaG90b0dhbGxlcnlQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Portfolio/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydGZvbGlvXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Portfolio/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydGZvbGlvXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Portfolio/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydGZvbGlvXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Portfolio/_PortfolioPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydGZvbGlvXF9Qb3J0Zm9saW9QYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Pricing/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpY2luZ1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Pricing/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpY2luZ1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Pricing/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpY2luZ1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Pricing/_PricingPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpY2luZ1xfUHJpY2luZ1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Setting/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/Address/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQWRkcmVzc1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/Banner/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQmFubmVyXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/CategoryList/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2F0ZWdvcnlMaXN0XERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/Cta/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3RhXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/Favicon/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRmF2aWNvblxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/Header/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcSGVhZGVyXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/Logo/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTG9nb1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/Project/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUHJvamVjdFxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/RecentPosts/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmVjZW50UG9zdHNcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Components/Theme/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVGhlbWVcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/_FrontEndLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gcm9udEVuZExheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/SliderFooter/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2xpZGVyRm9vdGVyXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/SliderFooter/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2xpZGVyRm9vdGVyXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/SliderFooter/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2xpZGVyRm9vdGVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/SliderFooter/_SliderFooterHomePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2xpZGVyRm9vdGVyXF9TbGlkZXJGb290ZXJIb21lUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/SpecialFeatures/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3BlY2lhbEZlYXR1cmVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/SpecialFeatures/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3BlY2lhbEZlYXR1cmVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/SpecialFeatures/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3BlY2lhbEZlYXR1cmVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/SpecialFeatures/_SpecialFeaturesPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3BlY2lhbEZlYXR1cmVzXF9TcGVjaWFsRmVhdHVyZXNQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Team/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhbVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Team/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhbVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Team/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhbVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Team/_TeamPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhbVxfVGVhbVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Testimonial/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Testimonial/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Testimonial/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/Testimonial/_TestimonialPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxcX1Rlc3RpbW9uaWFsUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/UserContacted/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckNvbnRhY3RlZFxEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/UserContacted/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckNvbnRhY3RlZFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/UserContacted/_UserContactedPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckNvbnRhY3RlZFxfVXNlckNvbnRhY3RlZFBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/WhyChooseUs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2h5Q2hvb3NlVXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/WhyChooseUs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2h5Q2hvb3NlVXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/WhyChooseUs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2h5Q2hvb3NlVXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/WhyChooseUs/_WhyChooseUsTablePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2h5Q2hvb3NlVXNcX1doeUNob29zZVVzVGFibGVQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/company_profile/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

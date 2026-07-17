@@ -1,0 +1,86 @@
+@model CounterVM
+
+@{
+    ViewData["Title"] = "Tambah Achievement";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row page-header" style="margin-bottom: 20px; align-items: center; display: flex; justify-content: space-between;">
+    <div class="col-md-6">
+        <h2 style="margin: 0; font-weight: 600;">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Achievement
+        </h2>
+        <p class="text-muted" style="margin: 5px 0 0 0;">Buat item achievement statistik baru di website.</p>
+    </div>    
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default" style="background: #fff; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e4e4e4;">
+            <div class="panel-heading" style="padding: 15px; background-color: #f5f5f5; border-bottom: 1px solid #e4e4e4;">
+                <strong>
+                    <i class="fa fa-edit" aria-hidden="true"></i> Formulir Achievement
+                </strong>
+            </div>
+
+            <div class="panel-body" style="padding: 25px;">
+                <form asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    
+                    <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom: 15px; font-weight: 500;"></div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group" style="margin-bottom: 20px;">
+                            <label asp-for="JudulCounter_ID" class="control-label" style="font-weight: 600; margin-bottom: 8px; display: block;">Judul Achievements (ID)</label>
+                            <div class="input-group">
+                                <span class="input-group-addon" style="background-color: #eee; color: #555; font-weight: bold;">ID</span>
+                                <input asp-for="JudulCounter_ID" class="form-control" placeholder="Contoh: Klien Puas, Proyek Selesai" />
+                            </div>
+                            <span asp-validation-for="JudulCounter_ID" class="text-danger" style="font-size: 13px; margin-top: 5px; display: block;"></span>
+                        </div>
+
+                        <div class="col-md-6 form-group" style="margin-bottom: 20px;">
+                            <label asp-for="JudulCounter_EN" class="control-label" style="font-weight: 600; margin-bottom: 8px; display: block;">Judul Achievements (EN)</label>
+                            <div class="input-group">
+                                <span class="input-group-addon" style="background-color: #eee; color: #555; font-weight: bold;">EN</span>
+                                <input asp-for="JudulCounter_EN" class="form-control" placeholder="Contoh: Satisfied Clients, Completed Projects" />
+                            </div>
+                            <span asp-validation-for="JudulCounter_EN" class="text-danger" style="font-size: 13px; margin-top: 5px; display: block;"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label asp-for="IsiContentCounter" class="control-label" style="font-weight: 600; margin-bottom: 8px; display: block;">Isi Capaian (Angka)</label>
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #eee; color: #555;"><i class="fa fa-calculator" aria-hidden="true"></i></span>
+                            <input asp-for="IsiContentCounter" type="number" min="0" class="form-control" placeholder="Contoh: 1500" />
+                        </div>
+                        <span asp-validation-for="IsiContentCounter" class="text-danger" style="font-size: 13px; margin-top: 5px; display: block;"></span>
+                        <small class="text-muted" style="display: block; margin-top: 5px;">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> Masukkan nilai dalam bentuk angka bulat positif.
+                        </small>
+                    </div>
+
+                    <hr style="border-top: 1px dashed #e4e4e4; margin: 25px 0;" />
+
+                    <div class="d-flex justify-content-center" style="display: flex; justify-content: space-between; align-items: center;">
+                        <a asp-action="Index" class="btn btn-secondary btn-sm me-1">
+                            <i class="fa fa-arrow-left"></i> Back to List
+                        </a>
+                        <button type="submit" class="btn btn-primary btn-sm" style="min-width: 100px;">
+                            <i class="fa fa-save"></i> Save Data
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

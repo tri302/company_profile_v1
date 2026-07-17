@@ -1,0 +1,172 @@
+@model company_profile.PortfolioVM
+@{
+    ViewData["Title"] = "Portfolio Gallery";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .portfolio-card {
+        transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+        border: none;
+    }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1) !important;
+        }
+
+    .img-hover-container {
+        position: relative;
+        overflow: hidden;
+        border-top-left-radius: calc(0.375rem - 1px);
+        border-top-right-radius: calc(0.375rem - 1px);
+    }
+
+    .portfolio-img {
+        transition: transform 0.35s ease;
+    }
+
+    .portfolio-card:hover .portfolio-img {
+        transform: scale(1.06);
+    }
+
+    .border-dashed {
+        border: 2px dashed #dee2e6 !important;
+    }
+
+    .text-line-limit {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
+<div class="container-fluid mt-4 px-4">
+    <div align="right" class="mb-2">
+        <a asp-action="Create" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus-circle me-1"></i> Create New
+        </a>
+    </div>
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-body p-4 bg-white rounded-3 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <div class="d-flex align-items-center">
+                <div class="bg-primary-subtle text-primary p-3 rounded-3 me-3 d-flex align-items-center justify-content-center" style="width: 55px; height: 55px;">
+                    <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
+                </div>
+
+                <div>
+                    <h4 class="mb-1 fw-bold text-dark">Portfolio Gallery</h4>
+                    <p class="text-muted mb-0 small">Manajemen dokumentasi hasil kerja, proyek klien, dan studi kasus perusahaan.</p>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div id="table-container">
+        <partial name="_PortfolioPartial.cshtml" model="Model" />
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedData", "Portfolio")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#searchPortfolio").on("keyup", function () {
+                var value = $(this).val().toLowerCase().trim();
+                var items = $(".portfolio-item");
+                var visibleCount = 0;
+
+                items.each(function () {
+                    var searchContent = $(this).attr("data-search");
+                    if (searchContent.indexOf(value) !== -1) {
+                        $(this).removeClass("d-none");
+                        visibleCount++;
+                    } else {
+                        $(this).addClass("d-none");
+                    }
+                });
+
+                // Tampilkan pesan kosong jika semua item tersembunyi akibat filter
+                if (visibleCount === 0 && items.length > 0) {
+                    $("#noResultsState").removeClass("d-none");
+                } else {
+                    $("#noResultsState").addClass("d-none");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function deletePortfolio(id) {
+            Swal.fire({
+                title: 'Hapus Portfolio?',
+                text: "Data informasi serta berkas gambar fisik proyek akan dihapus secara permanen dari server!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '<i class="fa fa-trash me-1"></i> Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                position: 'top',
+                customClass: {
+                    confirmButton: 'btn btn-danger px-3 mx-2',
+                    cancelButton: 'btn btn-secondary px-3 mx-2'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/Portfolio/Delete/' + id,
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Terhapus!',
+                                    text: 'Data portfolio berhasil dibersihkan dari server.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => location.reload());
+                            } else {
+                                Swal.fire('Gagal!', 'Sistem menolak operasi penghapusan data.', 'error');
+                            }
+                        },
+                        error: function() {
+                            Swal.fire('Error!', 'Terjadi gangguan jaringan saat memproses permintaan.', 'error');
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses!',
+                        text: '@TempData["SuccessMessage"]',
+                        position: 'top',
+                        timer: 4000,
+                        showConfirmButton: false
+                    });
+            </text>
+        }
+    </script>
+}

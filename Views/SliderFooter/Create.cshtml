@@ -1,0 +1,127 @@
+@model company_profile.SliderFooterHomeVM
+
+@{
+    ViewData["Title"] = "Tambah Slider Footer Home";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Content Header -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2 align-items-center">
+            <div class="col-sm-6">
+                <h2 class="m-0 text-dark">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Slider Baru
+                </h2>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <!-- Form Card -->
+                <div class="card card-primary card-outline shadow-sm">
+                    <div class="card-header">
+                        <h3 class="card-title text-muted font-weight-bold">Form Input Data Slider</h3>
+                    </div>
+                    <!-- Form wajib pakai enctype="multipart/form-data" untuk upload file -->
+                    <form asp-action="Create" asp-controller="SliderFooter" method="post" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <!-- Validasi Ringkas -->
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                            <!-- Input File Gambar -->
+                            <div class="form-group">
+                                <label asp-for="UploadGambar" class="control-label font-weight-bold">Pilih Gambar
+                                    Slider</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input asp-for="UploadGambar" type="file" class="custom-file-input"
+                                                   id="imageInput" accept="image/*" required />
+                                            <label class="custom-file-label" for="imageInput">Cari file gambar...</label>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="UploadGambar" class="text-danger small d-block mt-1"></span>
+                                    <small class="form-text text-muted">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i> Format yang didukung: JPG,
+                                        JPEG, PNG. Rekomendasi ukuran proporsional.
+                                    </small>
+                                </div>
+
+                                <!-- Live Preview Box -->
+                                <div class="form-group mt-4">
+                                    <label class="font-weight-bold text-muted d-block">Preview Gambar:</label>
+                                    <div id="previewContainer"
+                                         class="img-thumbnail bg-light d-flex align-items-center justify-content-center"
+                                         style="width: 100%; max-width: 400px; height: 200px; overflow: hidden; border: 2px dashed #ddd;">
+                                        <div id="previewPlaceholder" class="text-center text-secondary p-3">
+                                            <i class="fa fa-picture-o fa-3x d-block mb-2" aria-hidden="true"></i>
+                                            <span class="small">Belum ada gambar terpilih</span>
+                                        </div>
+                                        <img id="imagePreview" src="#" alt="Pratinjau Gambar" class="img-fluid d-none"
+                                             style="max-height: 100%; max-width: 100%; object-fit: dashed;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Footer Tombol -->
+                            <div class="card-footer bg-white border-top-0 py-3 d-flex justify-content-center gap-2">
+                                <a asp-action="Index" class="btn btn-secondary btn-sm">
+                                    <i class="fa fa-arrow-left"></i> Back
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-save"></i> Save Slider
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @section Scripts {
+        <!-- Script bawaan ASP.NET Core untuk validasi di sisi client (Client-side Validation) -->
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+
+        <script type="text/javascript">
+            document.getElementById('imageInput').addEventListener('change', function (e) {
+                const file = this.files[0];
+                const previewContainer = document.getElementById('previewContainer');
+                const previewPlaceholder = document.getElementById('previewPlaceholder');
+                const imagePreview = document.getElementById('imagePreview');
+
+                // Mengubah teks label custom file input bawaan bootstrap sesuai nama file
+                if (file) {
+                    this.nextElementSibling.innerText = file.name;
+
+                    // Proses pembacaan file untuk preview
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        imagePreview.src = event.target.result;
+                        imagePreview.classList.remove('d-none');
+                        previewPlaceholder.classList.add('d-none');
+                        previewContainer.style.borderStyle = 'solid';
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    this.nextElementSibling.innerText = 'Cari file gambar...';
+                    imagePreview.src = '#';
+                    imagePreview.classList.add('d-none');
+                    previewPlaceholder.classList.remove('d-none');
+                    previewContainer.style.borderStyle = 'dashed';
+                }
+            });
+        </script>
+    }

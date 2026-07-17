@@ -1,0 +1,95 @@
+﻿@model OurServicesVM
+<div class="card shadow-sm border-0 rounded-3">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" style="min-width: 800px;">
+                <thead class="table-light border-bottom">
+                    <tr>
+                        <th class="ps-4 py-3 text-secondary text-uppercase font-monospace fs-7" style="width: 120px;">Gambar/Ikon</th>
+                        <th class="py-3 text-secondary text-uppercase font-monospace fs-7" style="width: 250px;">Nama Layanan</th>
+                        <th class="py-3 text-secondary text-uppercase font-monospace fs-7">Pratinjau Deskripsi</th>
+                        <th class="pe-4 py-3 text-center text-secondary text-uppercase font-monospace fs-7" style="width: 180px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="border-0">
+                    @if (!Model.ListOurServices.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center py-5">
+                                <div class="text-muted mb-3">
+                                    <i class="fa fa-folder-open-o fa-3x opacity-50" aria-hidden="true"></i>
+                                </div>
+                                <h6 class="text-secondary fw-semibold mb-1">Belum Ada Data Layanan</h6>
+                                <p class="text-muted small mb-0">Klik tombol "Tambah Layanan Baru" untuk mengisi konten perdana.</p>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.ListOurServices)
+                        {
+                            <tr class="align-middle">
+                                <td class="ps-4 py-3">
+                                    <div class="position-relative d-inline-block">
+                                        <img src="@(string.IsNullOrEmpty(item.UrlGambar) ? "/images/default-service.png" : item.UrlGambar)"
+                                             class="rounded-3 border object-fit-cover shadow-sm bg-light"
+                                             style="width: 65px; height: 65px;"
+                                             alt="Cover Service"
+                                             onerror="this.onerror=null; this.src='/images/default-service.png';" />
+                                    </div>
+                                </td>
+
+                                <td class="py-3">
+                                    <div class="fw-bold text-dark fs-6 mb-1">@item.JudulService</div>
+                                    <div class="d-flex gap-1">
+                                        <span class="badge bg-light text-primary border border-primary-subtle font-monospace" style="font-size: 0.68rem;">ID</span>
+                                        <span class="badge bg-light text-secondary border font-monospace" style="font-size: 0.68rem;">EN</span>
+                                    </div>
+                                </td>
+
+                                <td class="py-3 text-wrap" style="max-width: 400px;">
+                                    <div class="text-secondary text-truncate-2 small text-muted">
+                                        @{
+                                            var plainText = System.Text.RegularExpressions.Regex.Replace(item.IsiService ?? "", "<.*?>", string.Empty);
+                                            @(plainText.Length > 110 ? plainText.Substring(0, 110) + "..." : plainText)
+                                        }
+                                    </div>
+                                </td>
+
+                                <td class="pe-4 py-3 text-center">
+                                    <div class="d-inline-flex gap-2">
+                                        <a asp-action="Edit" asp-route-id="@item.IDOurServices"
+                                           class="btn btn-warning btn-sm px-2.5 rounded-2 d-inline-flex align-items-center gap-1"
+                                           title="Ubah Layanan">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                        <button onclick="deleteService(@item.IDOurServices)"
+                                                class="btn btn-danger btn-sm px-2.5 rounded-2 d-inline-flex align-items-center gap-1"
+                                                title="Hapus Layanan">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-3 gap-3" id="pagination-controls">
+    <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+            data-page="@(Model.CurrentPage - 1)">
+        <i class="fa fa-arrow-left"></i>
+        Previous
+    </button>
+
+    <span class="text-muted fw-bold">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+    <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+            data-page="@(Model.CurrentPage + 1)">
+        Next
+        <i class="fa fa-arrow-right"></i>
+    </button>
+</div>

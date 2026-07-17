@@ -1,0 +1,98 @@
+@model company_profile.PhotoGalleryVM
+
+@{
+    ViewData["Title"] = "Photo Gallery";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .gallery-card {
+        transition: transform .2s;
+    }
+
+    .gallery-card:hover {
+        transform: scale(1.03);
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: .3s;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+        opacity: 1;
+    }
+</style>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fa fa-camera"></i> Photo Gallery</h2>
+        <a asp-action="Create" class="btn btn-primary btn-sm">
+            <i class="fa fa-upload"></i> Upload New Photo
+        </a>
+    </div>
+    <div id="table-container">
+        <partial name="_PhotoGalleryPartial.cshtml" model="Model" />
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedData", "PhotoGallery")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        function deletePhoto(id) {
+            Swal.fire({
+                title: 'Hapus foto ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus',
+                position: 'top',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/PhotoGallery/Delete/' + id,
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.success) location.reload();
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // Menampilkan pesan sukses setelah operasi berhasil
+        @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                        Swal.fire({
+                            icon: 'success',
+                        title: 'Sukses!',
+                        text: '@TempData["SuccessMessage"]',
+                        position: 'top',
+                        timer: 5000, // Waktu tampil pesan (5 detik)
+                        showConfirmButton: false
+                                                    });
+                </text>
+        }
+    </script>
+}

@@ -1,0 +1,140 @@
+﻿@using company_profile.ViewModels.HomeVM
+@model HomeVM
+<div class="card shadow border-0 rounded-3">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+            <i class="fa fa-list text-secondary me-2"></i>
+            <span class="fw-bold text-secondary text-uppercase small tracking-wider">Daftar Slot Beranda</span>
+        </div>
+        <span class="badge bg-light text-dark border border-secondary-subtle">Total: @(Model?.List.Count() ?? 0) Item</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 text-nowrap">
+                <thead class="table-light border-bottom text-secondary fw-semibold small text-uppercase">
+                    <tr>
+                        @* <th class="text-center py-3" style="width: 5%">#</th> *@
+                        <th style="width: 30%">About Start Section</th>
+                        <th style="width: 25%">Progress Bar Metrics</th>
+                        <th style="width: 15%">Video Embed</th>
+                        <th class="text-center py-3" style="width: 15%">Aksi Kontrol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.List != null && Model.List.Any())
+                    {
+                        @* int no = 1; *@
+                        foreach (var item in Model.List)
+                        {
+                            <tr>
+                                @* <td class="text-center fw-bold text-muted">@no</td> *@
+
+                                <td class="text-wrap">
+                                    <div class="fw-bold text-dark d-flex align-items-center gap-2 mb-1">
+                                        @item.JudulAboutStart
+                                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small-badge">ID & EN</span>
+                                    </div>
+                                    <div class="text-muted small text-truncate-2" style="max-height: 40px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                        @Html.Raw(item.IsiAboutStart)
+                                    </div>
+                                </td>
+
+                                <td class="text-wrap">
+                                    @if (item.ProgressBars != null && item.ProgressBars.Any())
+                                    {
+                                        <div class="d-flex flex-column gap-2">
+                                            @foreach (var pb in item.ProgressBars)
+                                            {
+                                                <div>
+                                                    <div class="d-flex justify-content-between mb-1 small">
+                                                        <span class="text-dark fw-medium text-truncate" style="max-width: 180px;">@pb.Judul</span>
+                                                        <span class="fw-bold text-success">@pb.Value%</span>
+                                                    </div>
+                                                    <div class="progress rounded-pill shadow-sm" style="height: 6px;">
+                                                        <div class="progress-bar bg-success rounded-pill progress-bar-striped progress-bar-animated"
+                                                             role="progressbar"
+                                                             style="width: @pb.Value%"></div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small italic text-center d-block py-2">
+                                            <i class="fa fa-info-circle me-1"></i> Kosong
+                                        </span>
+                                    }
+                                </td>
+
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-danger me-2"><i class="fa fa-youtube-play"></i></span>
+                                        <span class="text-monospace font-monospace text-truncate d-inline-block text-secondary small" style="max-width: 160px;" title="@item.EmbededUrlVidio">
+                                            @item.EmbededUrlVidio
+                                        </span>
+                                    </div>
+                                </td>
+
+                                @* <td class="text-center"> *@
+                                @*     @if (!string.IsNullOrEmpty(item.UrlGambar)) *@
+                                @*     { *@
+                                @*         <div class="position-relative d-inline-block img-hover-zoom rounded shadow-sm border"> *@
+                                @*             <img src="~/uploads/home/@item.UrlGambar" alt="Hero Banner" class="img-fluid rounded" style="width: 80px; height: 50px; object-fit: cover;" /> *@
+                                @*         </div> *@
+                                @*     } *@
+                                @*     else *@
+                                @*     { *@
+                                @*         <img src="~/uploads/no-image.png" alt="No Image Available" class="img-fluid rounded shadow-sm border" style="width: 80px; height: 50px; object-fit: cover;" /> *@
+                                @*     } *@
+                                @* </td> *@
+
+                                <td class="text-center py-3">
+                                    <div class="btn-group shadow-sm border rounded" role="group">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning" title="Edit Data Slot">
+                                            <i class="fa fa-pencil"></i> <span class="d-none d-xl-inline ms-1 text-dark fw-medium">Edit</span>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm" title="Lihat Detail Lengkap">
+                                            <i class="fa fa-eye"></i> <span class="d-none d-xl-inline ms-1 text-dark fw-medium">Detail</span>
+                                        </a>
+                                        <button type="button" onclick="deleteData(@item.Id)" class="btn btn-sm btn-danger" title="Hapus Konten">
+                                            <i class="fa fa-trash"></i> <span class="d-none d-xl-inline ms-1 text-dark fw-medium">Delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @* no++; *@
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-5 bg-light-subtle">
+                                <div class="py-4">
+                                    <i class="fa fa-folder-open text-secondary opacity-50 fa-3x mb-3 d-block"></i>
+                                    <p class="fw-bold mb-1 text-dark">Belum Ada Konten Tersedia</p>
+                                    <p class="small text-muted mb-0">Silakan klik tombol "Tambah Konten Baru" untuk mengisi data halaman utama.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-3 gap-3" id="pagination-controls">
+    <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+            data-page="@(Model.CurrentPage - 1)">
+        <i class="fa fa-arrow-left"></i>
+        Previous
+    </button>
+
+    <span class="text-muted fw-bold">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+    <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+            data-page="@(Model.CurrentPage + 1)">
+        Next
+        <i class="fa fa-arrow-right"></i>
+    </button>
+</div>

@@ -1,0 +1,70 @@
+﻿@using company_profile.PagenationVM
+@model EventsListViewModel
+
+@if (Model.Items == null || !Model.Items.Any())
+{
+    <div class="alert alert-info" role="alert">
+        No events available. Click "Create New Event" to add one.
+    </div>
+}
+else
+{
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Gambar</th>
+                        <th>Judul Event</th>
+                        <th>Waktu</th>
+                        <th>Lokasi</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@(string.IsNullOrEmpty(item.UrlGambar) ? Url.Content("~/uploads/no-image.png") : item.UrlGambar)"
+                                     class="img-thumbnail" style="width: 80px; height: 60px; object-fit: cover;" />
+                            </td>
+                            <td><strong>@item.JudulEvent</strong></td>
+                            <td>
+                                <small>
+                                    @item.StartEvent.ToString("dd MMM yyyy") <br />
+                                    s/d @item.EndEvent.ToString("dd MMM yyyy")
+                                </small>
+                            </td>
+                            <td>@item.AlamatEvent</td>
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-id="@item.IDEvents" class="btn btn-warning btn-sm">
+                                    <i class="fa fa-pencil"></i> Edit
+                                </a>
+                                <button type="button" onclick="deleteEvent(@item.IDEvents)" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+<div class="d-flex justify-content-center align-items-center mt-3 gap-3" id="pagination-controls">
+
+    <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+            data-page="@(Model.CurrentPage - 1)">
+        <i class="fa fa-arrow-left"></i>
+        Previous
+    </button>
+
+    <span class="text-muted fw-bold">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+    <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+            data-page="@(Model.CurrentPage + 1)">
+        Next
+        <i class="fa fa-arrow-right"></i>
+    </button>
+</div>

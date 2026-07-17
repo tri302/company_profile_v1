@@ -1,0 +1,981 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizerFactory Factory
+@{
+    var Localizer = Factory.Create("SharedResource", "company_profile");    
+}
+
+@using company_profile
+@model IndexHomeVM
+@{
+    ViewData["Title"] = "Home page";
+    Layout = "_FrontEndLayout";
+    // Fungsi untuk mengambil URL jika user terlanjur memasukkan tag iframe
+    string GetVideoUrl(string input)
+    {
+        if (string.IsNullOrEmpty(input)) return "";
+        if (input.Contains("src="))
+        {
+            // Mengambil isi di dalam atribut src="...."
+            int start = input.IndexOf("src=\"") + 5;
+            int end = input.IndexOf("\"", start);
+            return input.Substring(start, end - start);
+        }
+        return input; // Jika sudah murni URL
+    }
+}
+@functions {
+    public string StripHTML(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "<.*?>", String.Empty);
+    }
+}
+
+<!--Slider Start-->
+<div class="slider">
+    <div class="slide-carousel slider-one owl-carousel">
+        @if (Model?.BannerHome == null || !Model.BannerHome.Any())
+        {
+            @* Tampilan Default menggunakan komentar Razor agar tidak merusak DOM *@
+            <div class="slider-item flex" style="background-image:url('@Url.Content("~/uploads/no-image.png")');">
+                <div class="bg-slider"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-9 col-12">
+                            <div class="slider-text">
+                                <div class="text-animated">
+                                    <h1>Welcome to Our Company</h1>
+                                </div>
+                                <div class="text-animated">
+                                    <p>Your trusted partner for business solutions.</p>
+                                </div>
+                                <div class="text-animated">
+                                    <ul>
+                                        <li><a href="#">Read More</a></li>
+                                        <li><a href="#">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            foreach (var item in Model.BannerHome)
+            {
+                <div class="slider-item flex" style="background-image:url('@Url.Content(item.UrlGambar)');">
+                    <div class="bg-slider"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-9 col-12">
+                                <div class="slider-text">
+                                    <div class="text-animated">
+                                        <h1>@item.JudulTextAnimatedOnBanner</h1>
+                                    </div>
+                                    <div class="text-animated">
+                                        <p>@Html.Raw(@item.IsiTextAnimatedOnBanner)</p>
+                                    </div>
+                                    <div class="text-animated">
+                                        <ul>
+                                            <li><a href="#">Read More</a></li>
+                                            <li><a href="#">Contact Us</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<!--Slider End-->
+
+<!--About Start-->
+<div class="about-area pt_60 pb_90">
+    @if (Model.Home == null || !Model.Home.Any())
+    {
+        <!-- Tampilan Default jika data di database masih kosong -->
+        <span class="text-muted">Belum ada data tentang perusahaan yang ditambahkan.</span>
+    }
+    else
+    {
+        @foreach (var itemHome in Model.Home)
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mt_30">
+                        <div class="about-content">
+                            <div class="headline-left">
+                                <h2>
+                                    <span>
+                                        @itemHome.JudulAboutStart
+                                    </span>
+                                </h2>
+                            </div>
+                            <p>
+                                @Html.Raw(@itemHome.IsiAboutStart)
+                            </p>
+
+                            <div class="progress-gallery main-prog">
+                                <!-- Looping Progress Bar Dinamis -->
+                                @foreach (var itemBar in itemHome.ProgressBars)
+                                {
+                                    <div class="bar-container" style="margin-bottom: 20px;">
+                                        <p>@itemBar.Judul</p>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success progress-bar-custom" role="progressbar"
+                                                 aria-valuenow="@itemBar.Value" aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: @itemBar.Value%">
+                                            </div>
+                                        </div>
+                                        <div class="percentage-show">@itemBar.Value%</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sisi Kanan: Gambar Banner & Tombol Video -->
+                    <div class="col-lg-6 mt_30">
+                        <!-- Menggunakan UrlGambar secara dinamis dari database -->
+                        <div class="about-tab" style="background-image: url('/uploads/home/@itemHome.UrlGambar')">
+                           
+                            <div class="video-section">
+                                <div class="ratio ratio-16x9">
+                                    <iframe src="@GetVideoUrl(itemHome.EmbededUrlVidio)"
+                                            title="YouTube video player"
+                                            frameborder="0"
+                                            allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Modal-Box Start (ID dibuat dinamis agar tidak bentrok jika data Home lebih dari satu)-->
+            <div class="video-modal">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="video-box bg-area">
+                                <div class="modal fade in" id="videoModal-@itemHome.Id" role="dialog">
+                                    <div class="modal-dialog hb-style">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="download-video">
+                                                    <div style="position:relative;height:0;padding-bottom:56.21%">
+                                                        <!-- Menggunakan EmbededUrlVidio dari database -->
+                                                        <iframe src="@itemHome.EmbededUrlVidio"
+                                                                style="position:absolute;width:100%;height:100%;left:0" width="480"
+                                                                height="360" allowfullscreen></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Modal-Box End-->
+        }
+    }
+</div>
+<!--About End-->
+
+<!--Choose-Area Start-->
+<div class="choose-area pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <!-- Judul Utama & Subjudul Statis / Bisa Diambil dari Model Lain -->
+                    <h2>@Localizer["why"]</h2>
+                    <h3>@Localizer["whyisi"]</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.WhyChooseUs == null || !Model.WhyChooseUs.Any())
+            {
+                <!-- Tampilan Default jika data di database masih kosong -->
+                <div class="col-12 text-center">
+                    <p>Belum ada data untuk di tampilkan.</p>
+                </div>
+            }
+            else
+            {
+                <!-- Menggunakan Select dengan Index untuk mendeteksi urutan data (0, 1, 2, dst) -->
+                @foreach (var (itemChoose, index) in Model.WhyChooseUs.Select((item, index) => (item, index)))
+                {
+                    // Menentukan icon statis berdasarkan urutan baris data
+                    var currentIcon = index == 0 ? "fa-clock-o" :
+                    index == 1 ? "fa-thumbs-up" :
+                    "fa-globe";
+
+                    // Menentukan background image statis berdasarkan urutan baris data
+                    @* var currentBg = index == 0 ? "why-choose-1.png" : *@
+                    @* index == 1 ? "why-choose-7.png" : *@
+                    @* "why-choose-8.png"; *@
+
+                    <div class="col-lg-4">
+                        <div class="choose-item flex" style="background-image: url('@itemChoose.UrlGambar')">
+                            <div class="choose-icon">
+                                <!-- Ikon disuntikkan secara dinamis berdasarkan urutan nomor indeks -->
+                                <i class="fa @currentIcon" aria-hidden="true"></i>
+                            </div>
+                            <div class="choose-text">
+                                <h4>@itemChoose.JudulWhyChooseUs.ToUpper()</h4>
+                                <p>
+                                   @Html.Raw(@itemChoose.IsiContentWhyChooseUs)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!--Choose-Area End-->
+
+<!--Feature-Area Start-->
+<div class="feature-area feature-two bg-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>@Localizer["Special"]</h2>
+                    <h3>@Localizer["SpecialIsi"]</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.SpecialFeatures == null || !Model.SpecialFeatures.Any())
+            {
+                <!-- Tampilan Default jika data di database masih kosong -->
+                <div class="col-12 text-center">
+                    <p>Belum ada data untuk di tampilkan.</p>
+                </div>
+            }
+            else
+            {
+                <!-- Looping data dengan mendeteksi index urutan untuk variasi icon -->
+                @foreach (var (itemFeature, index) in Model.SpecialFeatures.Select((item, index) => (item, index)))
+                {
+                    // Menentukan icon secara bergantian berdasarkan index data
+                    // Menggunakan rumus % 6 agar jika data > 6, urutan icon kembali ke awal (tidak out of bounds)
+                    var iconIndex = index % 6;
+                    var currentIcon = iconIndex == 0 ? "fa-globe" :
+                    iconIndex == 1 ? "fa-file-text" :
+                    iconIndex == 2 ? "fa-clock-o" :
+                    iconIndex == 3 ? "fa-shield" :
+                    iconIndex == 4 ? "fa-commenting" :
+                    "fa-bullhorn";
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <!-- Icon statis otomatis dari sistem -->
+                                <i class="fa @currentIcon" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>@itemFeature.JudulSpecialFeatures.ToUpper()</h4>
+                                <p>
+                                   @Html.Raw(@itemFeature.IsiContentSpecialFeatures)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!--Feature-Area End-->
+<!--Services Start-->
+<div class="services-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>@Localizer["OurServices"]</h2>
+                    <h3>@Localizer["OurServicesIsi"]</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.OurServices == null || !Model.OurServices.Any())
+            {
+                <!-- Tampilan Default jika data di database masih kosong -->
+                <div class="col-12 text-center">
+                    <p>Belum ada data layanan yang ditambahkan.</p>
+                </div>
+            }
+            else
+            {
+                @foreach (var item in Model.OurServices)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="services-item effect-item">
+                            <a href="#" class="image-effect">
+                                <div class="services-photo" style="background-image: url('@Url.Content(item.UrlGambar)');">
+                                </div>
+                            </a>
+                            <div class="services-text">
+                                <h3>@item.JudulService</h3>
+                                <p>
+                                    @* Batasi 100 karakter untuk deskripsi singkat *@
+                                    @Html.Raw(@item.IsiService.Length > 100 ? @item.IsiService.Substring(0, 100) + "..." :
+                                             @item.IsiService)
+                                </p>
+                                <div class="button-bn">
+                                    <a asp-action="ServiceDetail" asp-route-id="@item.IDOurServices">
+                                        Read More
+                                        <i class="fa fa-chevron-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!--Services End-->
+<!--Counter-Area Start-->
+<div class="counterup-area pt_60 pb_90" style="background-image: url('@Url.Content("~/uploads/achivement.png")')">
+    <div class="bg-counterup"></div>
+    <div class="container">
+        <div class="row">
+            @{
+                // Menyediakan daftar ikon fallback agar tampilan ikon di setiap kolom bervariasi
+                var icons = new[] { "fa-user", "fa-bar-chart", "fa-users", "fa-trophy", "fa-thumbs-up",
+            "fa-briefcase" };
+            }
+
+            @if (Model.Achievements != null && Model.Achievements.Any())
+            {
+                @foreach (var (itemCounter, index) in Model.Achievements.Select((item, index) => (item, index)))
+                {
+                    // Pilih ikon berdasarkan sisa hasil bagi (modulo) dari jumlah ikon yang tersedia
+                    var currentIcon = icons[index % icons.Length];
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="counter-item flex">
+                            <!-- Ikon dinamis berdasarkan urutan data -->
+                            <i class="fa @currentIcon" aria-hidden="true"></i>
+
+                            <!-- Angka counter dari properti IsiContentCounter -->
+                            <h2 class="counter">@itemCounter.IsiContentCounter</h2>
+
+                            <!-- Judul counter dari database (misal: Projects, Clients, dll) -->
+                            <h4>@itemCounter.JudulCounter</h4>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <!-- Tampilan Default jika data di database masih kosong -->
+                <div class="col-12 text-center text-white">
+                    <p>Belum ada data pencapaian yang ditambahkan.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!--Counter-Area End-->
+<!--Portfolio Start-->
+<div class="portfolio-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>@Localizer["Work"]</h2>
+                    <h3>@Localizer["WorkIsi"]</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="portfolio-menu">
+                    <ul id="filtrnav">
+                        <li class="filtr filtr-active" data-filter="all">All</li>
+                        @* Tambahkan OrderBy di sini *@
+                        @foreach (var kategori in Model.Portfolio.Select(x => x.Judul).Distinct().OrderBy(x => x))
+                        {
+                            // Cari ID pertama yang cocok dengan judul/kategori ini untuk data-filter
+                            var idFilter = Model.Portfolio.First(x => x.Judul == kategori).IDPortfolio;
+                            <li class="filtr" data-filter="@idFilter">@kategori</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row filtr-container">
+            @foreach (var item in Model.Portfolio)
+            {
+                <div class="col-lg-4 col-md-6 filtr-item" data-category="@item.IDPortfolio" data-sort="Menu">
+                    <div class="portfolio-group">
+                        <div class="portfolio-photo" style="background-image:url('@Url.Content("~" + item.UrlGambar)');">
+                            <div class="portfolio-bg"></div>
+                            <div class="portfolio-table">
+                                <div class="portfolio-icon">
+                                    <a href="@Url.Content("~" + item.UrlGambar)" class="magnific">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-text">
+                        <h3>
+                            <a asp-action="PortfolioDetail" asp-route-id="@item.IDPortfolio">@item.Judul</a>
+                        </h3>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!--Portfolio End-->
+<!--Team-Area Start-->
+<div class="team-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>@Localizer["OurTeam"]</h2>
+                    <h3>@Localizer["OurTeamIsi"]</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="team-carousel owl-carousel">
+                    @if (Model?.Team != null && Model.Team.Any())
+                    {
+                        foreach (var item in Model.Team)
+                        {
+                            <div class="team-item">
+                                <div class="team-photo">
+                                    <!-- Menggunakan UrlGambar dari database, berikan fallback jika null -->
+                                    <img src="@(string.IsNullOrEmpty(item.UrlGambar) ? Url.Content("~/uploads/default-team.png") : Url.Content(item.UrlGambar))"
+                                         alt="@item.Nama">
+                                </div>
+                                <div class="team-text">
+                                    <a asp-action="DetailTeamMember" asp-route-idTeam="@item.IDTeam" target="_blank">
+                                        @item.Nama
+                                    </a>
+                                    <p>@item.Jabatan</p>
+                                </div>
+                                <div class="team-social">
+                                    <ul>
+                                        @if (!string.IsNullOrEmpty(item.UrlFb))
+                                        {
+                                            <li>
+                                                <a href="@item.UrlFb" target="_blank"><i class="fa fa-facebook"></i></a>
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.UrlTwiter))
+                                        {
+                                            <li>
+                                                <a href="@item.UrlTwiter" target="_blank"><i class="fa fa-twitter"></i></a>
+                                            </li>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.UrlLinkedIn))
+                                        {
+                                            <li><a href="@item.UrlLinkedIn" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.UrlYoutube))
+                                        {
+                                            <li>
+                                                <a href="@item.UrlYoutube" target="_blank"><i class="fa fa-youtube"></i></a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 text-center">
+                            <p>Belum ada data anggota tim untuk ditampilkan.</p>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Team-Area End-->
+<!--Price-Table Start-->
+<div class="price-area bg-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>@Localizer["Harga"]</h2>
+                    <h3>@Localizer["HargaIsi"]</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if (!Model.Pricing.Any())
+            {
+                <p>No pricing options available.</p>
+            }
+            else
+            {
+                @foreach (var item in Model.Pricing)
+                {
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="price-item">
+                            <div class="price-header">
+                                <i class="fa fa-shield" aria-hidden="true"></i>
+                                <h3>@item.JenisLayanan</h3>
+                                <h2>@string.Format(new System.Globalization.CultureInfo("id-ID"), "Rp {0:N0}", item.Harga)</h2>
+                            </div>
+                            <div class="price-body">
+                                @Html.Raw(item.DeskripsiJenisLayanan)
+                            </div>
+                            <div class="price-footer">
+                                <div class="button-df">
+                                    <a href="#">Choose Us <i class="fa fa-chevron-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!--Price-Table End-->
+<!--Testomonial-Area Start-->
+<div class="testimonial-area pt_90 pb_90"
+     style="background-image:url('@Url.Content("~/uploads/home_testimonial_photo.png")');">
+    <div class="bg-testimonial"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline hl-white">
+                    <h2>@Localizer["OurClient"]</h2>
+                    <h3>@Localizer["OurClientIsi"]</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="testimonial-carousel owl-carousel mt-30">
+                    <!-- Sesuaikan "Model.PortfolioList" dengan nama properti List<PortfolioVM> di ViewModel utama Anda -->
+                    @if (Model?.Portfolio != null && Model.Portfolio.Any())
+                    {
+                        foreach (var item in Model.Portfolio)
+                        {
+                            <!-- Mengabaikan data portfolio yang tidak memiliki komentar klien -->
+                            if (!string.IsNullOrEmpty(item.ClientComment))
+                            {
+                                <div class="testimonial-item">
+                                    <div class="testimonial-photo">
+                                        <!-- Menggunakan UrlGambar/UrlFotoProject, berikan fallback gambar default jika data kosong -->
+                                        <img src="@(string.IsNullOrEmpty(item.UrlGambar) ? Url.Content("~/uploads/default-client.png") : Url.Content(item.UrlGambar))"
+                                             alt="@item.ClientName">
+                                    </div>
+                                    <div class="testimonial-name">
+                                        <h4>@item.ClientName</h4>
+                                        <p>@item.ClientCompanyName</p>
+                                    </div>
+                                    <div class="testimonial-description">
+                                        <p>@Html.Raw(@item.ClientComment)</p>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <!-- Fallback item statis sederhana jika database masih kosong agar carousel tidak pecah -->
+                        <div class="testimonial-item">
+                            <div class="testimonial-name">
+                                <h4>No Client Testimonial</h4>
+                                <p>Belum ada testimoni dari klien yang dapat di tampilkan.</p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Testomonial-Area End-->
+<!--Blog-Area Start-->
+<div class="blog-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>@Localizer["LatesNews"]</h2>
+                    <h3>@Localizer["LatesNewsIsi"]</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="blog-carousel owl-carousel">
+                    @if (Model?.News != null && Model.News.Any())
+                    {
+                        foreach (var item in Model.News)
+                        {
+                            // Menghitung ringkasan konten (Max 150 karakter)
+                            var cleanText = StripHTML(item.IsiContent ?? "");
+                            var ringkasanKonten = cleanText.Length > 150 ? cleanText.Substring(0, 150) + "..." : cleanText;
+
+                            <div class="blog-item effect-item">
+                                <a asp-controller="Company" asp-action="NewsDetail" asp-route-id="@item.IDNews"
+                                   class="image-effect">
+                                    <!-- Menggunakan inline style untuk background-image dari database dengan fallback jika null -->
+                                    <div class="blog-image"
+                                         style="background-image: url('@(string.IsNullOrEmpty(item.UrlGambar) ? Url.Content("~/uploads/default-news.png") : Url.Content(item.UrlGambar))');">
+                                    </div>
+                                </a>
+
+                                <div class="blog-text">
+                                    <h3>
+                                        <a asp-controller="Company" asp-action="NewsDetail"
+                                           asp-route-id="@item.IDNews">@item.Judul</a>
+                                    </h3>
+                                    <span><i class="fa fa-calendar-o"></i> @item.CreateAt.ToString("MMM dd, yyyy")</span>
+                                    <p>@ringkasanKonten</p>
+                                </div>
+
+                                <div class="blog-author">
+                                    <ul>
+                                        <li>
+                                            <a asp-action="NewsByCategory" asp-route-NamaKategori="@item.NamaKategori" asp-controller="Company">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                                @(string.IsNullOrEmpty(item.NamaKategori) ? "Uncategorized" : item.NamaKategori)
+                                            </a>
+                                        </li>
+                                        <li class="blog-button">
+                                            <a asp-controller="Company" asp-action="NewsDetail" asp-route-id="@item.IDNews">
+                                                <i class="fa fa-long-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 text-center">
+                            <p>Belum ada artikel atau berita terbaru.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Blog-Area End-->
+<!--Brand-Area Start-->
+<div class="brand-area bg-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="brand-carousel owl-carousel">
+                    @if (Model?.SliderFooterHome != null && Model.SliderFooterHome.Any())
+                    {
+                        foreach (var brand in Model.SliderFooterHome)
+                        {
+                            // Perbaikan syntax string dan pengecekan properti di sini
+                            string pathGambar = string.IsNullOrEmpty(brand.UrlImage)
+                            ? "~/uploads/no-image.png"
+                            : "~/uploads/sliders/" + brand.UrlImage;
+
+                            <div class="brand-item">
+                                <img src="@Url.Content(pathGambar)" alt="Brand Partner @brand.Id">
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="brand-item">
+                            <img src="@Url.Content("~/uploads/no-image.png")" alt="Client Default">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Brand-Area End-->
+
+<!--Booking-Area Start-->
+<div class="booking-area pt_60 pb_90" style="background-image: url('@Url.Content("~/uploads/contactformimg.png")')">
+    <div class="bg-booking"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="booking-gallery">
+                    <div class="headline hl-white hl-left">
+                        <h2>@Localizer["BookingForm"]</h2>
+                    </div>
+                    <div class="booking-form pt_30">
+                        <!-- Tambahkan ID pada form -->
+                        <form id="contactForm" action="/UserContacted/Create" method="post" accept-charset="utf-8">
+                            @Html.AntiForgeryToken()
+                            <!-- Pastikan Token ini ada jika tidak pakai tag helper form asli ASP.NET -->
+
+                            <div class="form-row row">
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.Name" type="text" class="form-control"
+                                           placeholder="Name" />
+                                    <span id="error_ContactForm_Name" class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.PhoneNumber" type="text" class="form-control"
+                                           placeholder="Phone Number" />
+                                    <span id="error_ContactForm_PhoneNumber"
+                                          class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.EmailAddress" type="email" class="form-control"
+                                           placeholder="Email Address" />
+                                    <span id="error_ContactForm_EmailAddress"
+                                          class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.Subject" type="text" class="form-control"
+                                           placeholder="Subject Email" />
+                                    <span id="error_ContactForm_Subject" class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-12">
+                                    <textarea asp-for="ContactForm.Pesan" class="form-control"
+                                              placeholder="Pesan Email"></textarea>
+                                    <span id="error_ContactForm_Pesan" class="text-danger-ajax text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <div class="captcha-section-1">
+                                        <label><strong id="questionText">@ViewBag.CaptchaQuestion</strong></label>
+                                    </div>
+                                    <div class="captcha-section-2">
+                                        <input type="number" name="userCaptcha" id="userCaptchaInput"
+                                               class="form-control" required autocomplete="off" />
+                                    </div>
+                                    <b>
+                                        <span id="error_userCaptcha" class="text-danger-ajax text-danger ml-2"></span>
+                                    </b>
+                                </div>
+                                <div class="form-button">
+                                    <button type="submit" class="btn" name="form_portfolio">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Area tetap sama seperti kode Anda -->
+            <div class="col-lg-6">
+                <!-- ... bagian FAQ ... -->
+                <div class="container">
+                    <div class="headline hl-white hl-left">
+                        <h2>@Localizer["Tanya"]</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="faq-group headstyle mt-30">
+                                <div id="accordion">
+                                    @if (Model?.Faq == null || !Model.Faq.Any())
+                                    {
+                                        <div class="faq-item card">
+                                            <div class="faq-body">
+                                                <p>Belum ada pertanyaan yang tersedia.</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        var index = 0;
+                                        foreach (var item in Model.Faq)
+                                        {
+                                            var headingId = $"heading{index}";
+                                            var collapseId = $"collapse{index}";
+                                            var isFirst = index == 0;
+
+                                            <div class="faq-item card">
+                                                <div class="faq-header" id="@headingId">
+                                                    <button class="faq-button @(isFirst ? "" : "collapsed")"
+                                                            data-bs-toggle="collapse" data-bs-target="#@collapseId"
+                                                            aria-expanded="@(isFirst.ToString().ToLower())"
+                                                            aria-controls="@collapseId">
+                                                        <i class="fa fa-caret-right"></i>
+                                                        @item.JudulFaq
+                                                    </button>
+                                                </div>
+
+                                                <div id="@collapseId" class="collapse @(isFirst ? "show" : "")"
+                                                     aria-labelledby="@headingId" data-parent="#accordion">
+                                                    <div class="faq-body">
+                                                        <p>@Html.Raw(item.IsiFaq)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            index++;
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Booking-Area End-->
+
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Pastikan ID selector di bawah ini (#contactForm) SAMA dengan id di tag <form id="contactForm"> Anda
+            $("#contactForm").on("submit", function (e) {
+                e.preventDefault(); // Menghentikan reload halaman bawaan browser
+                // Bersihkan pesan error lama sebelum request baru dikirim
+                $(".text-danger-ajax").text("");
+                var form = $(this);
+                // Ambil URL dari atribut action form, atau set langsung manual jika action-nya masih '#'
+                var actionUrl = form.attr("action");
+                if (actionUrl === "#" || actionUrl === "") {
+                    actionUrl = "/Company/Home"; // Sesuaikan dengan Route / Controller terget Anda
+                }
+                var formData = form.serialize();
+                $.ajax({
+                    url: actionUrl,
+                    type: "POST",
+                    data: formData,
+                    success: function (response) {
+                        // 1. Selalu perbarui pertanyaan captcha secara realtime jika ada kiriman soal baru dari server
+                        if (response.newCaptchaQuestion) {
+                            $("#questionText").text(response.newCaptchaQuestion);
+                        }
+                        // 2. Jika Server merespon sukses (Data tersimpan & Captcha benar)
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses!',
+                                text: response.message,
+                                position: 'top',
+                                timer: 5000, // Waktu tampil pesan (5 detik)
+                                showConfirmButton: false
+                            });
+                            form[0].reset(); // Kosongkan isi semua input form
+                        }
+                        // 3. Jika Server merespon gagal (Captcha salah atau validasi model state gagal)
+                        else {
+                            if (response.errors) {
+                                $.each(response.errors, function (key, value) {
+                                    // Antisipasi nama properti complex (cth: ContactForm.Name menjadi ContactForm_Name)
+                                    var cleanKey = key.replace(/\./g, '_');
+                                    // Cari span error berdasarkan ID bawaan atau ID kustom Anda
+                                    var elementId = "#error_" + cleanKey;
+                                    // Jika tidak ketemu, coba cari span yang menggunakan asp-validation-for bawaan ASP.NET
+                                    if ($(elementId).length === 0) {
+                                        // Mencari span berdasarkan atribut name properti yang error
+                                        $("[asp-validation-for='ContactForm." + key + "']").text(value);
+                                        $("[asp-validation-for='" + key + "']").text(value);
+                                    } else {
+                                        $(elementId).text(value);
+                                    }
+                                });
+                            }
+                            // Kosongkan field input captcha yang salah agar user bisa isi ulang
+                            $("#userCaptchaInput").val("");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Terjadi kesalahan saat mengirim data. Silakan coba lagi.',
+                            position: 'top',
+                            timer: 5000,
+                            showConfirmButton: false
+                        });
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Hancurkan instansiasi lama jika sempat macet
+            var $slider = $('.slide-carousel');
+            if ($slider.hasClass('owl-loaded')) {
+                $slider.owlCarousel('destroy');
+            }
+
+            // Inisialisasi ulang secara paksa setelah DOM siap
+            $slider.owlCarousel({
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                animateOut: 'fadeOut',
+                animateIn: 'fadeIn',
+                items: 1,
+                nav: true,
+                dots: true,
+                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+            });
+        });
+    </script>
+    <script>
+                $(".btn-play-video").click(function () {
+                let rawData = $(this).data("url"); // Ini berisi string iframe lengkap
+                let videoUrl = "";
+
+                // Cek apakah data berisi tag iframe atau hanya URL biasa
+                if (rawData.includes("<iframe")) {
+                                                 // Ekstrak URL dari atribut src di dalam string iframe
+                                                 let match=rawData.match(/src ="([^" ]+)" /);
+                                             videoUrl=match ? match[1] : rawData;
+                                             } else {
+                                             videoUrl=rawData;
+                                             }
+                                             // Set source iframe modal
+                                             $("#videoIframe").attr("src", videoUrl);
+        });
+    </script>
+}

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<company_profile.KategoriVM>
+
+@{
+    // Menangkap nilai 'category' dari URL (jika ada)
+    var selectedCategory = ViewContext.HttpContext.Request.Query["category"].ToString();
+}
+
+<select name="category" class="form-control">
+    <option value="">All Categories</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.NamaKategori" selected="@(selectedCategory == item.NamaKategori)">
+            @item.NamaKategori
+        </option>
+    }
+</select>

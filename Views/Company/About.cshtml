@@ -1,0 +1,37 @@
+﻿@using company_profile
+@model AboutVM
+@{
+    ViewData["Title"] = "About page";
+    Layout = "_FrontEndLayout";
+}
+
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "About Page" })
+<!--Banner End-->
+<!--About Start-->
+<div class="about-page pt_60 pb_30">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @if (Model != null && !string.IsNullOrEmpty(Model.IsiContent))
+                {
+                    // Menampilkan isi content jika ada
+                    @Html.Raw(Model.IsiContent)
+                }
+                else
+                {
+                    // Tampilan Alert Bootstrap yang rapi jika data kosong
+                    <div class="alert alert-warning text-center my-5" role="alert">
+                        <i class="fa fa-info-circle mr-2"></i>
+                        <strong>Informasi Belum Tersedia!</strong>
+                        <p class="mb-0 mt-2">Maaf, konten untuk halaman About Us saat ini sedang dalam proses pembaruan.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--About End-->
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->

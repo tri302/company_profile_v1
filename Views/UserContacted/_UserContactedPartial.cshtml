@@ -1,0 +1,68 @@
+﻿@model company_profile.ContactFormVM
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nama User</th>
+                    <th>Phone Number</th>
+                    <th>Email Address</th>
+                    <th>Subject</th>
+                    <th>Pesan</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model == null || !Model.List.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center">No User contacted available.</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var item in Model.List)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.EmailAddress</td>
+                            <td>@item.Subject</td>
+                            <td>
+                                @(string.IsNullOrEmpty(item.Pesan) ? "-" : (item.Pesan.Length > 20 ? item.Pesan.Substring(0,
+                                    20) + "..." : item.Pesan))
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a asp-action="Detail" asp-route-id="@item.Id" asp-controller="UserContacted"
+                                       class="btn btn-sm btn-info btn-sm">
+                                        <i class="fa fa-eye"></i> Show Details
+                                    </a>
+                                    <button type="button" onclick="deleteData(@item.Id)"
+                                            class="btn btn-sm btn-danger btn-sm">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-3 gap-3" id="pagination-controls">
+    <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+            data-page="@(Model.CurrentPage - 1)">
+        <i class="fa fa-arrow-left"></i>
+        Previous
+    </button>
+
+    <span class="text-muted fw-bold">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+    <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+            data-page="@(Model.CurrentPage + 1)">
+        Next
+        <i class="fa fa-arrow-right"></i>
+    </button>
+</div>

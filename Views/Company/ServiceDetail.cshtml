@@ -1,0 +1,190 @@
+﻿@using company_profile;
+@model OurServicesVM;
+@{
+    ViewData["Title"] = "Service Details";
+    Layout = "_FrontEndLayout";
+}
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "Service Page" })
+<!--Banner End-->
+
+<!--Single-Service Start-->
+<div class="single-service-area pt_60 pb_90">
+    <div class="container">
+        <div class="row">
+
+            <!-- LEFT CONTENT -->
+            <div class="col-lg-8">
+                <div class="service-info">
+
+                    <!-- CAROUSEL -->
+                    <div class="single-ser-carousel owl-carousel">
+
+                        <div class="event-photo-item">
+                            <img src="@Url.Content(Model.UrlGambar ?? "~/uploads/default.png")" alt="Service Photo">
+                        </div>
+
+                    </div>
+
+                    <!-- TITLE -->
+                    <h2>@Model.JudulService</h2>
+
+                    <!-- CONTENT -->
+                    <div class="service-text">
+                        @Html.Raw(Model.IsiService)
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <div class="col-lg-4">
+                <div class="service-sidebar">
+
+                    <!-- OUR SERVICES -->
+                    <div class="service-sidebar-item headstyle">
+                        <h4>Our Services</h4>
+                        <ul>
+                            @foreach (var item in Model.ListOurServices)
+                            {
+                                <li>
+                                    <a asp-action="ServiceDetail" asp-route-id="@item.IDOurServices">
+                                        @item.JudulService
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    <!-- QUICK CONTACT -->
+                    <div class="service-sidebar-item headstyle">
+                        <h4>Quick Contact</h4>
+                        <form id="contactForm" action="/UserContacted/Create" method="post" accept-charset="utf-8">
+                            @Html.AntiForgeryToken()
+                            <!-- Pastikan Token ini ada jika tidak pakai tag helper form asli ASP.NET -->
+                            <div class="form-row row">
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.Name" type="text" class="form-control"
+                                           placeholder="Name" />
+                                    <span id="error_ContactForm_Name" class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.PhoneNumber" type="text" class="form-control"
+                                           placeholder="Phone Number" />
+                                    <span id="error_ContactForm_PhoneNumber"
+                                          class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.EmailAddress" type="email" class="form-control"
+                                           placeholder="Email Address" />
+                                    <span id="error_ContactForm_EmailAddress"
+                                          class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input asp-for="ContactForm.Subject" type="text" class="form-control"
+                                           placeholder="Subject Email" />
+                                    <span id="error_ContactForm_Subject" class="text-danger-ajax text-danger"></span>
+                                </div>
+                                <div class="form-group col-12">
+                                    <textarea asp-for="ContactForm.Pesan" class="form-control"
+                                              placeholder="Pesan Email"></textarea>
+                                    <span id="error_ContactForm_Pesan" class="text-danger-ajax text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <div class="captcha-section-1">
+                                        <label><strong id="questionText">@ViewBag.CaptchaQuestion</strong></label>
+                                    </div>
+                                    <div class="captcha-section-2">
+                                        <input type="number" name="userCaptcha" id="userCaptchaInput"
+                                               class="form-control" required autocomplete="off" />
+                                    </div>
+                                    <span id="error_userCaptcha" class="text-danger-ajax text-danger ml-2"></span>
+                                </div>
+                                <div class="form-button">
+                                    <button type="submit" class="btn" name="form_portfolio">Submit</button>
+                                </div>                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/sweetalert2@11.js"></script>
+
+    <script>
+        $(document).ready(function () {
+        // Pastikan ID selector di bawah ini (#contactForm) SAMA dengan id di tag <form id="contactForm"> Anda
+        $("#contactForm").on("submit", function (e) {
+        e.preventDefault(); // Menghentikan reload halaman bawaan browser
+        // Bersihkan pesan error lama sebelum request baru dikirim
+        $(".text-danger-ajax").text("");
+        $("#captchaError").text("");
+        var form = $(this);
+        // Ambil URL dari atribut action form, atau set langsung manual jika action-nya masih '#'
+        var actionUrl = form.attr("action");
+        if (actionUrl === "#" || actionUrl === "") {
+        actionUrl = "/Company/Portfolio"; // Sesuaikan dengan Route / Controller terget Anda
+        }
+        var formData = form.serialize();
+        $.ajax({
+        url: actionUrl,
+        type: "POST",
+        data: formData,
+        success: function (response) {
+        // 1. Selalu perbarui pertanyaan captcha secara realtime jika ada kiriman soal baru dari server
+        if (response.newCaptchaQuestion) {
+        $("#questionText").text(response.newCaptchaQuestion);
+        }
+        // 2. Jika Server merespon sukses (Data tersimpan & Captcha benar)
+        if (response.success) {
+        Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: response.message,
+        position: 'top',
+        timer: 5000, // Waktu tampil pesan (5 detik)
+        showConfirmButton: false
+        });
+        form[0].reset(); // Kosongkan isi semua input form
+        }
+        // 3. Jika Server merespon gagal (Captcha salah atau validasi model state gagal)
+        else {
+        if (response.errors) {
+        $.each(response.errors, function (key, value) {
+        // Antisipasi nama properti complex (cth: ContactForm.Name menjadi ContactForm_Name)
+        var cleanKey = key.replace(/\./g, '_');
+        // Cari span error berdasarkan ID bawaan atau ID kustom Anda
+        var elementId = "#error_" + cleanKey;
+        // Jika tidak ketemu, coba cari span yang menggunakan asp-validation-for bawaan ASP.NET
+        if ($(elementId).length === 0) {
+        // Mencari span berdasarkan atribut name properti yang error
+        $("[asp-validation-for='ContactForm." + key + "']").text(value);
+        $("[asp-validation-for='" + key + "']").text(value);
+        } else {
+        $(elementId).text(value);
+        }
+        });
+        }
+        // Kosongkan field input captcha yang salah agar user bisa isi ulang
+        $("#userCaptchaInput").val("");
+        }
+        },
+        error: function (xhr, status, error) {
+        alert("Terjadi kesalahan sistem pada AJAX request.");
+        console.error(xhr.responseText);
+        }
+        });
+        });
+        });
+    </script>
+}

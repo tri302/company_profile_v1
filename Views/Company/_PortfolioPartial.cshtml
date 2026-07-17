@@ -1,0 +1,73 @@
+﻿@using company_profile
+@model PortfolioVM
+<!--Portfolio Start-->
+<div class="portfolio-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>WORK PORTFOLIO</h2>
+                    <h3>See what we do for our valuable clients</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="portfolio-menu">
+                    <ul id="filtrnav">
+                        <li class="filtr filtr-active" data-filter="all">All</li>
+                        @* Mengambil kategori unik dari Model.List *@
+                        @foreach (var kategori in Model.List.Select(x => x.Judul).Distinct().OrderBy(x => x))
+                        {
+                            var idFilter = Model.List.First(x => x.Judul == kategori).IDPortfolio;
+                            <li class="filtr" data-filter="@idFilter">@kategori</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row filtr-container">
+            @* Mengulang item dari Model.List *@
+            @foreach (var item in Model.List)
+            {
+                <div class="col-lg-4 col-md-6 filtr-item" data-category="@item.IDPortfolio" data-sort="Menu">
+                    <div class="portfolio-group">
+                        <div class="portfolio-photo" style="background-image:url('@Url.Content("~" + item.UrlGambar)');">
+                            <div class="portfolio-bg"></div>
+                            <div class="portfolio-table">
+                                <div class="portfolio-icon">
+                                    <a href="@Url.Content("~" + item.UrlGambar)" class="magnific">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-text">
+                        <h3>
+                            <a asp-action="PortfolioDetail" asp-route-id="@item.IDPortfolio">@item.Judul</a>
+                        </h3>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center align-items-center mt-4" id="pagination-controls">
+                <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+                        data-page="@(Model.CurrentPage - 1)">
+                    <i class="fa fa-arrow-left"></i> Previous
+                </button>
+
+                <span class="text-muted fw-bold mx-4">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+                <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+                        data-page="@(Model.CurrentPage + 1)">
+                    Next <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Portfolio End-->

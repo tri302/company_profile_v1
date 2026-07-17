@@ -1,0 +1,35 @@
+﻿@using company_profile
+@model TeamVM
+@{
+    ViewData["Title"] = "Team page";
+    Layout = "_FrontEndLayout";
+}
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "Team Page" })
+<!--Banner End-->
+<div id="table-container">
+    <partial name="_TeamPartial" model="Model" />
+</div>
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->
+@section Scripts {    
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedDataTeam", "Company")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Gagal memuat halaman: ", error);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,129 @@
+@model SpecialFeaturesVM
+
+@{
+    ViewData["Title"] = "Ubah Special Feature";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .ck-editor__editable_inline {
+        min-height: 250px;
+    }
+</style>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4 justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning text-dark py-3">
+                    <h5 class="mb-0"><i class="fa fa-edit me-2"></i>Ubah Special Feature</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post" id="editFeatureForm">
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <ul class="nav nav-tabs mb-4" id="langTabs" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active" id="id-tab" data-bs-toggle="tab" data-bs-target="#id-pane" type="button">🇮🇩 Bahasa Indonesia</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="en-tab" data-bs-toggle="tab" data-bs-target="#en-pane" type="button">🇺🇸 English Content</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="langTabContent">
+                            <div class="tab-pane fade show active" id="id-pane" role="tabpanel">
+                                <div class="mb-3">
+                                    <label asp-for="JudulSpecialFeatures_ID" class="form-label fw-bold"></label>
+                                    <input asp-for="JudulSpecialFeatures_ID" class="form-control" />
+                                    <span asp-validation-for="JudulSpecialFeatures_ID" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiContentSpecialFeatures_ID" class="form-label fw-bold"></label>
+                                    <textarea asp-for="IsiContentSpecialFeatures_ID" id="editor_id" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="IsiContentSpecialFeatures_ID" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="en-pane" role="tabpanel">
+                                <div class="mb-3">
+                                    <label asp-for="JudulSpecialFeatures_EN" class="form-label fw-bold"></label>
+                                    <input asp-for="JudulSpecialFeatures_EN" class="form-control" />
+                                    <span asp-validation-for="JudulSpecialFeatures_EN" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiContentSpecialFeatures_EN" class="form-label fw-bold"></label>
+                                    <textarea asp-for="IsiContentSpecialFeatures_EN" id="editor_en" class="form-control" rows="5"></textarea>
+                                    <span asp-validation-for="IsiContentSpecialFeatures_EN" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between border-top pt-3 mt-3">
+                            <a asp-action="Index" class="btn btn-secondary btn-sm">
+                                <i class="fa fa-arrow-left"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-success btn-sm">
+                                <i class="fa fa-save"></i> Simpan Perubahan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    
+    <script>
+        // Logika untuk menyoroti tab yang error saat form dikirim
+        $('#editFeatureForm').on('submit', function() {
+            if (!$(this).valid()) {
+                $('.tab-pane').each(function() {
+                    if ($(this).find('.input-validation-error').length > 0) {
+                        let id = $(this).attr('id');
+                        $(`button[data-bs-target="#${id}"]`).addClass('text-danger');
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Pastikan CKEditor sudah dimuat di window
+            if (typeof ClassicEditor !== 'undefined') {
+                const targetEditors = ['#editor_id', '#editor_en'];
+
+                targetEditors.forEach(selector => {
+                    const editorElement = document.querySelector(selector);
+
+                    if (editorElement) {
+                        ClassicEditor
+                            .create(editorElement)
+                            .then(editor => {
+                                // Update field asli saat ada perubahan
+                                editor.model.document.on('change:data', () => {
+                                    editorElement.value = editor.getData();
+                                    // Validasi jika menggunakan jQuery Validate
+                                    if (typeof $ !== 'undefined' && $.fn.valid) {
+                                        $(editorElement).valid();
+                                    }
+                                });
+                            })
+                            .catch(error => {
+                                console.error('CKEditor Gagal Inisialisasi pada ' + selector, error);
+                            });
+                    }
+                });
+            } else {
+                console.error('CKEditor library tidak ditemukan.');
+            }
+        });
+            // 3. Konfigurasi Validasi jQuery agar tidak mengabaikan elemen hidden (textarea bawaan CKEditor)
+            if ($.validator) {
+                $.validator.setDefaults({ ignore: [] });
+            }
+    </script>
+}

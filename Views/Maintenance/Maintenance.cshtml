@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null; // Gunakan layout kosong atau custom layout agar tidak terganggu navbar/footer
+    ViewData["Title"] = "Sedang dalam Pemeliharaan";
+}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #2d3436;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #636e72;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 30px;
+        }
+
+        .status-badge {
+            background: #ffeaa7;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #d63031;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span class="icon">🛠️</span>
+        <div class="status-badge">MAINTENANCE MODE</div>
+        <h1>Kami Sedang Berbenah</h1>
+        <p>Kami sedang melakukan pemeliharaan rutin untuk meningkatkan performa layanan. Sistem akan segera kembali normal dalam waktu dekat.</p>
+        <p>Terima kasih atas kesabaran Anda.</p>
+        <small>Hubungi kami di: support@company.com</small>
+    </div>
+
+    <script>
+// Contoh sederhana menghitung mundur 1 jam
+        let timeLeft = 3600;
+        setInterval(() => {
+            timeLeft--;
+            console.log("Sisa waktu: " + Math.floor(timeLeft/60) + " menit");
+        }, 1000);
+    </script>
+
+</body>
+</html>
+
+       

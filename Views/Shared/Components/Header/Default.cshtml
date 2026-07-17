@@ -1,0 +1,116 @@
+@model company_profile.ViewModels.HeaderVM
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Http.Extensions
+
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var currentCulture = requestCulture.RequestCulture.UICulture.Name;
+
+    // Daftar bahasa secara eksplisit
+    var languages = new List<dynamic>
+    {
+        new { Name = "ID", Value = "id-ID" },
+        new { Name = "EN", Value = "en-US" }
+    };
+    // Cara yang lebih aman dan standar di ASP.NET Core
+    var returnUrl = Context.Request.GetEncodedPathAndQuery();
+}
+<div class="header-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-5 col-12">
+                <div class="header-social">
+                    <ul>
+                        <li>
+                            <div class="social-bar">
+                                <ul>
+                                    @if (!string.IsNullOrEmpty(Model.UrlFb))
+                                    {
+                                        <li><a href="@Model.UrlFb" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.UrlTwiter))
+                                    {
+                                        <li>
+                                            <a href="@Model.UrlTwiter" target="_blank"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.UrlLinkedIn))
+                                    {
+                                        <li>
+                                            <a href="@Model.UrlLinkedIn" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.UrlPinterest))
+                                    {
+                                        <li>
+                                            <a href="@Model.UrlPinterest" target="_blank">
+                                                <i class="fa fa-pinterest"></i>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.UrlInstagram))
+                                    {
+                                        <li>
+                                            <a href="@Model.UrlInstagram" target="_blank">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.UrlYoutube))
+                                    {
+                                        <li>
+                                            <a href="@Model.UrlYoutube" target="_blank"><i class="fa fa-youtube"></i></a>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.UrlTiktok))
+                                    {
+                                        <li><a href="@Model.UrlTiktok" target="_blank"><i class="fa fa-tiktok"></i></a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7 col-12">
+                <div class="header-info">
+                    <ul class="first">
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            <span>@Model.EmailAddress</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <span>@Model.PhoneNumber</span>
+                        </li>
+                    </ul>
+
+                    <div class="lang-right">
+                        <div class="ms-auto me-3 d-flex align-items-center">
+                            @foreach (var lang in languages)
+                            {
+                                <form asp-controller="Language" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl"
+                                      method="post" class="d-inline">
+                                    <input type="hidden" name="culture" value="@lang.Value" />
+                                    <button type="submit"
+                                            class="btn btn-link text-white text-decoration-none p-1 @(currentCulture == lang.Value ? "fw-bold" : "text-white-50")">
+                                        @lang.Name
+                                    </button>
+                                </form>
+                                @if (lang.Name != "EN")
+                                {
+                                    <span class="text-white mx-1">|</span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,177 @@
+@model company_profile.TeamVM
+@{
+    ViewData["Title"] = "Create Team Member";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .ck-editor__editable_inline {
+        min-height: 250px;
+    }
+    /* Paksa pesan error muncul di bawah elemen */
+    .field-validation-error {
+        display: block !important;
+        margin-top: 5px;
+        color: #dc3545;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container mt-4">
+    <form asp-action="Create" enctype="multipart/form-data" method="post" id="teamForm">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <label class="fw-bold d-block mb-3 bg-primary text-white py-2">Foto Profil</label>
+                        <img id="previewImg" src="~/uploads/no-image.png" class="img-fluid rounded mb-3 shadow-sm" style="max-height: 250px; width: 100%; object-fit: cover;" />
+                        <input asp-for="UploadGambar" type="file" class="form-control" accept="image/*" onchange="previewFile(this)" required/>
+                        <span asp-validation-for="UploadGambar" class="text-danger"></span>
+                        <span id="imageError" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white"><h5>Informasi Anggota Tim</h5></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Nama" class="form-label fw-bold"></label>
+                                <input asp-for="Nama" class="form-control" />
+                                <span asp-validation-for="Nama" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Email" class="form-label fw-bold"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NoHP" class="form-label fw-bold"></label>
+                                <input asp-for="NoHP" class="form-control" />
+                                <span asp-validation-for="NoHP" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Website" class="form-label fw-bold"></label>
+                                <input asp-for="Website" class="form-control" />
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-tabs mt-3" id="langTabs" role="tablist">
+                            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#id-pane" type="button">🇮🇩 Indonesia</button></li>
+                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#en-pane" type="button">🇺🇸 English</button></li>
+                        </ul>
+
+                        <div class="tab-content p-3 border border-top-0">
+                            <div class="tab-pane fade show active" id="id-pane">
+                                <div class="mb-3">
+                                    <label asp-for="Jabatan_ID" class="form-label fw-bold"></label>
+                                    <input asp-for="Jabatan_ID" class="form-control" />
+                                    <span asp-validation-for="Jabatan_ID" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Deskripsi_ID" class="form-label fw-bold"></label>
+                                    <textarea asp-for="Deskripsi_ID" id="editor_id" class="form-control" rows="5" required></textarea>
+                                    <span asp-validation-for="Deskripsi_ID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="en-pane">
+                                <div class="mb-3">
+                                    <label asp-for="Jabatan_EN" class="form-label fw-bold"></label>
+                                    <input asp-for="Jabatan_EN" class="form-control" />
+                                    <span asp-validation-for="Jabatan_EN" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Deskripsi_EN" class="form-label fw-bold"></label>
+                                    <textarea asp-for="Deskripsi_EN" id="editor_en" class="form-control" rows="5" required></textarea>
+                                    <span asp-validation-for="Deskripsi_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 border-bottom pb-2">Social Media Links</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-2"><input asp-for="UrlFb" class="form-control" placeholder="Facebook URL" /></div>
+                            <div class="col-md-6 mb-2"><input asp-for="UrlLinkedIn" class="form-control" placeholder="LinkedIn URL" /></div>
+                            <div class="col-md-6 mb-2"><input asp-for="UrlTwiter" class="form-control" placeholder="Twitter/X URL" /></div>
+                            <div class="col-md-6 mb-2"><input asp-for="UrlYoutube" class="form-control" placeholder="Youtube URL" /></div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-top d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. Inisialisasi CKEditor untuk Konten Bahasa Indonesia (ID)
+            const editorIdElement = document.querySelector('#editor_id');
+            if (editorIdElement) {
+                ClassicEditor
+                    .create(editorIdElement)
+                    .then(editor => {
+                        editor.model.document.on('change:data', () => {
+                            editorIdElement.value = editor.getData();
+                            if ($.validator) {
+                                $(editorIdElement).valid(); // Trigger validasi jQuery
+                            }
+                        });
+                    })
+                    .catch(error => { console.error(error); });
+            }
+
+            // 2. Inisialisasi CKEditor untuk Konten Bahasa Inggris (EN)
+            const editorEnElement = document.querySelector('#editor_en');
+            if (editorEnElement) {
+                ClassicEditor
+                    .create(editorEnElement)
+                    .then(editor => {
+                        editor.model.document.on('change:data', () => {
+                            editorEnElement.value = editor.getData();
+                            if ($.validator) {
+                                $(editorEnElement).valid(); // Trigger validasi jQuery
+                            }
+                        });
+                    })
+                    .catch(error => { console.error(error); });
+            }           
+        });
+    </script>
+
+    <script>
+            function previewFile(input) {
+            const preview = document.getElementById('previewImg');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Menampilkan gambar
+                }
+
+                reader.readAsDataURL(input.files[0]); // Membaca file sebagai URL data
+            } else {
+                preview.src = "#";
+                preview.style.display = 'none'; // Menyembunyikan jika tidak ada file
+            }
+        }
+    </script>
+
+    <script>
+        // Letakkan ini di luar DOMContentLoaded atau di paling awal
+        $.validator.setDefaults({
+            ignore: []
+        });
+    </script>
+}

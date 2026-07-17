@@ -1,0 +1,49 @@
+﻿@using company_profile;
+@model NewsVM;
+@{
+    ViewData["Title"] = Model.Judul;
+    Layout = "_FrontEndLayout";
+}
+
+<!-- Tambahkan hidden input ini untuk menyimpan nama kategori secara aman di HTML -->
+<input type="hidden" id="currentCategory" value="@Model.NamaKategori" />
+
+<div id="table-container">
+    <partial name="_NewsByCategoryPartial" model="Model" />
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination tombol
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+
+                // Panggil fungsi loadPage yang sudah kita buat di bawah
+                loadPage(targetPage);
+            });
+        });
+
+        // Satukan fungsi AJAX di sini agar rapi dan tidak bentrok
+        function loadPage(pageNumber) {
+            // Mengambil nilai dari hidden input yang kita buat di atas
+            var namaKategori = $("#currentCategory").val();
+
+            $.ajax({
+                url: '@Url.Action("GetPaginatedDataFENewsByCategory", "Company")',
+                type: 'GET',
+                data: {
+                    namaKategori: namaKategori,
+                    pageIndex: pageNumber // Sesuaikan nama parameter ini dengan parameter di Controller Anda
+                },
+                success: function (result) {
+                    // Update konten table-container dengan partial view yang baru
+                    $('#table-container').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Gagal memuat data berita: ", error);
+                }
+            });
+        }
+    </script>
+}

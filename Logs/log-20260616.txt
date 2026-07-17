@@ -1,0 +1,1046 @@
+2026-06-16 00:34:16.297 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-06-16 00:34:16.416 +07:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db_cms_CP_EFMigrationsLock', 259200)
+2026-06-16 00:34:16.528 +07:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:34:16.570 +07:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db_cms_CP' AND TABLE_NAME='__EFMigrationsHistory';
+2026-06-16 00:34:16.600 +07:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-06-16 00:34:16.624 +07:00 [INF] Applying migration '20260615173312_InitialCreate'.
+2026-06-16 00:34:16.872 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER DATABASE CHARACTER SET utf8mb4;
+2026-06-16 00:34:16.883 +07:00 [ERR] Failed executing DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Abouts` (
+    `IDAbout` int NOT NULL AUTO_INCREMENT,
+    `CreateAt` datetime(6) NOT NULL,
+    `IsiContent_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiContent_EN` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_Abouts` PRIMARY KEY (`IDAbout`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:03.643 +07:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE `db_cms_CP`;
+2026-06-16 00:36:03.747 +07:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-06-16 00:36:03.759 +07:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__db_cms_CP_EFMigrationsLock', 259200)
+2026-06-16 00:36:03.870 +07:00 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:03.894 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='db_cms_CP' AND TABLE_NAME='__EFMigrationsHistory';
+2026-06-16 00:36:03.907 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2026-06-16 00:36:03.938 +07:00 [INF] Applying migration '20260615173312_InitialCreate'.
+2026-06-16 00:36:04.102 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER DATABASE CHARACTER SET utf8mb4;
+2026-06-16 00:36:04.134 +07:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Abouts` (
+    `IDAbout` int NOT NULL AUTO_INCREMENT,
+    `CreateAt` datetime(6) NOT NULL,
+    `IsiContent_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiContent_EN` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_Abouts` PRIMARY KEY (`IDAbout`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.155 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `aspnetroles` (
+    `Id` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `Name` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `NormalizedName` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `ConcurrencyStamp` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_aspnetroles` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.175 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `aspnetusers` (
+    `Id` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `FullName` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UserName` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `NormalizedUserName` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `Email` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `NormalizedEmail` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `EmailConfirmed` tinyint(1) NOT NULL,
+    `PasswordHash` longtext CHARACTER SET utf8mb4 NULL,
+    `SecurityStamp` longtext CHARACTER SET utf8mb4 NULL,
+    `ConcurrencyStamp` longtext CHARACTER SET utf8mb4 NULL,
+    `PhoneNumber` longtext CHARACTER SET utf8mb4 NULL,
+    `PhoneNumberConfirmed` tinyint(1) NOT NULL,
+    `TwoFactorEnabled` tinyint(1) NOT NULL,
+    `LockoutEnd` datetime(6) NULL,
+    `LockoutEnabled` tinyint(1) NOT NULL,
+    `AccessFailedCount` int NOT NULL,
+    CONSTRAINT `PK_aspnetusers` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.203 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `bannerhome` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `JudulTextAnimatedOnBanner_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `JudulTextAnimatedOnBanner_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiTextAnimatedOnBanner_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiTextAnimatedOnBanner_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_bannerhome` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.227 +07:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `contactforms` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `Name` longtext CHARACTER SET utf8mb4 NULL,
+    `EmailAddress` longtext CHARACTER SET utf8mb4 NULL,
+    `PhoneNumber` longtext CHARACTER SET utf8mb4 NULL,
+    `Pesan` longtext CHARACTER SET utf8mb4 NULL,
+    `Subject` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_contactforms` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.250 +07:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Contacts` (
+    `IDContact` int NOT NULL AUTO_INCREMENT,
+    `Alamat_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `Alamat_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `PhoneNumber` longtext CHARACTER SET utf8mb4 NULL,
+    `EmailAddress` longtext CHARACTER SET utf8mb4 NULL,
+    `UrlFb` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlTwiter` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlLinkedIn` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlPinterest` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlYoutube` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlInstagram` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    CONSTRAINT `PK_Contacts` PRIMARY KEY (`IDContact`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.275 +07:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `counter` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `JudulCounter_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `JudulCounter_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiContentCounter` int NOT NULL,
+    CONSTRAINT `PK_counter` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.299 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `emailsettings` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `SendEmailFrom` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `ReceiveEmailTo` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `SmtpHost` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `SmtpPort` int NOT NULL,
+    `SmtpUsername` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `SmtpPassword` longtext CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_emailsettings` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.319 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Events` (
+    `IDEvents` int NOT NULL AUTO_INCREMENT,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NULL,
+    `StartEvent` datetime(6) NOT NULL,
+    `EndEvent` datetime(6) NOT NULL,
+    `JudulEvent_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `JudulEvent_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `LokasiEvent_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `LokasiEvent_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `AlamatEvent_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `AlamatEvent_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiContentEvent_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiContentEvent_EN` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_Events` PRIMARY KEY (`IDEvents`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.355 +07:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Faqs` (
+    `IDFaq` int NOT NULL AUTO_INCREMENT,
+    `JudulFaq_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `JudulFaq_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiFaq_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiFaq_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    CONSTRAINT `PK_Faqs` PRIMARY KEY (`IDFaq`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.376 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `header` (
+    `ID` int NOT NULL AUTO_INCREMENT,
+    `UrlFb` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlTwiter` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlLinkedIn` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlPinterest` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlYoutube` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlInstagram` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlTiktok` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `EmailAddress` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `PhoneNumber` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsShow` tinyint(1) NOT NULL,
+    CONSTRAINT `PK_header` PRIMARY KEY (`ID`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.398 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `home` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `ValueProgressBar` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `EmbededUrlVidio` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `JudulAboutStart_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `JudulAboutStart_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiAboutStart_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiAboutStart_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_home` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.421 +07:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Kategoris` (
+    `IDKategori` int NOT NULL AUTO_INCREMENT,
+    `NamaKategori_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `NamaKategori_EN` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_Kategoris` PRIMARY KEY (`IDKategori`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.441 +07:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `logosettings` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NULL,
+    `Tipe` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_logosettings` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.458 +07:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `newsletters` (
+    `IDNewsletter` int NOT NULL AUTO_INCREMENT,
+    `Email` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_newsletters` PRIMARY KEY (`IDNewsletter`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.475 +07:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `OurServices` (
+    `IDOurServices` int NOT NULL AUTO_INCREMENT,
+    `JudulService_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `JudulService_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiService_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiService_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    CONSTRAINT `PK_OurServices` PRIMARY KEY (`IDOurServices`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.503 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `pagebanners` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `PageName` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `BannerPath` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_pagebanners` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.524 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `PhotoGalleries` (
+    `IDPhotoGallery` int NOT NULL AUTO_INCREMENT,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    CONSTRAINT `PK_PhotoGalleries` PRIMARY KEY (`IDPhotoGallery`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.546 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Portfolios` (
+    `IDPortfolio` int NOT NULL AUTO_INCREMENT,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NULL,
+    `Judul_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `Judul_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiContentPortfolio_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiContentPortfolio_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `ClientComment_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `ClientComment_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    `ClientName` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `ClientCompanyName` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `ProjectStartDate` datetime(6) NOT NULL,
+    `ProjectEndDate` datetime(6) NOT NULL,
+    CONSTRAINT `PK_Portfolios` PRIMARY KEY (`IDPortfolio`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.573 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Pricings` (
+    `IDPricing` int NOT NULL AUTO_INCREMENT,
+    `JenisLayanan_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `JenisLayanan_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `DeskripsiJenisLayanan_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `DeskripsiJenisLayanan_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `Harga` double NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    CONSTRAINT `PK_Pricings` PRIMARY KEY (`IDPricing`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.601 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `seometadata` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `MetaTitle` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `MetaDescription` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `MetaKeywords` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `CanonicalUrl` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `OgImageUrl` longtext CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_seometadata` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.630 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `sliderfooterhomes` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `UrlImage` longtext CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_sliderfooterhomes` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.658 +07:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `specialfeatures` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `JudulSpecialFeatures_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `JudulSpecialFeatures_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiContentSpecialFeatures_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiContentSpecialFeatures_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_specialfeatures` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.683 +07:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `subscribers` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `Email` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `SubscribedAt` datetime(6) NOT NULL,
+    CONSTRAINT `PK_subscribers` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.713 +07:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Teams` (
+    `IDTeam` int NOT NULL AUTO_INCREMENT,
+    `UrlFoto` longtext CHARACTER SET utf8mb4 NULL,
+    `Email` longtext CHARACTER SET utf8mb4 NULL,
+    `NoHP` longtext CHARACTER SET utf8mb4 NULL,
+    `Website` longtext CHARACTER SET utf8mb4 NULL,
+    `Nama` longtext CHARACTER SET utf8mb4 NULL,
+    `UrlFb` longtext CHARACTER SET utf8mb4 NULL,
+    `UrlLinkedIn` longtext CHARACTER SET utf8mb4 NULL,
+    `UrlYoutube` longtext CHARACTER SET utf8mb4 NULL,
+    `UrlTwiter` longtext CHARACTER SET utf8mb4 NULL,
+    `Jabatan_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `Jabatan_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `Deskripsi_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `Deskripsi_EN` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_Teams` PRIMARY KEY (`IDTeam`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.749 +07:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `Testimonials` (
+    `IDTestimonial` int NOT NULL AUTO_INCREMENT,
+    `UrlFoto` longtext CHARACTER SET utf8mb4 NULL,
+    `Nama` longtext CHARACTER SET utf8mb4 NULL,
+    `Jabatan_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `Jabatan_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiTestimoni_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiTestimoni_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    CONSTRAINT `PK_Testimonials` PRIMARY KEY (`IDTestimonial`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.783 +07:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `themes` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `HeaderColor` longtext CHARACTER SET utf8mb4 NULL,
+    `FooterColor` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_themes` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.809 +07:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `whychooseus` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `JudulWhyChooseUs_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `JudulWhyChooseUs_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiContentWhyChooseUs_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `IsiContentWhyChooseUs_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_whychooseus` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.859 +07:00 [INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `aspnetroleclaims` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `RoleId` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `ClaimType` longtext CHARACTER SET utf8mb4 NULL,
+    `ClaimValue` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_aspnetroleclaims` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_aspnetroleclaims_aspnetroles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.921 +07:00 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `aspnetuserclaims` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `UserId` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `ClaimType` longtext CHARACTER SET utf8mb4 NULL,
+    `ClaimValue` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_aspnetuserclaims` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_aspnetuserclaims_aspnetusers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:04.972 +07:00 [INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `aspnetuserlogins` (
+    `LoginProvider` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `ProviderKey` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `ProviderDisplayName` longtext CHARACTER SET utf8mb4 NULL,
+    `UserId` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_aspnetuserlogins` PRIMARY KEY (`LoginProvider`, `ProviderKey`),
+    CONSTRAINT `FK_aspnetuserlogins_aspnetusers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:05.014 +07:00 [INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `aspnetuserroles` (
+    `UserId` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `RoleId` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_aspnetuserroles` PRIMARY KEY (`UserId`, `RoleId`),
+    CONSTRAINT `FK_aspnetuserroles_aspnetroles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_aspnetuserroles_aspnetusers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:05.037 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `aspnetusertokens` (
+    `UserId` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `LoginProvider` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `Name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `Value` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_aspnetusertokens` PRIMARY KEY (`UserId`, `LoginProvider`, `Name`),
+    CONSTRAINT `FK_aspnetusertokens_aspnetusers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:05.095 +07:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `homeprogressbar` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `Value` int NOT NULL,
+    `Judul_ID` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `Judul_EN` longtext CHARACTER SET utf8mb4 NOT NULL,
+    `HomeId` int NOT NULL,
+    CONSTRAINT `PK_homeprogressbar` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_homeprogressbar_home_HomeId` FOREIGN KEY (`HomeId`) REFERENCES `home` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:05.158 +07:00 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `News` (
+    `IDNews` int NOT NULL AUTO_INCREMENT,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NULL,
+    `Judul_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `Judul_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiContent_ID` longtext CHARACTER SET utf8mb4 NULL,
+    `IsiContent_EN` longtext CHARACTER SET utf8mb4 NULL,
+    `CreateAt` datetime(6) NOT NULL,
+    `IsSent` tinyint(1) NOT NULL,
+    `IDKategori` int NOT NULL,
+    CONSTRAINT `PK_News` PRIMARY KEY (`IDNews`),
+    CONSTRAINT `FK_News_Kategoris_IDKategori` FOREIGN KEY (`IDKategori`) REFERENCES `Kategoris` (`IDKategori`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:05.276 +07:00 [INF] Executed DbCommand (108ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `portfoliogambar` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `UrlGambar` longtext CHARACTER SET utf8mb4 NULL,
+    `IDPortfolio` int NOT NULL,
+    CONSTRAINT `PK_portfoliogambar` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_portfoliogambar_Portfolios_IDPortfolio` FOREIGN KEY (`IDPortfolio`) REFERENCES `Portfolios` (`IDPortfolio`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:05.328 +07:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `newslog` (
+    `ID` int NOT NULL AUTO_INCREMENT,
+    `IDNews` int NOT NULL,
+    `Email` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `SentAt` datetime(6) NOT NULL,
+    CONSTRAINT `PK_newslog` PRIMARY KEY (`ID`),
+    CONSTRAINT `FK_newslog_News_IDNews` FOREIGN KEY (`IDNews`) REFERENCES `News` (`IDNews`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+2026-06-16 00:36:05.361 +07:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_aspnetroleclaims_RoleId` ON `aspnetroleclaims` (`RoleId`);
+2026-06-16 00:36:05.387 +07:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX `RoleNameIndex` ON `aspnetroles` (`NormalizedName`);
+2026-06-16 00:36:05.418 +07:00 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_aspnetuserclaims_UserId` ON `aspnetuserclaims` (`UserId`);
+2026-06-16 00:36:05.445 +07:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_aspnetuserlogins_UserId` ON `aspnetuserlogins` (`UserId`);
+2026-06-16 00:36:05.471 +07:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_aspnetuserroles_RoleId` ON `aspnetuserroles` (`RoleId`);
+2026-06-16 00:36:05.492 +07:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `EmailIndex` ON `aspnetusers` (`NormalizedEmail`);
+2026-06-16 00:36:05.512 +07:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX `UserNameIndex` ON `aspnetusers` (`NormalizedUserName`);
+2026-06-16 00:36:05.537 +07:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_homeprogressbar_HomeId` ON `homeprogressbar` (`HomeId`);
+2026-06-16 00:36:05.561 +07:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_News_IDKategori` ON `News` (`IDKategori`);
+2026-06-16 00:36:05.589 +07:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_newslog_IDNews_Email` ON `newslog` (`IDNews`, `Email`);
+2026-06-16 00:36:05.610 +07:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_portfoliogambar_IDPortfolio` ON `portfoliogambar` (`IDPortfolio`);
+2026-06-16 00:36:05.619 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20260615173312_InitialCreate', '9.0.14');
+2026-06-16 00:36:05.627 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT RELEASE_LOCK('__db_cms_CP_EFMigrationsLock')
+2026-06-16 10:00:01.862 +07:00 [INF] Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `subscribers` AS `s`
+2026-06-16 10:00:02.045 +07:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2026-06-16 10:00:02.046 +07:00 [INF] Quartz Scheduler created
+2026-06-16 10:00:02.049 +07:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2026-06-16 10:00:02.049 +07:00 [INF] RAMJobStore initialized.
+2026-06-16 10:00:02.050 +07:00 [INF] Quartz Scheduler 3.18.1.0 - 'QuartzScheduler' with instanceId 'NON_CLUSTERED' initialized
+2026-06-16 10:00:02.051 +07:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2026-06-16 10:00:02.051 +07:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2026-06-16 10:00:02.073 +07:00 [INF] Adding 2 jobs, 2 triggers.
+2026-06-16 10:00:02.077 +07:00 [INF] Adding job: DEFAULT.BroadcastJob
+2026-06-16 10:00:02.088 +07:00 [INF] Adding job: DEFAULT.MonitorScaleJob
+2026-06-16 10:00:02.441 +07:00 [INF] User profile is available. Using 'C:\Users\ASUS\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-16 10:00:02.701 +07:00 [INF] Executed DbCommand (108ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-16 10:00:02.721 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-16 10:00:02.922 +07:00 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `aspnetroles` (`Id`, `ConcurrencyStamp`, `Name`, `NormalizedName`)
+VALUES (@p0, @p1, @p2, @p3);
+2026-06-16 10:00:02.939 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-16 10:00:02.943 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-16 10:00:02.956 +07:00 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `aspnetroles` (`Id`, `ConcurrencyStamp`, `Name`, `NormalizedName`)
+VALUES (@p0, @p1, @p2, @p3);
+2026-06-16 10:00:02.965 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-16 10:00:02.968 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-16 10:00:02.977 +07:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `aspnetroles` (`Id`, `ConcurrencyStamp`, `Name`, `NormalizedName`)
+VALUES (@p0, @p1, @p2, @p3);
+2026-06-16 10:00:03.093 +07:00 [INF] Executed DbCommand (81ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `aspnetusers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+2026-06-16 10:00:03.390 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `aspnetusers` AS `a`
+WHERE `a`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1
+2026-06-16 10:00:03.423 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `aspnetusers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+2026-06-16 10:00:03.551 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (Size = 4000), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `aspnetusers` (`Id`, `AccessFailedCount`, `ConcurrencyStamp`, `Email`, `EmailConfirmed`, `FullName`, `LockoutEnabled`, `LockoutEnd`, `NormalizedEmail`, `NormalizedUserName`, `PasswordHash`, `PhoneNumber`, `PhoneNumberConfirmed`, `SecurityStamp`, `TwoFactorEnabled`, `UserName`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+2026-06-16 10:00:03.582 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2
+2026-06-16 10:00:03.626 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='?' (Size = 255), @__p_1='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`UserId`, `a`.`RoleId`
+FROM `aspnetuserroles` AS `a`
+WHERE (`a`.`UserId` = @__p_0) AND (`a`.`RoleId` = @__p_1)
+LIMIT 1
+2026-06-16 10:00:03.633 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2
+2026-06-16 10:00:03.657 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `aspnetusers` AS `a`
+WHERE `a`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1
+2026-06-16 10:00:03.666 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `aspnetusers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+2026-06-16 10:00:03.711 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 255), @p17='?' (Size = 255), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p18='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (Size = 4000), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTimeOffset), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO `aspnetuserroles` (`RoleId`, `UserId`)
+VALUES (@p0, @p1);
+UPDATE `aspnetusers` SET `AccessFailedCount` = @p2, `ConcurrencyStamp` = @p3, `Email` = @p4, `EmailConfirmed` = @p5, `FullName` = @p6, `LockoutEnabled` = @p7, `LockoutEnd` = @p8, `NormalizedEmail` = @p9, `NormalizedUserName` = @p10, `PasswordHash` = @p11, `PhoneNumber` = @p12, `PhoneNumberConfirmed` = @p13, `SecurityStamp` = @p14, `TwoFactorEnabled` = @p15, `UserName` = @p16
+WHERE `Id` = @p17 AND `ConcurrencyStamp` = @p18;
+SELECT ROW_COUNT();
+2026-06-16 10:00:04.153 +07:00 [INF] Now listening on: http://localhost:5171
+2026-06-16 10:00:04.154 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-16 10:00:04.155 +07:00 [INF] Hosting environment: Development
+2026-06-16 10:00:04.155 +07:00 [INF] Content root path: D:\source\company_profile
+2026-06-16 10:00:04.166 +07:00 [INF] Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+2026-06-16 10:00:04.213 +07:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `n`.`IDNews`, `n`.`CreateAt`, `n`.`IDKategori`, `n`.`IsSent`, `n`.`IsiContent_EN`, `n`.`IsiContent_ID`, `n`.`Judul_EN`, `n`.`Judul_ID`, `n`.`UrlGambar`
+FROM `News` AS `n`
+2026-06-16 10:00:04.235 +07:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-06-16 10:00:04.265 +07:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `e`.`Id`, `e`.`ReceiveEmailTo`, `e`.`SendEmailFrom`, `e`.`SmtpHost`, `e`.`SmtpPassword`, `e`.`SmtpPort`, `e`.`SmtpUsername`
+FROM `emailsettings` AS `e`
+LIMIT 1
+2026-06-16 10:00:07.254 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/ - null null
+2026-06-16 10:00:07.301 +07:00 [WRN] Failed to determine the https port for redirect.
+2026-06-16 10:00:07.380 +07:00 [INF] Executing endpoint 'company_profile.Controllers.CompanyController.Home (company_profile)'
+2026-06-16 10:00:07.427 +07:00 [INF] Route matched with {action = "Home", controller = "Company"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Home() on controller company_profile.Controllers.CompanyController (company_profile).
+2026-06-16 10:00:07.817 +07:00 [INF] Executed DbCommand (269ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`IsiContentCounter`, `c`.`JudulCounter_EN`, `c`.`JudulCounter_ID`
+FROM `counter` AS `c`
+2026-06-16 10:00:07.871 +07:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `b`.`Id`, `b`.`JudulTextAnimatedOnBanner_EN` AS `JudulTextAnimatedOnBanner`, `b`.`IsiTextAnimatedOnBanner_EN` AS `IsiTextAnimatedOnBanner`, `b`.`JudulTextAnimatedOnBanner_ID`, `b`.`IsiTextAnimatedOnBanner_ID`, `b`.`UrlGambar`
+FROM `bannerhome` AS `b`
+2026-06-16 10:00:07.912 +07:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `h`.`ID`, `h`.`UrlFb`, `h`.`UrlTwiter`, `h`.`UrlLinkedIn`, `h`.`UrlPinterest`, `h`.`UrlYoutube`, `h`.`UrlInstagram`, `h`.`UrlTiktok`, `h`.`EmailAddress`, `h`.`PhoneNumber`, `h`.`IsShow`
+FROM `header` AS `h`
+2026-06-16 10:00:08.049 +07:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `h`.`Id`, `h`.`JudulAboutStart_EN`, `h`.`IsiAboutStart_EN`, `h`.`EmbededUrlVidio`, `h`.`JudulAboutStart_ID`, `h`.`IsiAboutStart_ID`
+FROM `home` AS `h`
+ORDER BY `h`.`Id`
+2026-06-16 10:00:08.080 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `w`.`Id`, `w`.`JudulWhyChooseUs_EN` AS `JudulWhyChooseUs`, `w`.`IsiContentWhyChooseUs_EN` AS `IsiContentWhyChooseUs`, `w`.`JudulWhyChooseUs_ID`, `w`.`IsiContentWhyChooseUs_ID`, `w`.`UrlGambar`
+FROM `whychooseus` AS `w`
+2026-06-16 10:00:08.112 +07:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`IsiContentSpecialFeatures_EN`, `s`.`IsiContentSpecialFeatures_ID`, `s`.`JudulSpecialFeatures_EN`, `s`.`JudulSpecialFeatures_ID`
+FROM `specialfeatures` AS `s`
+2026-06-16 10:00:08.145 +07:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `o`.`IDOurServices`, `o`.`CreateAt`, `o`.`IsiService_EN`, `o`.`IsiService_ID`, `o`.`JudulService_EN`, `o`.`JudulService_ID`, `o`.`UrlGambar`
+FROM `OurServices` AS `o`
+2026-06-16 10:00:08.204 +07:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`IDPortfolio`, `p`.`ClientComment_EN`, `p`.`ClientComment_ID`, `p`.`ClientCompanyName`, `p`.`ClientName`, `p`.`CreateAt`, `p`.`IsiContentPortfolio_EN`, `p`.`IsiContentPortfolio_ID`, `p`.`Judul_EN`, `p`.`Judul_ID`, `p`.`ProjectEndDate`, `p`.`ProjectStartDate`, `p`.`UrlGambar`
+FROM `Portfolios` AS `p`
+2026-06-16 10:00:08.245 +07:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`IDTeam`, `t`.`Deskripsi_EN`, `t`.`Deskripsi_ID`, `t`.`Email`, `t`.`Jabatan_EN`, `t`.`Jabatan_ID`, `t`.`Nama`, `t`.`NoHP`, `t`.`UrlFb`, `t`.`UrlFoto`, `t`.`UrlLinkedIn`, `t`.`UrlTwiter`, `t`.`UrlYoutube`, `t`.`Website`
+FROM `Teams` AS `t`
+2026-06-16 10:00:08.283 +07:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`IDPricing`, `p`.`CreateAt`, `p`.`DeskripsiJenisLayanan_EN`, `p`.`DeskripsiJenisLayanan_ID`, `p`.`Harga`, `p`.`JenisLayanan_EN`, `p`.`JenisLayanan_ID`
+FROM `Pricings` AS `p`
+2026-06-16 10:00:08.324 +07:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `f`.`IDFaq`, `f`.`CreateAt`, `f`.`IsiFaq_EN`, `f`.`IsiFaq_ID`, `f`.`JudulFaq_EN`, `f`.`JudulFaq_ID`
+FROM `Faqs` AS `f`
+2026-06-16 10:00:08.405 +07:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `n`.`IDNews`, `n`.`CreateAt`, `n`.`IDKategori`, `n`.`IsSent`, `n`.`IsiContent_EN`, `n`.`IsiContent_ID`, `n`.`Judul_EN`, `n`.`Judul_ID`, `n`.`UrlGambar`, `k`.`IDKategori`, `k`.`NamaKategori_EN`, `k`.`NamaKategori_ID`
+FROM `News` AS `n`
+INNER JOIN `Kategoris` AS `k` ON `n`.`IDKategori` = `k`.`IDKategori`
+ORDER BY `n`.`CreateAt` DESC
+2026-06-16 10:00:08.440 +07:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`UrlImage`
+FROM `sliderfooterhomes` AS `s`
+2026-06-16 10:00:08.489 +07:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:08.508 +07:00 [INF] Executing ViewResult, running view Home.
+2026-06-16 10:00:08.712 +07:00 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`Id`, `p`.`BannerPath`, `p`.`PageName`
+FROM `pagebanners` AS `p`
+WHERE `p`.`PageName` = 'Cta Page'
+LIMIT 1
+2026-06-16 10:00:08.790 +07:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `l`.`Id`, `l`.`Tipe`, `l`.`UrlGambar`
+FROM `logosettings` AS `l`
+2026-06-16 10:00:09.250 +07:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-06-16 10:00:09.282 +07:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`Id`, `t`.`FooterColor`, `t`.`HeaderColor`
+FROM `themes` AS `t`
+LIMIT 1
+2026-06-16 10:00:09.326 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `h`.`ID`, `h`.`UrlFb`, `h`.`UrlTwiter`, `h`.`UrlLinkedIn`, `h`.`UrlPinterest`, `h`.`UrlYoutube`, `h`.`UrlInstagram`, `h`.`UrlTiktok`, `h`.`EmailAddress`, `h`.`PhoneNumber`, `h`.`IsShow`
+FROM `header` AS `h`
+2026-06-16 10:00:09.404 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `l`.`Id`, `l`.`Tipe`, `l`.`UrlGambar`
+FROM `logosettings` AS `l`
+2026-06-16 10:00:09.440 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `k`.`IDKategori`, `k`.`NamaKategori_EN`, `k`.`NamaKategori_ID`
+FROM `Kategoris` AS `k`
+2026-06-16 10:00:09.475 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `n`.`IDNews`, `n`.`CreateAt`, `n`.`IDKategori`, `n`.`IsSent`, `n`.`IsiContent_EN`, `n`.`IsiContent_ID`, `n`.`Judul_EN`, `n`.`Judul_ID`, `n`.`UrlGambar`
+FROM `News` AS `n`
+ORDER BY `n`.`CreateAt` DESC
+LIMIT @__p_0
+2026-06-16 10:00:09.527 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`IDPortfolio`, `p`.`ClientComment_EN`, `p`.`ClientComment_ID`, `p`.`ClientCompanyName`, `p`.`ClientName`, `p`.`CreateAt`, `p`.`IsiContentPortfolio_EN`, `p`.`IsiContentPortfolio_ID`, `p`.`Judul_EN`, `p`.`Judul_ID`, `p`.`ProjectEndDate`, `p`.`ProjectStartDate`, `p`.`UrlGambar`
+FROM `Portfolios` AS `p`
+ORDER BY `p`.`IDPortfolio` DESC
+LIMIT @__p_0
+2026-06-16 10:00:09.542 +07:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-06-16 10:00:09.580 +07:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`IDContact`, `c`.`Alamat_EN`, `c`.`Alamat_ID`, `c`.`CreateAt`, `c`.`EmailAddress`, `c`.`PhoneNumber`, `c`.`UrlFb`, `c`.`UrlInstagram`, `c`.`UrlLinkedIn`, `c`.`UrlPinterest`, `c`.`UrlTwiter`, `c`.`UrlYoutube`
+FROM `Contacts` AS `c`
+LIMIT 1
+2026-06-16 10:00:09.710 +07:00 [INF] Executed ViewResult - view Home executed in 1207.9802ms.
+2026-06-16 10:00:09.721 +07:00 [INF] Executed action company_profile.Controllers.CompanyController.Home (company_profile) in 2293.0259ms
+2026-06-16 10:00:09.723 +07:00 [INF] Executed endpoint 'company_profile.Controllers.CompanyController.Home (company_profile)'
+2026-06-16 10:00:09.731 +07:00 [INF] Session started; Key:e8a3595e-0a52-0eef-dee8-f6130678015f, Id:44e73b73-8ef8-12db-b9b8-289922345cd0
+2026-06-16 10:00:09.755 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/ - 200 null text/html; charset=utf-8 2509.1787ms
+2026-06-16 10:00:10.098 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/embed-js/embed.min.js - null null
+2026-06-16 10:00:10.098 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-16 10:00:10.110 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 12.1228ms
+2026-06-16 10:00:10.111 +07:00 [INF] The file /embed-js/embed.min.js was not modified
+2026-06-16 10:00:10.115 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/embed-js/embed.min.js - 304 null text/javascript 17.575ms
+2026-06-16 10:00:10.116 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/no-image.png - null null
+2026-06-16 10:00:10.181 +07:00 [INF] Sending file. Request path: '/uploads/no-image.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\no-image.png'
+2026-06-16 10:00:10.181 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/no-image.png - 200 19382 image/png 65.3446ms
+2026-06-16 10:00:10.294 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/achivement.png - null null
+2026-06-16 10:00:10.295 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/home_testimonial_photo.png - null null
+2026-06-16 10:00:10.296 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/uploads/contactformimg.png - null null
+2026-06-16 10:00:10.475 +07:00 [INF] Sending file. Request path: '/uploads/achivement.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\achivement.png'
+2026-06-16 10:00:10.475 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/achivement.png - 200 1981098 image/png 180.7425ms
+2026-06-16 10:00:10.502 +07:00 [INF] Sending file. Request path: '/uploads/home_testimonial_photo.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\home_testimonial_photo.png'
+2026-06-16 10:00:10.504 +07:00 [INF] Sending file. Request path: '/uploads/contactformimg.png'. Physical path: 'D:\source\company_profile\wwwroot\uploads\contactformimg.png'
+2026-06-16 10:00:10.504 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/contactformimg.png - 200 2204623 image/png 208.0417ms
+2026-06-16 10:00:10.504 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/uploads/home_testimonial_photo.png - 200 2255845 image/png 209.5717ms
+2026-06-16 10:00:31.255 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/Admin/Dashboard - null null
+2026-06-16 10:00:31.285 +07:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (SuperAdmin)
+2026-06-16 10:00:31.291 +07:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2026-06-16 10:00:31.294 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/Admin/Dashboard - 302 null null 37.9192ms
+2026-06-16 10:00:31.340 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/Account/Login?ReturnUrl=%2FAdmin%2FDashboard - null null
+2026-06-16 10:00:31.354 +07:00 [INF] Executing endpoint 'company_profile.Controllers.AccountController.Login (company_profile)'
+2026-06-16 10:00:31.362 +07:00 [INF] Route matched with {action = "Login", controller = "Account"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller company_profile.Controllers.AccountController (company_profile).
+2026-06-16 10:00:31.371 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:31.374 +07:00 [INF] Executing ViewResult, running view Login.
+2026-06-16 10:00:31.483 +07:00 [INF] Executed ViewResult - view Login executed in 110.7321ms.
+2026-06-16 10:00:31.484 +07:00 [INF] Executed action company_profile.Controllers.AccountController.Login (company_profile) in 121.6137ms
+2026-06-16 10:00:31.484 +07:00 [INF] Executed endpoint 'company_profile.Controllers.AccountController.Login (company_profile)'
+2026-06-16 10:00:31.485 +07:00 [WRN] Unable to configure browser refresh script injection on the response. Consider manually adding '<script src="/_framework/aspnetcore-browser-refresh.js"></script>' to the body of the page.
+2026-06-16 10:00:31.488 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/Account/Login?ReturnUrl=%2FAdmin%2FDashboard - 200 null text/html; charset=utf-8 147.4284ms
+2026-06-16 10:00:31.609 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/font-awesome/css/all.min.css - null null
+2026-06-16 10:00:31.611 +07:00 [INF] The file /font-awesome/css/all.min.css was not modified
+2026-06-16 10:00:31.614 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/font-awesome/css/all.min.css - 304 null text/css 4.657ms
+2026-06-16 10:00:31.618 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/sweetalert2/sweetalert2.min.css - null null
+2026-06-16 10:00:31.620 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/sweetalert2/sweetalert2.min.js - null null
+2026-06-16 10:00:31.626 +07:00 [INF] The file /sweetalert2/sweetalert2.min.css was not modified
+2026-06-16 10:00:31.626 +07:00 [INF] The file /sweetalert2/sweetalert2.min.js was not modified
+2026-06-16 10:00:31.627 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/sweetalert2/sweetalert2.min.css - 304 null text/css 8.1366ms
+2026-06-16 10:00:31.627 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/sweetalert2/sweetalert2.min.js - 304 null text/javascript 7.5735ms
+2026-06-16 10:00:31.724 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/font-awesome/webfonts/fa-solid-900.woff2 - null null
+2026-06-16 10:00:31.724 +07:00 [INF] The file /font-awesome/webfonts/fa-solid-900.woff2 was not modified
+2026-06-16 10:00:31.724 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/font-awesome/webfonts/fa-solid-900.woff2 - 304 null font/woff2 0.7865ms
+2026-06-16 10:00:37.514 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5171/Account/Login - application/x-www-form-urlencoded 270
+2026-06-16 10:00:37.518 +07:00 [INF] Executing endpoint 'company_profile.Controllers.AccountController.Login (company_profile)'
+2026-06-16 10:00:37.545 +07:00 [INF] Route matched with {action = "Login", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(company_profile.ViewModels.LoginViewModel) on controller company_profile.Controllers.AccountController (company_profile).
+2026-06-16 10:00:37.598 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `aspnetusers` AS `a`
+WHERE `a`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1
+2026-06-16 10:00:37.803 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@__user_Id_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ClaimType`, `a`.`ClaimValue`, `a`.`UserId`
+FROM `aspnetuserclaims` AS `a`
+WHERE `a`.`UserId` = @__user_Id_0
+2026-06-16 10:00:37.838 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a0`.`Name`
+FROM `aspnetuserroles` AS `a`
+INNER JOIN `aspnetroles` AS `a0` ON `a`.`RoleId` = `a0`.`Id`
+WHERE `a`.`UserId` = @__userId_0
+2026-06-16 10:00:37.845 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `aspnetroles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+2026-06-16 10:00:37.861 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@__role_Id_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `a`.`ClaimType`, `a`.`ClaimValue`
+FROM `aspnetroleclaims` AS `a`
+WHERE `a`.`RoleId` = @__role_Id_0
+2026-06-16 10:00:37.870 +07:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2026-06-16 10:00:37.873 +07:00 [INF] Executing RedirectResult, redirecting to /Admin/Dashboard.
+2026-06-16 10:00:37.874 +07:00 [INF] Executed action company_profile.Controllers.AccountController.Login (company_profile) in 328.692ms
+2026-06-16 10:00:37.874 +07:00 [INF] Executed endpoint 'company_profile.Controllers.AccountController.Login (company_profile)'
+2026-06-16 10:00:37.874 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5171/Account/Login - 302 null null 359.6367ms
+2026-06-16 10:00:37.900 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/Admin/Dashboard - null null
+2026-06-16 10:00:37.910 +07:00 [INF] Executing endpoint 'company_profile.Controllers.AdminController.Dashboard (company_profile)'
+2026-06-16 10:00:37.914 +07:00 [INF] Route matched with {action = "Dashboard", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard() on controller company_profile.Controllers.AdminController (company_profile).
+2026-06-16 10:00:37.924 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Kategoris` AS `k`
+2026-06-16 10:00:37.934 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `News` AS `n`
+2026-06-16 10:00:37.962 +07:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Events` AS `e`
+2026-06-16 10:00:37.970 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Teams` AS `t`
+2026-06-16 10:00:37.977 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Portfolios` AS `p`
+2026-06-16 10:00:37.983 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `OurServices` AS `o`
+2026-06-16 10:00:38.007 +07:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Testimonials` AS `t`
+2026-06-16 10:00:38.031 +07:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `PhotoGalleries` AS `p`
+2026-06-16 10:00:38.039 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Pricings` AS `p`
+2026-06-16 10:00:38.042 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:38.044 +07:00 [INF] Executing ViewResult, running view Dashboard.
+2026-06-16 10:00:38.322 +07:00 [INF] Executed ViewResult - view Dashboard executed in 279.243ms.
+2026-06-16 10:00:38.322 +07:00 [INF] Executed action company_profile.Controllers.AdminController.Dashboard (company_profile) in 407.8103ms
+2026-06-16 10:00:38.322 +07:00 [INF] Executed endpoint 'company_profile.Controllers.AdminController.Dashboard (company_profile)'
+2026-06-16 10:00:38.323 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/Admin/Dashboard - 200 null text/html; charset=utf-8 423.0955ms
+2026-06-16 10:00:38.503 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-16 10:00:38.504 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 0.5586ms
+2026-06-16 10:00:38.532 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:00:38.630 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:38.632 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:00:38.647 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:38.648 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:00:38.655 +07:00 [INF] Executed ViewResult - view NotFound executed in 7.7867ms.
+2026-06-16 10:00:38.655 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 22.7854ms
+2026-06-16 10:00:38.656 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:38.657 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 124.3821ms
+2026-06-16 10:00:38.658 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:00:39.161 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:00:39.186 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:39.186 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:00:39.195 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:39.195 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:00:39.196 +07:00 [INF] Executed ViewResult - view NotFound executed in 1.0025ms.
+2026-06-16 10:00:39.196 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 10.0016ms
+2026-06-16 10:00:39.196 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:39.197 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 35.6146ms
+2026-06-16 10:00:39.197 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:00:49.748 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/Kategori/Index - null null
+2026-06-16 10:00:49.759 +07:00 [INF] Executing endpoint 'company_profile.Controllers.KategoriController.Index (company_profile)'
+2026-06-16 10:00:49.764 +07:00 [INF] Route matched with {action = "Index", controller = "Kategori"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller company_profile.Controllers.KategoriController (company_profile).
+2026-06-16 10:00:49.824 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `k`.`IDKategori`, `k`.`NamaKategori_EN`, `k`.`NamaKategori_ID`, (
+    SELECT COUNT(*)
+    FROM `News` AS `n`
+    WHERE `k`.`IDKategori` = `n`.`IDKategori`)
+FROM `Kategoris` AS `k`
+ORDER BY `k`.`IDKategori`
+2026-06-16 10:00:49.826 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:49.828 +07:00 [INF] Executing ViewResult, running view Index.
+2026-06-16 10:00:49.849 +07:00 [INF] Executed ViewResult - view Index executed in 22.8907ms.
+2026-06-16 10:00:49.850 +07:00 [INF] Executed action company_profile.Controllers.KategoriController.Index (company_profile) in 85.7104ms
+2026-06-16 10:00:49.850 +07:00 [INF] Executed endpoint 'company_profile.Controllers.KategoriController.Index (company_profile)'
+2026-06-16 10:00:49.851 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/Kategori/Index - 200 null text/html; charset=utf-8 102.7419ms
+2026-06-16 10:00:50.090 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:00:50.095 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-16 10:00:50.095 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 0.2031ms
+2026-06-16 10:00:50.095 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:50.096 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:00:50.190 +07:00 [INF] Executed DbCommand (61ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:50.190 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:00:50.191 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4164ms.
+2026-06-16 10:00:50.191 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 95.2168ms
+2026-06-16 10:00:50.191 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:50.191 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 101.0763ms
+2026-06-16 10:00:50.191 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:00:50.485 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:00:50.491 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:50.491 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:00:50.498 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:50.499 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:00:50.499 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.457ms.
+2026-06-16 10:00:50.499 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 8.5621ms
+2026-06-16 10:00:50.500 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:50.500 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 14.4976ms
+2026-06-16 10:00:50.500 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:00:52.443 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/Kategori/Create - null null
+2026-06-16 10:00:52.456 +07:00 [INF] Executing endpoint 'company_profile.Controllers.KategoriController.Create (company_profile)'
+2026-06-16 10:00:52.460 +07:00 [INF] Route matched with {action = "Create", controller = "Kategori"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Create() on controller company_profile.Controllers.KategoriController (company_profile).
+2026-06-16 10:00:52.463 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:52.464 +07:00 [INF] Executing ViewResult, running view Create.
+2026-06-16 10:00:52.494 +07:00 [INF] Executed ViewResult - view Create executed in 31.3195ms.
+2026-06-16 10:00:52.494 +07:00 [INF] Executed action company_profile.Controllers.KategoriController.Create (company_profile) in 34.0986ms
+2026-06-16 10:00:52.494 +07:00 [INF] Executed endpoint 'company_profile.Controllers.KategoriController.Create (company_profile)'
+2026-06-16 10:00:52.495 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/Kategori/Create - 200 null text/html; charset=utf-8 51.8588ms
+2026-06-16 10:00:52.722 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:00:52.727 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:52.727 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:00:52.743 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-16 10:00:52.744 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 0.1902ms
+2026-06-16 10:00:52.781 +07:00 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:52.781 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:00:52.782 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4168ms.
+2026-06-16 10:00:52.782 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 54.6136ms
+2026-06-16 10:00:52.782 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:52.782 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 152.479ms
+2026-06-16 10:00:52.782 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:00:52.954 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:00:52.961 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:52.961 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:00:52.964 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:00:52.965 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:00:52.965 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4712ms.
+2026-06-16 10:00:52.965 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 4.0129ms
+2026-06-16 10:00:52.965 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:00:52.965 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 11.2839ms
+2026-06-16 10:00:52.965 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:01:14.368 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5171/Kategori/Create - application/x-www-form-urlencoded 269
+2026-06-16 10:01:14.373 +07:00 [INF] Executing endpoint 'company_profile.Controllers.KategoriController.Create (company_profile)'
+2026-06-16 10:01:14.384 +07:00 [INF] Route matched with {action = "Create", controller = "Kategori"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(company_profile.KategoriVM) on controller company_profile.Controllers.KategoriController (company_profile).
+2026-06-16 10:01:14.626 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO `Kategoris` (`NamaKategori_EN`, `NamaKategori_ID`)
+VALUES (@p0, @p1);
+SELECT `IDKategori`
+FROM `Kategoris`
+WHERE ROW_COUNT() = 1 AND `IDKategori` = LAST_INSERT_ID();
+2026-06-16 10:01:14.650 +07:00 [INF] Executing RedirectResult, redirecting to /Kategori/Index.
+2026-06-16 10:01:14.657 +07:00 [INF] Executed action company_profile.Controllers.KategoriController.Create (company_profile) in 273.548ms
+2026-06-16 10:01:14.657 +07:00 [INF] Executed endpoint 'company_profile.Controllers.KategoriController.Create (company_profile)'
+2026-06-16 10:01:14.658 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5171/Kategori/Create - 302 null null 289.4809ms
+2026-06-16 10:01:14.678 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/Kategori/Index - null null
+2026-06-16 10:01:14.682 +07:00 [INF] Executing endpoint 'company_profile.Controllers.KategoriController.Index (company_profile)'
+2026-06-16 10:01:14.682 +07:00 [INF] Route matched with {action = "Index", controller = "Kategori"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller company_profile.Controllers.KategoriController (company_profile).
+2026-06-16 10:01:14.687 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `k`.`IDKategori`, `k`.`NamaKategori_EN`, `k`.`NamaKategori_ID`, (
+    SELECT COUNT(*)
+    FROM `News` AS `n`
+    WHERE `k`.`IDKategori` = `n`.`IDKategori`)
+FROM `Kategoris` AS `k`
+ORDER BY `k`.`IDKategori`
+2026-06-16 10:01:14.759 +07:00 [INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `n1`.`IDNews`, `n1`.`CreateAt`, `n1`.`IDKategori`, `n1`.`IsSent`, `n1`.`IsiContent_EN`, `n1`.`IsiContent_ID`, `n1`.`Judul_EN`, `n1`.`Judul_ID`, `n1`.`UrlGambar`, `k`.`IDKategori`
+FROM `Kategoris` AS `k`
+INNER JOIN `News` AS `n1` ON `k`.`IDKategori` = `n1`.`IDKategori`
+ORDER BY `k`.`IDKategori`
+2026-06-16 10:01:14.767 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:01:14.767 +07:00 [INF] Executing ViewResult, running view Index.
+2026-06-16 10:01:14.777 +07:00 [INF] Executed ViewResult - view Index executed in 10.0728ms.
+2026-06-16 10:01:14.777 +07:00 [INF] Executed action company_profile.Controllers.KategoriController.Index (company_profile) in 95.4417ms
+2026-06-16 10:01:14.777 +07:00 [INF] Executed endpoint 'company_profile.Controllers.KategoriController.Index (company_profile)'
+2026-06-16 10:01:14.778 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/Kategori/Index - 200 null text/html; charset=utf-8 100.001ms
+2026-06-16 10:01:14.926 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:01:14.938 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-16 10:01:14.938 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 0.2615ms
+2026-06-16 10:01:14.938 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:01:14.938 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:01:14.945 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:01:14.945 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:01:14.946 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.5343ms.
+2026-06-16 10:01:14.946 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 7.7007ms
+2026-06-16 10:01:14.946 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:01:14.947 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 20.4336ms
+2026-06-16 10:01:14.947 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:01:15.141 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:01:15.147 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:01:15.147 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:01:15.150 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:01:15.150 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:01:15.150 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.3682ms.
+2026-06-16 10:01:15.151 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 3.6939ms
+2026-06-16 10:01:15.151 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:01:15.151 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 10.1919ms
+2026-06-16 10:01:15.151 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:01:17.297 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/Admin/Dashboard - null null
+2026-06-16 10:01:17.302 +07:00 [INF] Executing endpoint 'company_profile.Controllers.AdminController.Dashboard (company_profile)'
+2026-06-16 10:01:17.303 +07:00 [INF] Route matched with {action = "Dashboard", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Dashboard() on controller company_profile.Controllers.AdminController (company_profile).
+2026-06-16 10:01:17.306 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Kategoris` AS `k`
+2026-06-16 10:01:17.312 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `News` AS `n`
+2026-06-16 10:01:17.317 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Events` AS `e`
+2026-06-16 10:01:17.319 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Teams` AS `t`
+2026-06-16 10:01:17.320 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Portfolios` AS `p`
+2026-06-16 10:01:17.322 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `OurServices` AS `o`
+2026-06-16 10:01:17.327 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Testimonials` AS `t`
+2026-06-16 10:01:17.329 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `PhotoGalleries` AS `p`
+2026-06-16 10:01:17.331 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Pricings` AS `p`
+2026-06-16 10:01:17.333 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:01:17.333 +07:00 [INF] Executing ViewResult, running view Dashboard.
+2026-06-16 10:01:17.336 +07:00 [INF] Executed ViewResult - view Dashboard executed in 2.6626ms.
+2026-06-16 10:01:17.336 +07:00 [INF] Executed action company_profile.Controllers.AdminController.Dashboard (company_profile) in 33.2806ms
+2026-06-16 10:01:17.336 +07:00 [INF] Executed endpoint 'company_profile.Controllers.AdminController.Dashboard (company_profile)'
+2026-06-16 10:01:17.338 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/Admin/Dashboard - 200 null text/html; charset=utf-8 41.0842ms
+2026-06-16 10:01:17.480 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:01:17.483 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-16 10:01:17.483 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 0.1917ms
+2026-06-16 10:01:17.487 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:01:17.487 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:01:17.494 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:01:17.495 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:01:17.495 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.3808ms.
+2026-06-16 10:01:17.495 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 7.8387ms
+2026-06-16 10:01:17.495 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:01:17.495 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 15.0146ms
+2026-06-16 10:01:17.495 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404
+2026-06-16 10:01:17.703 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - null null
+2026-06-16 10:01:17.708 +07:00 [INF] Executing endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:01:17.708 +07:00 [INF] Route matched with {action = "HttpStatusCodeHandler", controller = "Error"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult HttpStatusCodeHandler(Int32) on controller company_profile.Controllers.ErrorController (company_profile).
+2026-06-16 10:01:17.714 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `s`.`Id`, `s`.`CanonicalUrl`, `s`.`MetaDescription`, `s`.`MetaKeywords`, `s`.`MetaTitle`, `s`.`OgImageUrl`
+FROM `seometadata` AS `s`
+WHERE `s`.`Id` = 1
+LIMIT 1
+2026-06-16 10:01:17.714 +07:00 [INF] Executing ViewResult, running view NotFound.
+2026-06-16 10:01:17.715 +07:00 [INF] Executed ViewResult - view NotFound executed in 0.4067ms.
+2026-06-16 10:01:17.715 +07:00 [INF] Executed action company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile) in 6.7042ms
+2026-06-16 10:01:17.715 +07:00 [INF] Executed endpoint 'company_profile.Controllers.ErrorController.HttpStatusCodeHandler (company_profile)'
+2026-06-16 10:01:17.715 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5171/js/flatpickr.js - 404 null text/html; charset=utf-8 12.2219ms
+2026-06-16 10:01:17.715 +07:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5171/js/flatpickr.js, Response status code: 404

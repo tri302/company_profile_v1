@@ -1,0 +1,603 @@
+@using company_profile
+@model SettingsViewModel
+@{
+    ViewData["Title"] = "Setting";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Settings Section</h5>
+        <br />
+        <hr />
+
+        <ul class="nav nav-tabs" id="settingsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="logo-tab" data-bs-toggle="tab" data-bs-target="#logo" type="button"
+                        role="tab">
+                    Logo
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="favicon-tab" data-bs-toggle="tab" data-bs-target="#favicon" type="button"
+                        role="tab">
+                    Favicon
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email" type="button"
+                        role="tab">
+                    Email
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="banner-tab" data-bs-toggle="tab" data-bs-target="#banner" type="button"
+                        role="tab">
+                    Banner
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="color-tab" data-bs-toggle="tab" data-bs-target="#color" type="button"
+                        role="tab">
+                    Color
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="seo-tab" data-bs-toggle="tab" data-bs-target="#seo" type="button"
+                        role="tab">
+                    SEO
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-4" id="settingsTabContent">
+            <div class="tab-pane fade show active" id="logo" role="tabpanel" aria-labelledby="logo-tab">
+                <form id="formLogo" asp-action="UpdateLogo" asp-controller="Setting" method="post"
+                      enctype="multipart/form-data">
+                    <input type="hidden" asp-for="LogoSetting.Id" />
+                    <div class="mb-4 row">
+                        <label class="col-sm-2 col-form-label">Existing Photo</label>
+                        <div class="col-sm-10">
+                            <img src="@(string.IsNullOrEmpty(Model.LogoSetting.UrlGambar) ? "/uploads/no-image.png" : Model.LogoSetting.UrlGambar)"
+                                 alt="Logo" style="max-height: 80px;" id="previewLogo" />
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">New Photo</label>
+                        <div class="col-sm-6">
+                            <input type="file" class="form-control" asp-for="LogoSetting.NewLogo" accept="image/*"
+                                   onchange="previewImage(this, 'previewLogo')">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10 offset-sm-2">
+                            <button type="submit" class="btn btn-primary btn-sm">Update Logo</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="favicon" role="tabpanel" aria-labelledby="favicon-tab">
+                <form id="formFavicon" asp-action="UpdateFavicon" asp-controller="Setting" method="post"
+                      enctype="multipart/form-data">
+                    <input type="hidden" asp-for="SettingFavicon.Id" />
+                    <div class="mb-4 row">
+                        <label class="col-sm-2 col-form-label">Existing Photo</label>
+                        <div class="col-sm-10">
+                            <img src="@(string.IsNullOrEmpty(Model.SettingFavicon.UrlGambar) ? "/uploads/img/no-image.png" : Model.SettingFavicon.UrlGambar)"
+                                 alt="Favicon" style="max-height: 40px;" id="previewFavicon" />
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">New Photo</label>
+                        <div class="col-sm-6">
+                            <input type="file" class="form-control" asp-for="SettingFavicon.NewFavicon" accept="image/*"
+                                   onchange="previewImage(this, 'previewFavicon')">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10 offset-sm-2">
+                            <button type="submit" class="btn btn-primary btn-sm">Update Favicon</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="email" role="tabpanel" aria-labelledby="email-tab">
+                <div class="row g-4">
+                    <div class="col-lg-7 col-md-12">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="card-title mb-4 text-primary d-flex align-items-center">
+                                    <i class="fa fa-gear me-2"></i> SMTP Configuration
+                                </h5>
+
+                                <form id="formEmail" asp-action="UpdateEmail" asp-controller="Setting" method="post">
+                                    <input type="hidden" asp-for="EmailSetting.Id" />
+
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold text-secondary">
+                                                Send Email From
+                                                *
+                                            </label>
+                                            <input type="email" class="form-control form-control-solid"
+                                                   asp-for="EmailSetting.SendEmailFrom"
+                                                   placeholder="noreply@yourdomain.com" required>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold text-secondary">
+                                                Receive Email To
+                                                *
+                                            </label>
+                                            <input type="email" class="form-control form-control-solid"
+                                                   asp-for="EmailSetting.ReceiveEmailTo" placeholder="admin@yourdomain.com"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <label class="form-label fw-semibold text-secondary">SMTP Host</label>
+                                            <input type="text" class="form-control" asp-for="EmailSetting.SmtpHost"
+                                                   placeholder="e.g., live.smtp.mailtrap.io">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-semibold text-secondary">SMTP Port</label>
+                                            <input type="number" class="form-control" asp-for="EmailSetting.SmtpPort"
+                                                   placeholder="587">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold text-secondary">SMTP Username</label>
+                                            <input type="text" class="form-control" asp-for="EmailSetting.SmtpUsername"
+                                                   placeholder="Username atau API Key">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold text-secondary">SMTP Password</label>
+                                            <input type="password" class="form-control"
+                                                   asp-for="EmailSetting.SmtpPassword"
+                                                   value="@Model.EmailSetting.SmtpPassword" placeholder="••••••••">
+                                        </div>
+
+                                        <div class="col-12 mt-4 text-end">
+                                            <button type="submit" class="btn btn-primary px-4 shadow-sm btn-sm">
+                                                <i class="fa fa-save me-1"></i> Save Configuration
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-12">
+                        <div class="card bg-light border-0 shadow-sm h-100">
+                            <div class="card-body p-4 d-flex flex-column justify-content-between">
+                                <div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="p-2 bg-primary bg-opacity-10 text-primary rounded-3 me-3">
+                                            <i class="fa fa-phone fs-4 px-1"></i>
+                                        </div>
+                                        <h5 class="card-title mb-0 fw-bold text-dark">Informasi Broadcast</h5>
+                                    </div>
+
+                                    <p class="text-muted lh-base small">
+                                        Email ini digunakan untuk melakukan <strong>
+                                            broadcast berita secara massal.
+                                            </strong>
+                                    </p>
+
+                                    <div class="alert alert-warning border-0 bg-warning bg-opacity-10 text-warning-dark p-3 rounded-3 my-3 small"
+                                         role="alert">
+                                        <i class="fa fa-exclamation-triangle me-2"></i>
+                                        Pastikan email pengirim aktif dan konfigurasi SMTP sudah benar agar email tidak
+                                        masuk ke folder spam/junk.
+                                    </div>
+
+                                    <p class="text-muted lh-base small mb-0">
+                                        Anda dapat mengatur email ini menggunakan nama domain sendiri (misalnya:
+                                        <code>info@company.com</code>) atau menggunakan layanan pihak ketiga seperti
+                                        <strong>Mailtrap, Gmail, Outlook, dll</strong>.
+                                    </p>
+                                </div>
+
+                                <div class="pt-4 border-top border-2 border-dashed mt-3">
+                                    <span class="badge bg-secondary bg-opacity-10 text-secondary p-2 w-100 text-start text-wrap font-monospace lh-base"
+                                          style="font-size: 0.75rem;">
+                                        <i class="fa fa-info-circle me-1"></i> Note: Jika menggunakan Mailtrap, gunakan
+                                        host <code>live.smtp.mailtrap.io</code> untuk mode produksi (Email Sending).
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="banner" role="tabpanel" aria-labelledby="banner-tab">
+                <div class="row">
+                    @if (Model.PageBanners != null && Model.PageBanners.Count > 0)
+                    {
+                        @for (int i = 0; i < Model.PageBanners.Count; i++)
+                        {
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-header bg-light">
+                                        <h6 class="m-0 font-weight-bold text-primary">@Model.PageBanners[i].PageName</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="formBanner-@Model.PageBanners[i].Id" enctype="multipart/form-data">
+                                            <input type="hidden" name="Id" value="@Model.PageBanners[i].Id" />
+                                            <input type="hidden" name="PageName" value="@Model.PageBanners[i].PageName" />
+                                            <input type="hidden" name="BannerPath" value="@Model.PageBanners[i].BannerPath" />
+
+                                            <div class="mb-3">
+                                                <label class="form-label text-muted small d-block">Existing Banner</label>
+                                                <img src="@(string.IsNullOrEmpty(Model.PageBanners[i].BannerPath) ? "/uploads/no-image.png" : "/uploads/banners/" + Model.PageBanners[i].BannerPath)"
+                                                     id="preview-@Model.PageBanners[i].Id" class="img-thumbnail w-100"
+                                                     style="height: 150px; object-fit: cover;" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label text-muted small">Change Banner</label>
+                                                <input type="file" name="NewBanner" class="form-control form-control-sm"
+                                                       accept="image/*"
+                                                       onchange="previewImage(this, 'preview-@Model.PageBanners[i].Id')" />
+                                            </div>
+
+                                            <button type="button" class="btn btn-primary btn-sm w-100"
+                                                    onclick="uploadBanner('@Model.PageBanners[i].Id')">
+                                                <i class="fa fa-upload me-1"></i> Update Banner
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 text-center text-muted py-4">
+                            <p>Tidak ada data banner halaman ditemukan.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="color" role="tabpanel" aria-labelledby="color-tab">
+                <div class="row">
+                    <div class="col-md-4 mx-auto">
+                        <form asp-action="SaveSettings" id="formColor" method="post" asp-controller="Setting">
+                            <div class="form-group">
+                                <label class="fw-semibold text-secondary mb-1">Warna Header:</label>
+                                <input asp-for="Theme.HeaderColor" value="@Model.Theme?.HeaderColor"
+                                       class="form-control" data-jscolor="{format:'hex'}" id="header-picker" />
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="fw-semibold text-secondary mb-1">Warna Footer:</label>
+                                <input asp-for="Theme.FooterColor" value="@Model.Theme?.FooterColor"
+                                       class="form-control" data-jscolor="{format:'hex'}" id="footer-picker" />
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-4 btn-sm w-100">
+                                <i class="fa fa-save me-1"></i> Simpan Perubahan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Pengaturan SEO Global</h5>
+                        <br />
+                        <p class="text-muted">
+                            Atur metadata default yang akan digunakan jika halaman tidak memiliki SEO
+                            spesifik.
+                        </p>
+
+                        <form id="formSeo" asp-controller="Setting" asp-action="UpdateSeo" method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="SeoMetadata.Id" />
+                            <div class="mb-3">
+                                <label for="MetaTitle" class="form-label">Meta Title</label>
+                                <input type="text" class="form-control" asp-for="SeoMetadata.MetaTitle" placeholder="Contoh: Beranda | Nama Perusahaan">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="MetaKeywords" class="form-label">Meta Keywords</label>
+                                <input type="text" class="form-control" asp-for="SeoMetadata.MetaKeywords" placeholder="Contoh: software, layanan IT, konsultasi">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="MetaDescription" class="form-label">Meta Description</label>
+                                <textarea class="form-control" asp-for="SeoMetadata.MetaDescription" rows="3" placeholder="Deskripsi singkat..."></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="CanonicalUrl" class="form-label">Canonical URL (Opsional)</label>
+                                <input type="text" class="form-control" asp-for="SeoMetadata.CanonicalUrl" placeholder="https://www.domainanda.com">
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Existing Photo</label>
+                                <div class="col-sm-10">
+                                    <img src="@(string.IsNullOrEmpty(Model.SeoMetadata?.OgImageUrl) ? "/uploads/default-og-image.png" : Model.SeoMetadata.OgImageUrl)"
+                                         alt="Seo" style="max-height: 80px;" id="previewSeo" />
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">New Photo</label>
+                                <div class="col-sm-6">
+                                    <input type="file" class="form-control" asp-for="SeoMetadata.NewFoto" accept="image/*"
+                                           onchange="previewImage(this, 'previewSeo')">
+                                </div>
+                            </div>
+                            <div align="center">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-save me-1"></i> Simpan SEO
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+          // 1. Tambahkan #formSeo ke dalam daftar selector
+          $(
+            "#formColor, #formLogo, #formFavicon, #formEmail, #formSeo, [id^='formBanner-']",
+          ).on("submit", function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr("action");
+            var formId = form.attr("id"); // Simpan ID form untuk pengecekan nanti
+
+            if (!url && formId.startsWith("formBanner-")) {
+              return;
+            }
+
+            var formData = new FormData(this);
+
+            Swal.fire({
+              title: "Menyimpan Data...",
+              text: "Harap tunggu sebentar.",
+              allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+              },
+            });
+
+            $.ajax({
+              url: url,
+              type: "POST",
+              data: formData,
+              contentType: false,
+              processData: false,
+              success: function (response) {
+                if (response.success) {
+                  Swal.fire({
+                    icon: "success",
+                    title: "Berhasil!",
+                    text: response.message || "Konfigurasi telah diperbarui.",
+                    timer: 2000,
+                    showConfirmButton: false,
+                  }).then(() => {
+                    // 2. CEK ID FORM: Jika bukan formSeo, lakukan reload.
+                    // Jika formSeo, biarkan saja (tanpa reload).
+                    if (formId !== "formSeo") {
+                      location.reload();
+                    }
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Gagal!",
+                    text:
+                      response.message || "Terjadi kesalahan saat menyimpan data.",
+                  });
+                }
+              },
+              error: function (xhr, status, error) {
+                Swal.fire({
+                  icon: "error",
+                  title: "Sistem Error",
+                  text: "Gagal terhubung ke server: " + error,
+                });
+              },
+            });
+          });
+        });
+    </script>
+
+    <script>
+        // Fungsi untuk memproses upload banner menggunakan Fetch API
+        function uploadBanner(id) {
+          const form = document.getElementById(`formBanner-${id}`);
+          if (!form) return;
+
+          const fileInput = form.querySelector('input[type="file"]');
+          if (!fileInput || fileInput.files.length === 0) {
+            Swal.fire({
+              icon: "warning",
+              title: "Warning!",
+              text: "Silakan pilih file banner terlebih dahulu sebelum memperbarui.",
+            });
+            return;
+          }
+
+          const pageName = form.querySelector('input[name="PageName"]').value;
+
+          // Petakan PageName ke URL Aksi Controller yang sesuai
+          let actionUrl = "";
+          switch (pageName) {
+            case "About Page":
+              actionUrl = "/Setting/UpdateBannerAboutPage";
+              break;
+            case "Testimonial Page":
+              actionUrl = "/Setting/UpdateBannerTestimonialPage";
+              break;
+            case "News Page":
+              actionUrl = "/Setting/UpdateBannerNewsPage";
+              break;
+            case "Event Page":
+              actionUrl = "/Setting/UpdateBannerEventPage";
+              break;
+            case "Contact Page":
+              actionUrl = "/Setting/UpdateBannerContactPage";
+              break;
+            case "Search Page":
+              actionUrl = "/Setting/UpdateBannerSearchPage";
+              break;
+            case "Privacy Page":
+              actionUrl = "/Setting/UpdateBannerPrivacyPage";
+              break;
+            case "Verify Subscriber Page":
+              actionUrl = "/Setting/UpdateBannerVerifySubscriberPage";
+              break;
+            case "FAQ Page":
+              actionUrl = "/Setting/UpdateBannerFAQPage";
+              break;
+            case "Service Page":
+              actionUrl = "/Setting/UpdateBannerServicePage";
+              break;
+            case "Portfolio Page":
+              actionUrl = "/Setting/UpdateBannerPortfolioPage";
+              break;
+            case "Team Page":
+              actionUrl = "/Setting/UpdateBannerTeamPage";
+              break;
+            case "Pricing Page":
+              actionUrl = "/Setting/UpdateBannerPricingPage";
+              break;
+            case "Photo Gallery Page":
+              actionUrl = "/Setting/UpdateBannerPhotoGalleryPage";
+              break;
+            case "Terms Page":
+              actionUrl = "/Setting/UpdateBannerTermsPage";
+              break;
+            case "Cta Page":
+              actionUrl = "/Setting/UpdateBannerCtaPage";
+              break;
+            default:
+              Swal.fire({
+                icon: "error",
+                title: "Gagal!",
+                text: "Rute halaman tidak dikenali!",
+              });
+              return;
+          }
+
+          const formData = new FormData(form);
+
+          // Tampilkan loading sebelum fetch
+          Swal.fire({
+            title: "Menyimpan Banner...",
+            text: "Harap tunggu sebentar.",
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          });
+
+          fetch(actionUrl, {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                Swal.fire({
+                  icon: "success",
+                  title: "Berhasil!",
+                  text: data.message,
+                  timer: 2000,
+                  showConfirmButton: false,
+                }).then(() => {
+                  location.reload();
+                });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Gagal!",
+                  text: data.message || "Terjadi kesalahan saat memperbarui banner.",
+                });
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              Swal.fire({
+                icon: "error",
+                title: "Sistem Error",
+                text: "Gagal terhubung ke server: " + error,
+              });
+            });
+        }
+
+        // Fungsi pembantu untuk pratinjau gambar secara real-time saat file dipilih
+        function previewImage(input, previewId) {
+          const preview = document.getElementById(previewId);
+          if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              preview.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+    </script>
+
+    <script>
+        // Menampilkan pesan sukses dari backend TempData jika ada
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                            Swal.fire({
+                                icon: 'success',
+                            title: 'Sukses!',
+                            text: '@TempData["SuccessMessage"]',
+                            position: 'top',
+                            timer: 5000,
+                            showConfirmButton: false
+                                                                        });
+            </text>
+        }
+    </script>
+    <script>
+        document
+          .getElementById("header-picker")
+          .addEventListener("input", function (e) {
+            var warnaDipilih = e.target.value;
+            // Opsional: manipulasi DOM preview real-time di sini
+          });
+
+        document
+          .getElementById("footer-picker")
+          .addEventListener("input", function (e) {
+            var warnaDipilih = e.target.value;
+            // Opsional: manipulasi DOM preview real-time di sini
+          });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // Mengambil nilai langsung dari model Razor
+          var headerColor = "@Model.Theme?.HeaderColor";
+          var footerColor = "@Model.Theme?.FooterColor";
+
+          // Jika nilai dari database ada, pasang ke jscolor
+          if (headerColor) {
+            document.getElementById("header-picker").jscolor.fromString(headerColor);
+          }
+          if (footerColor) {
+            document.getElementById("footer-picker").jscolor.fromString(footerColor);
+          }
+        });
+    </script>
+}

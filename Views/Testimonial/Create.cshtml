@@ -1,0 +1,103 @@
+@model company_profile.TestimonialVM
+@{
+    ViewData["Title"] = "Add Testimonial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .ck-editor__editable_inline {
+        min-height: 250px;
+    }
+</style>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white"><h5>Add Testimonial</h5></div>
+                <div class="card-body">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div class="text-center mb-4">
+                            <img id="imgPreview" src="/uploads/no-user.png" class="rounded-circle img-thumbnail"
+                                 style="width: 120px; height: 120px; object-fit: cover;" />
+                            <div class="mt-2">
+                                <input asp-for="UploadGambar" type="file" required class="form-control form-control-sm" accept="image/*" onchange="previewFile()" />
+                                <span asp-validation-for="UploadGambar" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Nama" class="form-label fw-bold"></label>
+                            <input asp-for="Nama" class="form-control" />
+                            <span asp-validation-for="Nama" class="text-danger"></span>
+                        </div>
+
+                        <ul class="nav nav-tabs" id="langTabs" role="tablist">
+                            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#id-pane" type="button">🇮🇩 Indonesia</button></li>
+                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#en-pane" type="button">🇺🇸 English</button></li>
+                        </ul>
+
+                        <div class="tab-content p-3 border border-top-0 mb-3">
+                            <div class="tab-pane fade show active" id="id-pane">
+                                <div class="mb-3">
+                                    <label asp-for="Jabatan_ID" class="form-label"></label>
+                                    <input asp-for="Jabatan_ID" class="form-control" />
+                                    <span asp-validation-for="Jabatan_ID" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiTestimoni_ID" class="form-label"></label>
+                                    <textarea asp-for="IsiTestimoni_ID" class="form-control editor-id" rows="5"></textarea>
+                                    <span asp-validation-for="IsiTestimoni_ID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="en-pane">
+                                <div class="mb-3">
+                                    <label asp-for="Jabatan_EN" class="form-label"></label>
+                                    <input asp-for="Jabatan_EN" class="form-control" />
+                                    <span asp-validation-for="Jabatan_EN" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="IsiTestimoni_EN" class="form-label"></label>
+                                    <textarea asp-for="IsiTestimoni_EN" class="form-control editor-en" rows="5"></textarea>
+                                    <span asp-validation-for="IsiTestimoni_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between border-top pt-3 mt-3">
+                            <a asp-action="Index" class="btn btn-secondary btn-sm">
+                                <i class="fa fa-arrow-left"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-save"></i> Simpan Data
+                            </button>
+                        </div>                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Inisialisasi Editor untuk semua textarea dengan class terkait
+        document.querySelectorAll('.editor-id, .editor-en').forEach(el => {
+            ClassicEditor.create(el).then(editor => {
+                editor.model.document.on('change:data', () => { el.value = editor.getData(); });
+            });
+        });
+
+        // Preview Foto
+        function previewFile() {
+            const file = document.querySelector('input[type="file"]').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => { document.getElementById('imgPreview').src = e.target.result; };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        $.validator.setDefaults({ ignore: [] });
+    </script>    
+}

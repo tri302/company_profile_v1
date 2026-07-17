@@ -1,0 +1,75 @@
+@model company_profile.KategoriVM
+@{
+    ViewData["Title"] = "Edit Kategori";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid px-4 mt-4">
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-8">
+            <div class="card shadow-sm border-0 border-top border-warning border-4 rounded-3">
+                
+                <div class="card-header bg-white py-3 d-flex align-items-center border-bottom">
+                    <div class="bg-warning-subtle text-warning p-2 rounded-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0 fw-bold text-dark">Ubah Data Kategori</h5>
+                        <small class="text-muted">Perbarui nama kategori untuk versi Bahasa Indonesia dan Inggris</small>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post" autocomplete="off" asp-controller="Kategori">
+                        
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" asp-for="IDKategori" />
+
+                        <div class="mb-4">
+                            <label asp-for="NamaKategori_ID" class="form-label fw-semibold text-secondary d-flex align-items-center gap-2">
+                                <span class="badge bg-light text-dark border border-secondary-subtle">ID</span>
+                                Nama Kategori (Indonesia) <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light text-muted"><i class="fa fa-font" aria-hidden="true"></i></span>
+                                <input asp-for="NamaKategori_ID" class="form-control" 
+                                       placeholder="Masukkan nama kategori dalam Indonesia..." />
+                            </div>
+                            <span asp-validation-for="NamaKategori_ID" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="NamaKategori_EN" class="form-label fw-semibold text-secondary d-flex align-items-center gap-2">
+                                <span class="badge bg-light text-dark border border-secondary-subtle">EN</span>
+                                Category Name (English) <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light text-muted"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                                <input asp-for="NamaKategori_EN" class="form-control" 
+                                       placeholder="Masukkan nama kategori dalam Inggris..." />
+                            </div>
+                            <span asp-validation-for="NamaKategori_EN" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <hr class="text-muted my-4 opacity-25">
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-light border px-4 fw-semibold text-secondary d-inline-flex align-items-center gap-2">
+                                <i class="fa fa-arrow-left"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-success px-4 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                                <i class="fa fa-save"></i> Perbarui Kategori
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

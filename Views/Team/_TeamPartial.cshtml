@@ -1,0 +1,102 @@
+﻿@model company_profile.TeamVM
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light border-bottom">
+                    <tr>
+                        @* <th class="text-center" style="width: 5%">#</th> *@
+                        <th style="width: 30%">Member</th>
+                        <th style="width: 30%">Jabatan (ID / EN)</th>
+                        <th style="width: 15%">Social Media</th>
+                        <th class="text-center" style="width: 20%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.List.Any())
+                    {
+                        @* int no = 1; *@
+                        @foreach (var item in Model.List)
+                        {
+                            <tr>
+                                @* <td class="text-center text-muted">@no</td> *@
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="@Url.Content(string.IsNullOrEmpty(item.UrlGambar) ? "~/uploads/no-image.png" : "~/" + item.UrlGambar.TrimStart('/'))"
+                                             class="rounded-circle shadow-sm me-3"
+                                             style="width: 45px; height: 45px; object-fit: cover;" />
+                                        <div>
+                                            <div class="fw-bold text-dark">@item.Nama</div>
+                                            <small class="text-muted">@item.Email</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mb-1"><span class="badge bg-light text-danger border">ID</span> <small>@item.Jabatan_ID</small></div>
+                                    <div><span class="badge bg-light text-primary border">EN</span> <small>@item.Jabatan_EN</small></div>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        @if (!string.IsNullOrEmpty(item.UrlFb))
+                                        {
+                                            <i class="fa fa-facebook text-primary"></i>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.UrlLinkedIn))
+                                        {
+                                            <i class="fa fa-linkedin text-info"></i>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.UrlTwiter))
+                                        {
+                                            <i class="fa fa-twitter text-dark"></i>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.UrlYoutube))
+                                        {
+                                            <i class="fa fa-youtube text-danger"></i>
+                                        }
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm">
+                                        <a asp-action="Edit" asp-route-id="@item.IDTeam" class="btn btn-sm btn-warning">
+                                            <i class="fa fa-edit"></i>
+                                            Edit
+                                        </a>
+                                        <button type="button" onclick="deleteMember(@item.IDTeam)" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @* no++; *@
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="fa fa-users fa-3x mb-3 d-block opacity-50"></i>
+                                Belum ada data anggota tim.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-3 gap-3" id="pagination-controls">
+    <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+            data-page="@(Model.CurrentPage - 1)">
+        <i class="fa fa-arrow-left"></i>
+        Previous
+    </button>
+
+    <span class="text-muted fw-bold">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+    <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+            data-page="@(Model.CurrentPage + 1)">
+        Next
+        <i class="fa fa-arrow-right"></i>
+    </button>
+</div>

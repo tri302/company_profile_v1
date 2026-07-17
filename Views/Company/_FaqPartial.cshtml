@@ -1,0 +1,73 @@
+﻿@using company_profile;
+@model FaqVM
+<!--FAQ Start-->
+<div class="faq-area faq-main-page pt_60 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="faq-group headstyle mt-30">
+
+                    <div id="accordion">
+                        @if (Model.ListFaqs == null || !Model.ListFaqs.Any())
+                        {
+                            <div class="faq-item card">
+                                <div class="faq-body">
+                                    <p>There is no data to show</p>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            var index = 0;
+                            foreach (var item in Model.ListFaqs)
+                            {
+                                var headingId = $"heading{index}";
+                                var collapseId = $"collapse{index}";
+                                var isFirst = index == 0;
+
+                                <div class="faq-item card">
+                                    <div class="faq-header" id="@headingId">
+                                        <button class="faq-button @(isFirst ? "" : "collapsed")" data-bs-toggle="collapse"
+                                                data-bs-target="#@collapseId" aria-expanded="@(isFirst.ToString().ToLower())"
+                                                aria-controls="@collapseId">
+                                            <i class="fa fa-caret-right"></i>
+                                            @item.JudulFaq
+                                        </button>
+                                    </div>
+
+                                    <div id="@collapseId" class="collapse @(isFirst ? "show" : "")" aria-labelledby="@headingId"
+                                         data-parent="#accordion">
+                                        <div class="faq-body">
+                                            <p>@Html.Raw(item.IsiFaq)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                index++;
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center align-items-center mt-4" id="pagination-controls">
+                <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+                        data-page="@(Model.CurrentPage - 1)">
+                    <i class="fa fa-arrow-left"></i> Previous
+                </button>
+
+                <!-- Menambahkan mx-4 untuk memberi jarak kiri dan kanan pada teks -->
+                <span class="text-muted fw-bold mx-4">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+                <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+                        data-page="@(Model.CurrentPage + 1)">
+                    Next <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FAQ End-->

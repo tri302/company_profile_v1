@@ -1,0 +1,272 @@
+﻿@model company_profile.NewsVM
+@{
+    ViewData["Title"] = "Edit Berita";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    /* Menjaga konsistensi tinggi editor teks */
+    .ck-editor__editable_inline {
+        min-height: 280px;
+    }
+    .image-preview-wrapper {
+        max-width: 220px;
+        max-height: 140px;
+        object-fit: cover;
+    }
+</style>
+
+<div class="container-fluid px-4 mt-4">
+    <div class="row justify-content-center">
+        <div class="col-xl-9 col-lg-11">
+            <div class="card shadow-sm border-0 border-top border-warning border-4 rounded-3">
+                
+                <div class="card-header bg-white py-3 d-flex align-items-center border-bottom">
+                    <div class="bg-warning-subtle text-warning p-2 rounded-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0 fw-bold text-dark">Ubah Data Artikel Berita</h5>
+                        <small class="text-muted">Perbarui informasi, kategori, atau modifikasi konten terjemahan artikel</small>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data" autocomplete="off">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" asp-for="IDNews" />
+                        <input type="hidden" asp-for="UrlGambar" />
+                        <input type="hidden" asp-for="CreateAt" />
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="IDKategori" class="form-label fw-semibold text-secondary">
+                                    <i class="fa fa-tags me-1" aria-hidden="true"></i> Kategori Berita <span class="text-danger">*</span>
+                                </label>
+                                <select asp-for="IDKategori" class="form-select"
+                                        asp-items="@(new SelectList(ViewBag.KategoriList ?? new List<Kategori>(), "IDKategori", "NamaKategori"))">
+                                    <option value="">-- Pilih Kategori Artikel --</option>
+                                </select>
+                                <span asp-validation-for="IDKategori" class="text-danger small mt-1 d-block"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="UploadGambar" class="form-label fw-semibold text-secondary">
+                                    <i class="fa fa-image me-1" aria-hidden="true"></i> Ganti Cover Baru (Opsional)
+                                </label>
+                                <input asp-for="UploadGambar" id="fileCoverEdit" type="file" class="form-control" accept="image/*" />     <small class="text-muted" style="font-size: 0.78rem;">Biarkan kosong jika tidak ingin mengubah gambar sampul utama</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 p-3 bg-light border rounded">
+                            <div class="text-secondary small fw-semibold mb-2" id="previewLabel">Gambar Sampul Saat Ini:</div>
+                            <img id="imageEditPreview" 
+                                 src="@(string.IsNullOrEmpty(Model.UrlGambar) ? "/images/no-news.png" : Model.UrlGambar)" 
+                                 class="image-preview-wrapper rounded shadow-sm border" 
+                                 alt="Preview Cover" 
+                                 onerror="this.onerror=null; this.src='/images/no-news.png';" />
+                        </div>
+
+                        <div class="card border shadow-none bg-white rounded-3 mb-4">
+                            <div class="card-header bg-light p-2">
+                                <ul class="nav nav-pills card-header-pills" id="multiLangEditTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active fw-semibold d-flex align-items-center gap-2" id="id-edit-tab" data-bs-toggle="tab" data-bs-target="#edit-id" type="button" role="tab" aria-controls="edit-id" aria-selected="true">
+                                            🇮🇩 Bahasa Indonesia
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link fw-semibold d-flex align-items-center gap-2" id="en-edit-tab" data-bs-toggle="tab" data-bs-target="#edit-en" type="button" role="tab" aria-controls="edit-en" aria-selected="false">
+                                            🇺🇸 English Version
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="card-body tab-content p-4" id="multiLangEditTabContent">
+                                
+                                <div class="tab-pane fade show active" id="edit-id" role="tabpanel" aria-labelledby="id-edit-tab">
+                                    <div class="mb-4">
+                                        <label asp-for="Judul_ID" class="form-label fw-semibold text-secondary">Judul Berita (Indonesia) <span class="text-danger">*</span></label>
+                                        <input asp-for="Judul_ID" class="form-control" placeholder="Tuliskan judul berita utama disini..." />
+                                        <span asp-validation-for="Judul_ID" class="text-danger small mt-1 d-block"></span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label asp-for="IsiContent_ID" class="form-label fw-semibold text-secondary">Isi Konten Berita (Indonesia) <span class="text-danger">*</span></label>
+                                        <!-- Instruksi yang dipercantik -->
+                                        <div class="alert alert-info py-2 px-3 small mb-2">
+                                            <i class="fa fa-info-circle me-1"></i>
+                                            <strong>Tips:</strong> Untuk menyisipkan video, unggah video Anda ke YouTube terlebih dahulu, lalu masukkan URL video tersebut ke dalam editor di bawah.
+                                        </div>
+                                        <textarea asp-for="IsiContent_ID" id="editor_edit_ID" class="form-control"></textarea>
+                                        <span asp-validation-for="IsiContent_ID" class="text-danger small mt-1 d-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="edit-en" role="tabpanel" aria-labelledby="en-edit-tab">
+                                    <div class="mb-4">
+                                        <label asp-for="Judul_EN" class="form-label fw-semibold text-secondary">News Title (English) <span class="text-danger">*</span></label>
+                                        <input asp-for="Judul_EN" class="form-control" placeholder="Write the main news headline here..." />
+                                        <span asp-validation-for="Judul_EN" class="text-danger small mt-1 d-block"></span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label asp-for="IsiContent_EN" class="form-label fw-semibold text-secondary">News Content Body (English) <span class="text-danger">*</span></label>
+                                        <!-- Instruksi yang dipercantik -->
+                                        <div class="alert alert-info py-2 px-3 small mb-2">
+                                            <i class="fa fa-info-circle me-1"></i>
+                                            <strong>Tips:</strong> Untuk menyisipkan video, unggah video Anda ke YouTube terlebih dahulu, lalu masukkan URL video tersebut ke dalam editor di bawah.
+                                        </div>
+                                        <textarea asp-for="IsiContent_EN" id="editor_edit_EN" class="form-control"></textarea>
+                                        <span asp-validation-for="IsiContent_EN" class="text-danger small mt-1 d-block"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <hr class="text-muted my-4 opacity-25">
+
+                        <div class="d-flex justify-content-end justify-content-between gap-1">
+                            <a asp-action="Index" class="btn-sm btn btn-secondary gap-1">
+                                <i class="fa fa-arrow-left"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-success btn-sm fw-semibold d-inline-flex align-items-center gap-1 shadow-sm">
+                                <i class="fa fa-save"></i> Simpan Perubahan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+        // Mencegah validasi jQuery mengabaikan input tersembunyi (CKEditor textarea)
+        $.validator.setDefaults({
+            ignore: []
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. Definisikan Adapter Class
+                    class MyUploadAdapter {
+            constructor(loader) { this.loader = loader; }
+
+            upload() {
+                return this.loader.file.then(file => {
+                    return new Promise((resolve, reject) => {
+                        const data = new FormData();
+                        data.append('upload', file);
+
+                        fetch('/News/UploadImage', {
+                            method: 'POST',
+                            body: data,
+                            // Pastikan header tidak membawa sisa-sisa form jika tidak perlu
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) throw new Error('Network response was not ok');
+                            return response.json();
+                        })
+                        .then(result => {
+                            if (result.uploaded === 1) {
+                                resolve({ default: result.url });
+                            } else {
+                                reject(result.error ? result.error.message : 'Upload failed');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Upload Error:', error);
+                            reject(error);
+                        });
+                    });
+                });
+            }
+
+            // Tambahkan ini untuk mencegah abort() memicu aksi yang tidak diinginkan
+            abort() {}
+        }
+
+            function MyCustomUploadAdapterPlugin(editor) {
+                editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                    return new MyUploadAdapter(loader);
+                };
+            }
+
+            // 2. Definisikan fungsi init
+            function initEditor(elementId) {
+                const editorEl = document.querySelector('#' + elementId);
+                if (!editorEl) return;
+
+                ClassicEditor
+                    .create(editorEl, {
+                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                    })
+                    .then(editor => {
+                        editor.model.document.on('change:data', () => {
+                            editorEl.value = editor.getData();
+                            $(editorEl).valid();
+                        });
+                    })
+                    .catch(error => { console.error(error); });
+            }
+
+            // 3. PANGGIL FUNGSI DI SINI (Ini yang sebelumnya kurang)
+            initEditor('editor_edit_ID');
+            initEditor('editor_edit_EN');
+        });
+
+        // 3. SKRIP SWAP PREVIEW GAMBAR & CEK FILE SIZE (Perbaikan JavaScript .length)
+        document.getElementById('fileCoverEdit').addEventListener('change', function () {
+            const previewImg = document.getElementById('imageEditPreview');
+            const previewLabel = document.getElementById('previewLabel');
+            const fallbackSrc = '@(string.IsNullOrEmpty(Model.UrlGambar) ? "/uploads/no-image.png" : Model.UrlGambar)';
+            
+            if (this.files && this.files.length > 0) {
+                const file = this.files[0];
+                const fileSizeInMB = file.size / 1024 / 1024;
+                const maxSize = 2; // Limit 2 Megabytes
+
+                if (fileSizeInMB > maxSize) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ukuran Gambar Terlalu Besar!',
+                        text: 'Maksimal ukuran gambar yang diizinkan adalah ' + maxSize + ' MB. Silakan pilih berkas lain.',
+                        confirmButtonColor: '#0d6efd'
+                    });
+                    this.value = ''; // Reset input file
+                    previewImg.src = fallbackSrc; // Kembalikan ke gambar semula
+                    previewLabel.innerText = "Gambar Sampul Saat Ini:";
+                    return;
+                }
+
+                // Render stream data file ke penampung gambar src (Live Preview Swap)
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImg.src = e.target.result;
+                    previewLabel.innerHTML = '<span class="badge bg-success me-1">Baru</span> Pratinjau Gambar Cover Baru:';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                // Jika user membatalkan pilihan file, kembalikan ke default gambar di server
+                previewImg.src = fallbackSrc;
+                previewLabel.innerText = "Gambar Sampul Saat Ini:";
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new EmbedJS({
+                // Opsional: Jika ingin menentukan selector spesifik
+                selector: 'oembed'
+            }).render();
+        });
+    </script>
+}

@@ -1,0 +1,104 @@
+@model NewsVM
+@{
+    ViewData["Title"] = "Manajemen Berita";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Manajemen Artikel Berita</h2>
+        <a asp-action="Create" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus-circle"></i> Create New
+        </a>
+    </div>
+    <div id="table-container">
+        <partial name="_NewsPartial.cshtml" model="Model" />
+    </div>
+</div>   
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedData", "News")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        function deleteNews(id) {
+            Swal.fire({
+                title: 'Hapus Artikel Berita?',
+                text: "Artikel yang dihapus tidak dapat dikembalikan dan akan memutus relasi komentar terkait.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: 'btn btn-danger px-3 mx-1',
+                    cancelButton: 'btn btn-secondary px-3 mx-1'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Menghapus data...',
+                        didOpen: () => { Swal.showLoading() },
+                        allowOutsideClick: false
+                    });
+
+                    $.ajax({
+                        url: '/News/Delete/' + id,
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Terhapus!',
+                                    text: 'Artikel berita berhasil dihapus dari sistem.',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire('Gagal!', res.message || 'Gagal menghapus berita.', 'error');
+                            }
+                        },
+                        error: function () {
+                            Swal.fire('Error!', 'Terjadi kegagalan komunikasi internal server.', 'error');
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: @Json.Serialize(TempData["SuccessMessage"]),
+                    timer: 4000,
+                    showConfirmButton: false,
+                    toast: true,
+                    position: 'top-end',
+                    background: '#fff',
+                    iconColor: '#198754'
+                });
+            </text>
+        }
+    </script>
+}

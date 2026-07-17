@@ -1,0 +1,101 @@
+﻿@model company_profile.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Terjadi Kesalahan";
+    Layout = null;
+}
+
+<div class="error-container">
+    <div class="error-content">
+        <!-- Ikon Peringatan Umum -->
+        <div class="error-icon">
+            <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        </div>
+
+        <h1>Ada yang tidak beres!</h1>
+        <p>Maaf, kami mengalami kesulitan dalam memproses permintaan Anda. Tim kami telah diberitahu dan sedang memeriksanya.</p>
+
+        @if (Model.ShowRequestId)
+        {
+            <p>Mohon laporkan kode berikut kepada admin: <strong>@Model.RequestId</strong></p>
+        }
+
+        <div class="error-actions">
+            <a href="/" class="btn-primary">Kembali ke Beranda</a>
+            <a href="javascript:location.reload()" class="btn-secondary">Coba Lagi</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+        padding: 20px;
+    }
+
+    .error-icon {
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        color: #2d3436;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        color: #636e72;
+        margin-bottom: 1.5rem;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .request-id {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 2rem;
+        display: inline-block;
+        border: 1px dashed #ced6e0;
+    }
+
+        .request-id code {
+            color: #6c5ce7;
+            font-weight: bold;
+        }
+
+    .btn-primary {
+        background-color: #6c5ce7;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 8px;
+        margin-right: 10px;
+        transition: 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #5b4bc4;
+        }
+
+    .btn-secondary {
+        background-color: #f1f2f6;
+        color: #2d3436;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+        .btn-secondary:hover {
+            background-color: #dfe6e9;
+        }
+</style>

@@ -1,0 +1,106 @@
+@using company_profile.PagenationVM
+@model SliderFooterListViewModel
+
+@{
+    ViewData["Title"] = "Kelola Slider Footer Home";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Content Header -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2 align-items-center">
+            <div class="col-sm-6">
+                <h2 class="m-0 text-dark">
+                    <i class="fa fa-sliders"></i> Kelola Slider Footer Home
+                </h2>
+            </div>
+            <div class="col-sm-6 text-right d-flex justify-content-end">
+                <a asp-action="Create" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus"></i> Create New Slider
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="table-container">
+    <partial name="_SliderFooterHomePartial" model="Model" />
+</div>
+
+<style>
+    /* Menjaga komponen dalam tabel sejajar secara vertikal di tengah */
+    .vertical-align-middle td {
+        vertical-align: middle !important;
+    }
+</style>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedData", "SliderFooter")',
+                    data: { pageNumber: targetPage },
+                    success: function (result) {
+                        $('#table-container').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        function deleteSliderFooter(id) {
+            Swal.fire({
+                title: 'Hapus Slider Footer Home?',
+                text: "Layanan ini tidak akan muncul lagi di website.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus',
+                position: 'top',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/SliderFooter/Delete/' + id,
+                        type: 'POST',
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    response.message,
+                                    'success'
+                                ).then(() => {
+                                    location.reload(); // Reload halaman untuk melihat perubahan
+                                });
+                            } else {
+                                Swal.fire('Error!', response.message, 'error');
+                            }
+                        },
+                        error: function () {
+                            Swal.fire('Error!', 'Terjadi kesalahan sistem.', 'error');
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // Menampilkan pesan sukses setelah operasi berhasil
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                            Swal.fire({
+                                icon: 'success',
+                            title: 'Sukses!',
+                            text: '@TempData["SuccessMessage"]',
+                            position: 'top',
+                            timer: 5000, // Waktu tampil pesan (5 detik)
+                            showConfirmButton: false
+                                });
+            </text>
+        }
+    </script>
+}

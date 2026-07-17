@@ -1,0 +1,60 @@
+﻿@using company_profile;
+@model NewsVM;
+@{
+    ViewData["Title"] = "News";
+    Layout = "_FrontEndLayout";
+}
+@functions {
+    public string StripHTML(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "<.*?>", String.Empty);
+    }
+}
+<!--Banner Start-->
+@await Component.InvokeAsync("Banner", new { pageName = "News Page" })
+<!--Banner End-->
+<div id="table-container">
+    <partial name="_NewsPartialFE" model="Model" />
+</div>
+<!--Call Start-->
+@await Component.InvokeAsync("Cta")
+<!--Call End-->
+@section Scripts {
+    @if (ViewBag.Message != null)
+    {
+        <div class="container" style="margin-top:20px;">
+            <div class="alert alert-info">@ViewBag.Message</div>
+        </div>
+    }
+    <script>
+            $(document).ready(function () {
+            // Event delegation untuk pagination
+            $('#table-container').on('click', 'button.btn:not(.disabled)', function () {
+                var targetPage = $(this).data('page');
+
+                // Ambil nilai pencarian langsung dari URL agar sinkron
+                var urlParams = new URLSearchParams(window.location.search);
+                var searchString = urlParams.get('search_string') || '';
+                var category = urlParams.get('category') || '';
+
+                $.ajax({
+                    url: '@Url.Action("GetPaginatedDataFE", "Company")',
+                    data: {
+                        pageNumber: targetPage,
+                        search_string: searchString,
+                        category: category
+                    },
+                    success: function (result) {
+                        $('#table-container').html(result);
+
+                        // Opsional: scroll kembali ke atas daftar berita setelah halaman berubah
+                        $('html, body').animate({ scrollTop: $("#table-container").offset().top - 100 }, 'slow');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Gagal memuat halaman: ", error);
+                    }
+                });
+            });
+        });
+    </script>
+}

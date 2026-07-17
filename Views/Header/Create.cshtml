@@ -1,0 +1,173 @@
+@model company_profile.ViewModels.HeaderVM;
+
+@{
+    ViewData["Title"] = "Tambah Company Profile Header";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="card-title mb-0"><i class="fa fa-plus-square-fill me-2"></i> Create New Data Profile Header Web</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post" asp-controller="Header">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <h5 class="text-primary border-bottom pb-2 mb-3">
+                            <i class="fa fa-phone me-2"></i> Informasi Kontak
+                        </h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="EmailAddress" class="form-label fw-semibold">Alamat Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                    <input asp-for="EmailAddress" type="email" class="form-control"
+                                           placeholder="contoh@perusahaan.com" />
+                                </div>
+                                <span asp-validation-for="EmailAddress" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PhoneNumber" class="form-label fw-semibold">Nomor Telepon</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                    <input asp-for="PhoneNumber" type="tel" class="form-control"
+                                           placeholder="+62 812..." />
+                                </div>
+                                <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <h5 class="text-primary border-bottom pb-2 mb-3">
+                            <i class="fa fa-share me-2"></i> Tautan Media Sosial
+                        </h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="UrlFb" class="form-label fw-semibold">Facebook URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary text-white"><i
+                                        class="fa fa-facebook"></i></span>
+                                        <input asp-for="UrlFb" type="url" class="form-control"
+                                               placeholder="https://facebook.com/..." />
+                                    </div>
+                                    <span asp-validation-for="UrlFb" class="text-danger small"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="UrlTwiter" class="form-label fw-semibold">Twitter / X URL</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-dark text-white"><i
+                                            class="fa fa-twitter"></i></span>
+                                            <input asp-for="UrlTwiter" type="url" class="form-control"
+                                                   placeholder="https://x.com/..." />
+                                        </div>
+                                        <span asp-validation-for="UrlTwiter" class="text-danger small"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label asp-for="UrlLinkedIn" class="form-label fw-semibold">LinkedIn URL</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-secondary text-white"><i
+                                                class="fa fa-linkedin"></i></span>
+                                                <input asp-for="UrlLinkedIn" type="url" class="form-control"
+                                                       placeholder="https://linkedin.com/in/..." />
+                                            </div>
+                                            <span asp-validation-for="UrlLinkedIn" class="text-danger small"></span>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label asp-for="UrlPinterest" class="form-label fw-semibold">Pinterest URL</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-danger text-white"><i
+                                                    class="fa fa-pinterest"></i></span>
+                                                    <input asp-for="UrlPinterest" type="url" class="form-control"
+                                                           placeholder="https://pinterest.com/..." />
+                                                </div>
+                                                <span asp-validation-for="UrlPinterest" class="text-danger small"></span>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label asp-for="UrlYoutube" class="form-label fw-semibold">YouTube URL</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text bg-danger text-white"><i
+                                                        class="fa fa-youtube"></i></span>
+                                                        <input asp-for="UrlYoutube" type="url" class="form-control"
+                                                               placeholder="https://youtube.com/c/..." />
+                                                    </div>
+                                                    <span asp-validation-for="UrlYoutube" class="text-danger small"></span>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label asp-for="UrlInstagram" class="form-label fw-semibold">Instagram URL</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text bg-warning text-dark"><i
+                                                            class="fa fa-instagram"></i></span>
+                                                            <input asp-for="UrlInstagram" type="url" class="form-control"
+                                                                   placeholder="https://instagram.com/..." />
+                                                        </div>
+                                                        <span asp-validation-for="UrlInstagram" class="text-danger small"></span>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <label asp-for="UrlTiktok" class="form-label fw-semibold">TikTok URL</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text bg-dark text-white">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                                                     fill="currentColor" style="width: 16px; height: 16px;">
+                                                                    <path
+                                                                    d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a73.44,73.44,0,1,0,40.23,65.38V0h88.12a117.31,117.31,0,0,0,11,40.13,119.67,119.67,0,0,0,60.7,58.4A121.78,121.78,0,0,0,448,109.74Z" />
+                                                                </svg>
+                                                            </span>
+                                                            <input asp-for="UrlTiktok" type="url" class="form-control"
+                                                                   placeholder="https://tiktok.com/@@..." />
+                                                        </div>
+                                                        <span asp-validation-for="UrlTiktok" class="text-danger small"></span>
+                                                    </div>
+                                                </div>
+
+                                                <h5 class="text-primary border-bottom pb-2 mb-3">
+                                                    <i class="fa fa-gear me-2"></i> Konfigurasi Tampilan
+                                                </h5>
+                                                <div class="mb-4">
+                                                    <label asp-for="IsShow" class="form-label fw-semibold d-block">Tampilkan di Website?</label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" asp-for="IsShow" value="true" id="isShowTrue"
+                                                               checked />
+                                                        <label class="form-check-label text-success fw-bold" for="isShowTrue">
+                                                            <i class="fa fa-eye"></i> Ya, Tampilkan
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" asp-for="IsShow" value="false"
+                                                               id="isShowFalse" />
+                                                        <label class="form-check-label text-danger fw-bold" for="isShowFalse">
+                                                            <i class="fa fa-eye-slash"></i> Sembunyikan
+                                                        </label>
+                                                    </div>
+                                                    <span asp-validation-for="IsShow" class="text-danger small d-block"></span>
+                                                </div>
+
+                                                <hr class="my-4">
+
+                                                <div class="d-flex justify-content-end justify-content-between gap-2">
+                                                    <a asp-action="Index" class="btn btn-secondary btn-sm">
+                                                        <i class="fa fa-arrow-left"></i> Batal
+                                                    </a>
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-save me-1"></i> Save Profile Header
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @section Scripts {
+                            @{
+                                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+                            }
+                        }

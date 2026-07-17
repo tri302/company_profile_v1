@@ -1,0 +1,78 @@
+﻿@using company_profile
+@model TeamVM
+<!--Team Start-->
+<div class="team-area pt_90 pb_90">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="headline">
+                    <h2>OUR TEAM</h2>
+                    <h3>All our skilled team members are listed below</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            @foreach (var item in Model.List)
+            {
+                // Logika untuk menentukan path gambar
+                // Jika UrlGambar kosong, langsung pakai no-image
+                var imagePath = string.IsNullOrEmpty(item.UrlGambar)
+                                ? Url.Content("~/uploads/no-image.png")
+                                : Url.Content("~/" + item.UrlGambar.TrimStart('/'));
+                <div class="col-md-3 col-sm-6">
+                    <div class="team-item" style="margin-bottom: 30px;">
+                        <img src="@imagePath" onerror="this.onerror=null;this.src='@Url.Content("~/uploads/no-image.png")';"
+                             alt="Team Photo" style="width:100%; height: 250px; object-fit: cover;">
+                        <div class="team-text">
+                            <a asp-action="DetailTeamMember" asp-route-idTeam="@item.IDTeam" target="_blank">
+                                @item.Nama
+                            </a>
+                            <p>@item.Jabatan</p>
+                        </div>
+                        <div class="team-social" style="position: absolute;">
+                            <ul>
+                                <li>
+                                    <a href="@(string.IsNullOrEmpty(item.UrlFb) ? "#" : item.UrlFb)" target="_blank">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@(string.IsNullOrEmpty(item.UrlTwiter) ? "#" : item.UrlTwiter)"
+                                       target="_blank"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="@(string.IsNullOrEmpty(item.UrlLinkedIn) ? "#" : item.UrlLinkedIn)"
+                                       target="_blank"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                                <li>
+                                    <a href="@(string.IsNullOrEmpty(item.UrlYoutube) ? "#" : item.UrlYoutube)"
+                                       target="_blank"><i class="fa fa-youtube"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center align-items-center mt-4" id="pagination-controls">
+                <button id="btn-prev" class="btn btn-primary btn-sm @(Model.CurrentPage <= 1 ? "disabled" : "")"
+                        data-page="@(Model.CurrentPage - 1)">
+                    <i class="fa fa-arrow-left"></i> Previous
+                </button>
+
+                <!-- Menambahkan mx-4 untuk memberi jarak kiri dan kanan pada teks -->
+                <span class="text-muted fw-bold mx-4">Page @Model.CurrentPage of @Model.TotalPages</span>
+
+                <button id="btn-next" class="btn btn-warning btn-sm @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")"
+                        data-page="@(Model.CurrentPage + 1)">
+                    Next <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Team End-->
