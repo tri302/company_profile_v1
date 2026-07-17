@@ -2,7 +2,6 @@
 
 [![Framework: .NET 9.0](https://img.shields.io/badge/Framework-.NET%209.0-purple.svg)](https://dotnet.microsoft.com/)
 [![Database: MySQL / SQL Server](https://img.shields.io/badge/Database-MySQL%20%7C%20SQL%20Server-blue.svg)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 📌 Tentang Proyek
 
