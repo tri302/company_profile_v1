@@ -1,7 +1,7 @@
 # Company Profile Web Application
 
 [![Framework: .NET 9.0](https://img.shields.io/badge/Framework-.NET%209.0-purple.svg)](https://dotnet.microsoft.com/)
-[![Database: MySQL / SQL Server](https://img.shields.io/badge/Database-MySQL%20%7C%20SQL%20Server-blue.svg)]()
+[![Database: MySQL](https://img.shields.io/badge/Database-MySQL%20%7C%20SQL%20Server-blue.svg)]()
 
 ## 📌 Tentang Proyek
 
@@ -14,7 +14,7 @@ Dikembangkan dengan arsitektur yang bersih (*clean architecture components*) dan
 
 Uji coba langsung keandalan sistem kami melalui tautan demo berikut:
 
-* **Link Demo:** (http://democp.runasp.net/)
+* **Link Demo:** [http://democp.runasp.net/]
 
 ### Akun Kredensial Pengujian:
 **Super Admin**
