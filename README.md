@@ -10,6 +10,22 @@ Di era transformasi digital, impresi pertama sebuah instansi atau korporasi dite
 Dikembangkan dengan arsitektur yang bersih (*clean architecture components*) dan standar performa tinggi, web aplikasi ini menyajikan antarmuka yang elegan di sisi pengguna (*frontend*) sekaligus menyediakan panel manajemen data (*backoffice*) yang aman, adaptif, dan responsif. Proyek ini siap membangun kredibilitas merek (*brand authority*) dan mengonversi kunjungan menjadi peluang bisnis yang nyata.
 
 ---
+## 🌐 Demo & Hak Akses
+
+Uji coba langsung keandalan sistem kami melalui tautan demo berikut:
+
+* **Link Demo:** [http://demopos.runasp.net/](http://demopos.runasp.net/)
+
+### Akun Kredensial Pengujian:
+1. **Super Admin**
+   * **Username:** `superadmin@gmail.com`
+   * **Password:** `SuperAdmin123!`
+   * **Website address** `http://democp.runasp.net/Account/Login?ReturnUrl=%2FAdmin%2FDashboard`
+   
+2. **FrontEnd**
+ * **Website address** `http://democp.runasp.net/`  
+
+---
 
 ## 🚀 Keunggulan Utama Aplikasi
 
