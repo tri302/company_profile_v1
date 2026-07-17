@@ -14,13 +14,13 @@ Dikembangkan dengan arsitektur yang bersih (*clean architecture components*) dan
 
 Uji coba langsung keandalan sistem kami melalui tautan demo berikut:
 
-* **Link Demo:** [http://democp.runasp.net/]
+* **Link Demo:** http://democp.runasp.net/
 
 ### Akun Kredensial Pengujian:
 **Super Admin**
    * **Username:** `superadmin@gmail.com`
    * **Password:** `SuperAdmin123!`
-   * **Website address** `http://democp.runasp.net/Account/Login`  
+   * **Website address:** http://democp.runasp.net/Account/Login 
 ---
 
 ## 🚀 Keunggulan Utama Aplikasi
